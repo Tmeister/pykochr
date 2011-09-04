@@ -1,0 +1,2 @@
+cookie_key	= 'USFD98OIDSWERTYHNJKOIURTFGhytrDertgHJuytFgHJUikHYTReswEDfGkloIUYtrDFghfsdiuytyhfrtyuikjhgtytsdsdjkgymns'
+salt_key	= 'plkmngrewaXCdeDFVGBNJUYTRWERTYUIOkjhgFBNMkjtrew234567890jhgfdsdfghjhgbFDWQASXCDRTGFVBHJ56mnbvcxzsaSDFVB'

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}It works!{% endblock %}
+
+{% block content %}
+	hellooo<br>
+	{% for e in kochs %}
+		<h1>{{e.title}}</h1>
+		<h2>{{e.status}}</h2>
+	{% endfor %}
+{% endblock %}

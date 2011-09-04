@@ -1,0 +1,25 @@
+.content-slider-wrapper { width: 100%; height: 127px; padding: 0 0 26px 0; margin: -12px 0 -26px 0; background: url(../images/content-slider-wrapper-bg.jpg) 0 0 repeat-x; position: relative; z-index: 300; overflow: hidden; }
+
+.content-slider { width: 966px; padding: 0 0 0 0; overflow: visible; position: relative; }
+
+.content-slider .item { width: 70px; margin: 0 68px 0 0; float: left; }
+
+.content-slider .item img { padding: 0 0 7px 0; background: url(../images/image-shadow-2.png) bottom center no-repeat; position: absolute; z-index: 1; }
+
+.content-slider .item a { width: 70px; height: 70px; position: absolute; }
+
+.content-slider .price { height: 23px; padding: 1px 6px 0 6px; margin: 6px -4px 0 0; float: right; font-size: 12px; font-weight: bold; color: #fff; text-align: right; background: url(../images/price-2-bg.png) top right; position: relative; z-index: 2; }
+
+#content-slider { width: 900px; height: 77px; margin: 0 auto; }
+
+#content-slider .slider-item { padding: 0 0 0 0; width: 3500px; position: absolute; top: 22px !important; }
+
+#slider-control-wrapper { width: 585px; margin: 36px auto 0 auto; padding: 0 0 0 365px; position: relative; z-index: 100; }
+
+#slider-control { width: 159px; height: 32px; padding: 7px 0 0 55px; margin: 0; background: url(../images/homepage-slider-control-bg.png) 0 0 no-repeat; z-index: 30; }
+
+#slider-control a { width: 14px; height: 14px; margin: 0 4px; text-indent: -5000px; background: url(../images/homepage-slider-control-item-ico.png) 0 0 no-repeat; text-decoration: none; float: left; }
+
+#slider-control a:hover { background-position: 0 -14px; }
+
+#slider-control a.active { background-position: 0 -28px; }
