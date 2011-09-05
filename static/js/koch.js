@@ -80,6 +80,14 @@ $(function($) {
 		  	}
 		});		
 	});
+
+	$('#save_settings').click(function(event) {
+		event.preventDefault();
+		$('#form_settings').submit();
+				
+	});
+			
+			
 			
 			
 

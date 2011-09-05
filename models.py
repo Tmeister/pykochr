@@ -16,6 +16,9 @@ class User(db.Model):
 	email               = db.EmailProperty(required=False)
 	admin               = db.BooleanProperty(default=False)
 	active				= db.BooleanProperty(default=False)
+	avatar				= db.StringProperty(required=False, default="")
+	firstname			= db.StringProperty(required=False, default="")
+	lastname			= db.StringProperty(required=False, default="")
 
 	@staticmethod
 	def is_nickname_exists(user):

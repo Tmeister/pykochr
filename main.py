@@ -5,11 +5,10 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import util, template
 from django.utils import simplejson
-from django.core.validators import email_re
 from models import *
 from gaesessions import get_current_session
 
-from handlers import account
+from handlers import (account, profile)
 
 class Home(webapp.RequestHandler):
     def get(self):
@@ -28,6 +27,9 @@ application = webapp.WSGIApplication(
                                             ('/ajax/register', account.Register),
                                             ('/ajax/login', account.Login),
                                             ('/logout', account.Logout),
+                                            ('/profile', profile.Edit),
+                                            ('/account', account.Overview),
+
                                         ],
                                         debug=True)
 
