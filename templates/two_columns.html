@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<!-- BEGIN .homepage-columns -->
+	<div id="home-content">
+		<div id="main-about" class="">
+			<!-- BEGIN .homepage-about -->
+			<div class="homepage-about">
+				<div class="content">
+					{%block left_content%}{% endblock %}
+				</div>
+				<div class="clear"></div><!-- / -->	
+			</div>
+			<div class="clear"></div><!-- / -->	
+			<div class="homepage-about-bottom"><p class="back-top"><a href="#top"><span>go back to the top</span></a></p></div>
+			<!-- END .homepage-about -->
+		</div><!-- /main-about -->
+		<div id="sidebar" class="events">
+			<div class="content">
+				{%block sidebar_content%}{% endblock %}
+			</div>
+			<div class="clear"></div><!-- / -->	
+			<div class="events-bottom"><p class="back-top"><a href="#top"><span>go back to the top</span></a></p></div>
+		</div><!-- /sidebar -->
+		<div class="clear"></div><!-- / -->	
+	</div>
+{% endblock %}
+
+
+
+
+
