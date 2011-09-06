@@ -29,7 +29,6 @@ application = webapp.WSGIApplication(
                                             ('/logout', account.Logout),
                                             ('/profile', profile.Edit),
                                             ('/account', account.Overview),
-                                            ('/create/save', koch.Save),
                                             ('/create', koch.Create),
 
                                         ],

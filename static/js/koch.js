@@ -123,43 +123,25 @@ $(function($) {
 		
 		ingredients_to_go = [];
 		ingredients.each(function(){
-			ingredients_to_go.push( $(this).find('span').html() );
+			//ingredients_to_go.push( $(this).find('span').html() );
+			var hidden = $('<input/>',{name:'ingredients[]',type:'hidden',value:$(this).find('span').html()});
+			hidden.appendTo($('#form_new_koch'));
 		});
 
 		directions_to_go = [];
 		directions.each(function(){
-			directions_to_go.push( $(this).find('span').html() );
+			var hidden = $('<input/>',{name:'directions[]',type:'hidden',value:$(this).find('span').html()});
+			hidden.appendTo($('#form_new_koch'));
 		});
 
 		tags_to_go = [];
 		tags.each(function(){
-			tags_to_go.push( $(this).find('span').html() );
+			var hidden = $('<input/>',{name:'tags[]',type:'hidden',value:$(this).find('span').html()});
+			hidden.appendTo($('#form_new_koch'));
 		});
 
-		$.ajax({
-			url: '/create/save',
-			type: 'POST',
-			dataType: 'json',
-			data: {
-				ingredients 	: ingredients_to_go,
-				directions 		: directions_to_go,
-				tags 			: tags_to_go,
-				name 			: name,
-				notes 			: notes
-			},
-			success: function(data, textStatus, xhr) {
-				switch( data.status){
-					case 'success':
-						show_success( 'The changes were saved successfully!' );
-						break;
-					case 'fail':
-						show_error( 'Something went wrong please try again :(' );
-						break;
-
-				}
-			}	
-		});
-				
+		$('#form_new_koch').submit()
+		
 	});
 
 });

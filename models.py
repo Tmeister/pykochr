@@ -61,7 +61,7 @@ class Koch(db.Model):
 class Photo(db.Model):
 	"""docstring for Photos"""
 	koch = db.ReferenceProperty(Koch)
-	path = db.StringProperty(required=True)
+	image = db.BlobProperty(required=True)
 
 class Ingredient(db.Model):
 	"""docstring for Ingredients"""
