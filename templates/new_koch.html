@@ -1,0 +1,59 @@
+{% extends 'two_columns.html' %}
+{% block title %}New Koch{% endblock %}
+{% block js %}
+	<script src="/static/js/jquery.autogrowtextarea.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/jquery.bubbleBox.min.js" type="text/javascript" charset="utf-8"></script>
+{% endblock%}
+{% block css%}
+	<link rel="stylesheet" type="text/css" media="screen" href="/static/css/bubbleBox.css" />
+	<link rel="stylesheet" href="/static/unorderedliststyles/style.css">
+{% endblock%}
+{% block left_content %}
+	<div class="main-title">
+		<span><b>Create new Koch</b></span>
+	</div>
+	<h4>Koch is the name that we use for a recipe.</h4>
+	<div class="kochmaker">
+		<form action="" id="form_new_koch" method="post" enctype="multipart/form-data"> 
+			<div class="input field">
+				<label for="koch_name"><h5>Name *</h5></label>
+				<input type="text" placeholder="Name" id="koch_name" />
+			</div>
+			<div class="input field">
+				<label for="koch_ingredient"><h5>Ingredients *</h5></label>
+				<input type="text" id="koch_ingredient" placeholder="Ingredients +" />
+				<ul id="koch_ingredient_list" class="green-list"></ul>
+			</div>
+			<div class="input field">
+				<label for="koch_directions"><h5>Directions *</h5></label>
+				<input type="text" id="koch_directions" placeholder="Directions +" />
+				<ul id="koch_directions_list" class="orange-list"></ul>
+			</div>
+			<div class="input field">
+				<label for="koch_photos"><h5>Photos</h5></label>
+				<input id="photos" name="photos" type="file" multiple="multiple" accept="image/jpeg, image/gif, image/png">
+			</div>
+			<div class="input field">
+				<label for="koch_tags"><h5>Tags</h5></label>
+				<input type="text" id="koch_tags" placeholder="Tags +" />
+				<ul id="koch_tags_list" class="red-list"></ul>
+			</div>
+			<div class="input field">
+				<label for="koch_tags"><h5>Notes</h5></label>
+				<textarea name="" id="koch_notes" rows="1" placeholder="Notes"></textarea>
+			</div>
+			<div class="field box box-red"><span class="koch_status"></span></div>
+			<div class="field box box-green"><span class="koch_status"></span></div>
+			<input type="button" class="main-button white full-width" id="koch_save" value="Save">
+		</form>
+	</div>
+{% endblock %}
+{% block sidebar_content %}
+	<div class="main-title">
+		<span><b>Title SideBar</b></span>
+		<a href="#">show all</a>
+	</div>
+	<div class="real">Contenido Derecho</div><!-- /real -->
+	<p class="show-all"><a href="#"><span>Show entire menu card</span></a></p>
+{% endblock %}

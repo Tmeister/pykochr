@@ -36,7 +36,7 @@ All files, unless otherwise stated, are released under the GNU General Public Li
 
 html, body	{ height: 100%; }
 
-body { margin: 0; padding: 0; font: 12px/18px Arial, serif; color: #76452f; background: url(../images/main-body-bg.jpg) top center repeat-y; }
+body { margin: 0; padding: 0; font: 12px/18px Helvetica, Arial, sans-serif; color: #76452f; background: url(../images/main-body-bg.jpg) top center repeat-y; }
 
 h1, h2, h3, h4, h5, h6, span, p, form, input, ul, li, ol { margin: 0; padding: 0; }
 
@@ -1667,6 +1667,7 @@ html[xmlns] #nav {
 {
 	padding:10px;
 	width:415px;
+	font-family: Helvetica, Arial, sans-serif;
 }
 hr{
 	border:none;
@@ -1701,3 +1702,74 @@ hr{
     border: 1px solid #AFDEE2;
     color: #38878E;
 }
+
+.kochmaker input[type='text'],
+.kochmaker input[type='file'],
+.kochmaker textarea
+{
+	border-color: -moz-use-text-color -moz-use-text-color #999;
+	border-style: none none dotted;
+	border-width: medium medium 1px;
+	font-size: 14px;
+	height: 30px;
+	background-color:transparent;
+	line-height:1.5em;
+	text-shadow: 1px 1px 1px #fff;
+	/*filter: dropshadow(color=#fff, offx=1, offy=1);*/
+	color:#9a9a9a;
+	font-family: Helvetica, Arial, sans-serif;
+	width:465px;
+}
+.kochmaker .input h5{width:115px;margin-top:15px;}
+.kochmaker textarea{
+}
+
+.kochmaker #koch_name{
+	font-size: 20px;
+	font-weight: bold;
+	color:#9a9a9a;
+}
+
+.kochmaker #koch_ingredient,
+.kochmaker #koch_directions,
+.kochmaker #koch_tags
+{
+	background:url(../images/add_16.png) no-repeat 100% 50%;
+}
+
+
+.kochmaker .field
+{
+	margin:40px 0px;
+}
+
+.kochmaker ul
+{
+	margin-bottom: 40px;
+	color:#9a9a9a;
+	font-size:14px;
+	margin-left:75px;
+}
+
+.kochmaker ul li{
+	font-family: Helvetica, Arial, sans-serif;
+	text-shadow: 1px 1px 1px #fff;
+	/*filter: dropshadow(color=#fff, offx=1, offy=1); */
+	font-weight:normal;
+}
+
+.kochmaker .no-margin{
+	margin:0px;
+}
+
+.kochmaker .green-list li:hover{
+	background-color:#E6EDDA;
+}
+.kochmaker .orange-list li:hover{
+	background-color:#F7E4D7;
+}
+
+#koch_save{
+	height:35px;
+}
+

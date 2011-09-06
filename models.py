@@ -42,28 +42,17 @@ class User(db.Model):
 class Koch(db.Model):
 	"""docstring for Koch"""
 
-	LEVELS_CHOICES = (
-		(u'easy', u'Easy'),
-		(u'medium', u'Medium'),
-		(u'advanced', u'Advanced')
-	)
-
-	STATUS_CHOICES = (
-		(u'publish', u'Publish'),
-		(u'draft', u'Draft'),
-		(u'trash', u'Trash')
-	)
-
-	#author 		= db.ReferenceProperty(User, related_name='kochs', null=True	)
+	author 		= db.ReferenceProperty(User,required=True)
 	title		= db.StringProperty(required=True)
-	prep_time	= db.StringProperty(required=True)
-	cook_time	= db.StringProperty(required=True)
-	level		= db.StringProperty(choices=LEVELS_CHOICES)
+	prep_time	= db.StringProperty(required=False)
+	cook_time	= db.StringProperty(required=False)
+	level		= db.StringProperty(default='easy')
 	likes		= db.IntegerProperty(default=0)
 	created		= db.DateTimeProperty(auto_now_add=True)
-	status		= db.StringProperty(default='publish', choices=STATUS_CHOICES)
+	status		= db.StringProperty(default='publish')
 	private		= db.BooleanProperty(default=False);
 	slug		= db.StringProperty()
+	notes		= db.TextProperty()
 
 
 
@@ -82,7 +71,7 @@ class Ingredient(db.Model):
 class Direction(db.Model):
 	"""docstring for Directions"""
 	koch = db.ReferenceProperty(Koch)
-	directions = db.TextProperty(required=True)
+	direction = db.TextProperty(required=True)
 
 class Tag(db.Model):
 	"""docstring for Photos"""

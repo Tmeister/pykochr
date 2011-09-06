@@ -87,9 +87,79 @@ $(function($) {
 				
 	});
 			
+	
+	$("#koch_notes").ata();
+	$('#koch_ingredient').bubbleBox();
+	$('#koch_directions').bubbleBox();
+	$('#koch_tags').bubbleBox();
+	
+	$('.field.box').hide();
+	$('.field.box').hide();
+	$('#koch_name, #koch_ingredient, #koch_directions, #koch_notes').focus(function(){
+		$('.field.box').slideUp('slow');
+	});
 			
-			
-			
+	function show_error (error) {
+		$('.box-red .koch_status').html(error);
+		$('.field.box-red').show();
+	}
+	function show_success (error) {
+		$('.box-green .koch_status').html(error);
+		$('.field.box-green').show();
+	}
+					
 
+	$('#koch_save').click(function(e) {
+		e.preventDefault();
+		name = 		$.trim( $('#koch_name').val() );
+		ingredients = 	$('#koch_ingredient_list > li');
+		directions = 	$('#koch_directions_list > li');
+		tags = 		$('#koch_tags_list > li');
+		notes = 		$('#koch_notes').val();
+
+		if( ! name.length ){show_error('Really, Do you not forget the name?');return;}
+		if( ! ingredients.length ){show_error('A recipe without ingredients is it strange, Huh?');return;}
+		if( ! directions.length ){show_error('We need directions to get it right.');return;}
+		
+		ingredients_to_go = [];
+		ingredients.each(function(){
+			ingredients_to_go.push( $(this).find('span').html() );
+		});
+
+		directions_to_go = [];
+		directions.each(function(){
+			directions_to_go.push( $(this).find('span').html() );
+		});
+
+		tags_to_go = [];
+		tags.each(function(){
+			tags_to_go.push( $(this).find('span').html() );
+		});
+
+		$.ajax({
+			url: '/create/save',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				ingredients 	: ingredients_to_go,
+				directions 		: directions_to_go,
+				tags 			: tags_to_go,
+				name 			: name,
+				notes 			: notes
+			},
+			success: function(data, textStatus, xhr) {
+				switch( data.status){
+					case 'success':
+						show_success( 'The changes were saved successfully!' );
+						break;
+					case 'fail':
+						show_error( 'Something went wrong please try again :(' );
+						break;
+
+				}
+			}	
+		});
+				
+	});
 
 });

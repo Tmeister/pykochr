@@ -8,7 +8,7 @@ from django.utils import simplejson
 from models import *
 from gaesessions import get_current_session
 
-from handlers import (account, profile)
+from handlers import (account, profile, koch)
 
 class Home(webapp.RequestHandler):
     def get(self):
@@ -29,6 +29,8 @@ application = webapp.WSGIApplication(
                                             ('/logout', account.Logout),
                                             ('/profile', profile.Edit),
                                             ('/account', account.Overview),
+                                            ('/create/save', koch.Save),
+                                            ('/create', koch.Create),
 
                                         ],
                                         debug=True)
