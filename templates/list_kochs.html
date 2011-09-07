@@ -1,0 +1,33 @@
+{% extends 'two_flat.html' %}
+
+{%block left_content%}
+	<div class="blog-list-1">
+		{% for koch in kochs %}
+			<!-- BEGIN .item -->
+			<div class="item">
+				<div class="image">
+					<a href="post-style-1.html"><img src="http://images.media-allrecipes.com/site/allrecipes/area/community/userphoto/small/616032.jpg" alt="" width="100" height="100" /></a>
+				</div>
+				<div class="text">
+					<h3>{{koch.koch.title}}</h3>
+					<p>{{kock.koch.notes}}</p>
+					<p class="last"><a href="post-style-1.html" class="more-link">Read more</a></p>
+				</div>
+				<div class="date">
+					<p class="day">12</p>
+					<p class="month">January</p>
+					<p class="year">2011</p>
+					<p class="comments"><a href="#">9</a></p>
+					<p class="section"><a href="#">Section</a></p>
+					<p class="author"><a href="#">{{koch.author.firstname}} {{koch.author.lastname}}</a></p>
+				</div>
+			<!-- END .item -->
+			</div>
+		{% endfor %}
+	</div>
+{%endblock%}
+
+{%block sidebar_content%}
+	Derecha
+{%endblock%}
+

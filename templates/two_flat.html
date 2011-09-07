@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main-content-wrapper">
+	<div class="top"></div>
+	<div class="content-wrapper">
+		<div class="content">
+			<!-- BEGIN .left-side -->
+			<div class="left-side">
+				{%block left_content%}{% endblock %}
+			<!-- END .left-side -->
+			</div>
+			<!-- BEGIN .right-side -->
+			<div class="right-side">
+				<div class="sidebar-block-1">
+					{%block sidebar_content%}{% endblock %}
+				</div>
+			<!-- END .right-side -->
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+<!-- END .homepage-about -->
+<div class="main-content-wrapper-bottom"><p class="back-top"><a href="#top"><span>go back to the top</span></a></p></td>
+{% endblock %}
