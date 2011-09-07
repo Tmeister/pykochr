@@ -31,6 +31,23 @@
 				<ul id="koch_directions_list" class="orange-list"></ul>
 			</div>
 			<div class="input field">
+				<label for="prep_time"><h5>Prep Time</h5></label>
+				<input id="prep_time" name="prep_time" type="text" placeholder="90">
+			</div>
+			<div class="input field">
+				<label for="cook_time"><h5>Cook Time</h5></label>
+				<input id="cook_time" name="cook_time" type="text" placeholder="30">
+			</div>
+			<div class="input field">
+				<label for="level"><h5>Level</h5></label>
+				<select name="level">
+					<option value="easy">Easy</option>
+					<option value="medium">Medium</option>
+					<option value="difficult">Difficult</option>
+					option
+				</select>	
+			</div>
+			<div class="input field">
 				<label for="koch_photos"><h5>Image</h5></label>
 				<input id="photos" name="photo" type="file">
 			</div>
@@ -42,6 +59,10 @@
 			<div class="input field">
 				<label for="koch_tags"><h5>Notes</h5></label>
 				<textarea name="notes" id="koch_notes" rows="1" placeholder="Notes"></textarea>
+			</div>
+			<div class="input field">
+				<label for="koch_private"><h5>Private</h5></label>
+				<span id="private"><input type="checkbox" name="private" value="1"> Only you will see this koch.</span>
 			</div>
 			<div class="field box box-red"><span class="koch_status"></span></div>
 			<div class="field box box-green"><span class="koch_status"></span></div>

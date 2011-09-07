@@ -24,12 +24,14 @@ class Home(webapp.RequestHandler):
 application = webapp.WSGIApplication(
                                         [
                                             ('/', Home),
-                                            ('/ajax/register', account.Register),
-                                            ('/ajax/login', account.Login),
-                                            ('/logout', account.Logout),
-                                            ('/profile', profile.Edit),
-                                            ('/account', account.Overview),
-                                            ('/create', koch.Create),
+                                            ('/ajax/register'   , account.Register),
+                                            ('/ajax/login'      , account.Login),
+                                            ('/logout'          , account.Logout),
+                                            ('/profile'         , profile.Edit),
+                                            ('/account'         , account.Overview),
+                                            ('/create'          , koch.Create),
+                                            ('/cook/(.+)'       , koch.List),
+
 
                                         ],
                                         debug=True)

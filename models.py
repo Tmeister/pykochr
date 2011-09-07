@@ -61,19 +61,19 @@ class Koch(db.Model):
 class Photo(db.Model):
 	"""docstring for Photos"""
 	koch = db.ReferenceProperty(Koch)
-	image = db.BlobProperty(required=True)
+	value = db.BlobProperty(required=True)
 
 class Ingredient(db.Model):
 	"""docstring for Ingredients"""
 	koch = db.ReferenceProperty(Koch)
-	ingredient = db.StringProperty(required=True)
+	value = db.StringProperty(required=True)
 
 class Direction(db.Model):
 	"""docstring for Directions"""
 	koch = db.ReferenceProperty(Koch)
-	direction = db.TextProperty(required=True)
+	value = db.TextProperty(required=True)
 
 class Tag(db.Model):
 	"""docstring for Photos"""
 	koch = db.ReferenceProperty(Koch)
-	tag = db.StringProperty(required=True)
+	value = db.StringProperty(required=True)
