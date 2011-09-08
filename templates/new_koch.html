@@ -1,0 +1,77 @@
+{% extends 'right_bar.html' %}
+{% block title %}New Koch{% endblock %}
+{% block js %}
+	<script src="/static/js/jquery.autogrowtextarea.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/jquery.bubbleBox.min.js" type="text/javascript" charset="utf-8"></script>
+{% endblock%}
+{% block css%}
+	<link rel="stylesheet" type="text/css" media="screen" href="/static/css/bubbleBox.css" />
+	<link rel="stylesheet" href="/static/unorderedliststyles/style.css">
+{% endblock%}
+
+{% block left_content %}
+	<h1 class="welcome nobottommargin">Create new Koch</h1>
+	<h4 class="notopmargin colored">Koch is the name that we use for a recipe.</h4>
+	<div class="separator margin15"></div>
+	<div class="kochmaker">
+		<form action="" id="form_new_koch" method="post" enctype="multipart/form-data"> 
+			<div class="input field">
+				<label for="koch_name"><h5>Name *</h5></label>
+				<input type="text" placeholder="Name" id="koch_name" name="name" />
+			</div>
+			<div class="input field">
+				<label for="koch_ingredient"><h5>Ingredients *</h5></label>
+				<input type="text" id="koch_ingredient" placeholder="Ingredients +" />
+				<ul id="koch_ingredient_list" class=""></ul>
+			</div>
+			<div class="input field">
+				<label for="koch_directions"><h5>Directions *</h5></label>
+				<input type="text" id="koch_directions" placeholder="Directions +" />
+				<ul id="koch_directions_list" class=""></ul>
+			</div>
+			<div class="input field">
+				<label for="prep_time"><h5>Prep Time</h5></label>
+				<input id="prep_time" name="prep_time" type="text" placeholder="90">
+			</div>
+			<div class="input field">
+				<label for="cook_time"><h5>Cook Time</h5></label>
+				<input id="cook_time" name="cook_time" type="text" placeholder="30">
+			</div>
+			<div class="input field">
+				<label for="level"><h5>Level</h5></label>
+				<select name="level">
+					<option value="easy">Easy</option>
+					<option value="medium">Medium</option>
+					<option value="difficult">Difficult</option>
+					option
+				</select>	
+			</div>
+			<div class="input field">
+				<label for="koch_photos"><h5>Image</h5></label>
+				<input id="photos" name="photo" type="file">
+			</div>
+			<div class="input field">
+				<label for="koch_tags"><h5>Tags</h5></label>
+				<input type="text" id="koch_tags" placeholder="Tags +" />
+				<ul id="koch_tags_list" class=""></ul>
+			</div>
+			<div class="input field">
+				<label for="koch_tags"><h5>Notes</h5></label>
+				<textarea name="notes" id="koch_notes" rows="3" placeholder="Notes"></textarea>
+			</div>
+			<div class="input field">
+				<label for="koch_private"><h5>Private</h5></label>
+				<span id="private"><input type="checkbox" name="private" value="1"> Only you will see this koch.</span>
+			</div>
+			<div class="field box box-red"><span class="koch_status"></span></div>
+			<div class="field box box-green"><span class="koch_status"></span></div>
+			<input type="button" class="main-button white full-width" id="koch_save" value="Save">
+		</form>
+	</div>
+{% endblock %}
+{% block side_content %}
+	<div class="one-fourth notopmargin sidebar-right last">
+		{% include 'sidebar.html' %}
+	</div>
+{% endblock %}

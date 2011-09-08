@@ -9,6 +9,8 @@ from django.core.validators import email_re
 from gaesessions import get_current_session
 from models import (User, Koch, Ingredient, Direction, Tag, Photo)
 
+import helpers
+
 
 class Create(webapp.RequestHandler):
 	"""docstring for Create"""
@@ -35,6 +37,8 @@ class Create(webapp.RequestHandler):
 		cook 		= self.request.get('cook_time')
 		level 		= self.request.get('level')
 		private 	= True if self.request.get('private') == "1" else False
+		slug 		= helpers.sluglify( name )
+
 
 		koch = Koch(
 						author		= user, 
@@ -43,7 +47,8 @@ class Create(webapp.RequestHandler):
 						prep_time	= prep,
 						cook_time	= cook,
 						level		= level,
-						private 	= private
+						private 	= private,
+						slug 		= slug
 					)
 		koch.put()
 
@@ -56,7 +61,7 @@ class Create(webapp.RequestHandler):
 		for tag in tags:
 			Tag(koch=koch, value=tag).put()
 
-		if len(self.request.POST.get('photo')):
+		if self.request.POST.get('photo'):
 			try:
 				img_data = self.request.POST.get('photo').file.read()
 				img = images.Image(img_data)
@@ -83,7 +88,7 @@ class List(webapp.RequestHandler):
 			self.redirect('/')
 		
 		user = user[0]
-		tmp_kochs = Koch.all().filter('author =', user)
+		tmp_kochs = Koch.all().filter('author =', user).order('-created')
 		kochs = []
 
 		for koch in tmp_kochs:
@@ -94,9 +99,29 @@ class List(webapp.RequestHandler):
 			kochs.append({
 					'author'		: user,
 					'koch'			: koch, 
-					'ingredients'	: Ingredient.all().filter('koch =', koch), 
-					'directions'	: Direction.all().filter('koch =', koch), 
 					'tags'			: Tag.all().filter('koch =', koch),
-					'images'		: Photo.all().filter('koch =', koch)
+					'images'		: Photo.all().filter('koch =', koch).fetch(1)
 				})
+		
 		self.response.out.write(template.render('templates/list_kochs.html', locals()))
+
+class Detail(webapp.RequestHandler):
+	"""docstring for Detail"""
+	def get(self, slug):
+		session = get_current_session()
+		if session.has_key('user'):
+			user = session['user']
+
+		query = Koch.all().filter( 'slug =', slug).fetch(1)
+		if len( query ):
+			koch = query[0];
+			ingredients	= Ingredient.all().filter('koch =', koch)
+			directions	= Direction.all().filter('koch =', koch)
+			tags		= Tag.all().filter('koch =', koch)
+			images		= Photo.all().filter('koch =', koch)
+			loop 		= [i+1 for i in range(243)]
+
+			self.response.out.write(template.render('templates/details_koch.html', locals()))
+		else:
+			print 'nononono'
+

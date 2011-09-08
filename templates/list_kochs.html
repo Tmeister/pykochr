@@ -1,0 +1,91 @@
+{% extends 'right_bar.html' %}
+{% block title %}Explore{%endblock%}
+{% block left_content %}
+	<h1 class="welcome nobottommargin left">Explore</h1>
+	<p class="left description ">: Other text</p>
+	<h4 class="clear colored">Some other text...  </h4>
+	<div class="separator margin15"></div>
+	{% for koch in kochs %}
+		<div class="three-fourth left">
+	        <div class="three-fourth notopmargin last">
+	        	<div class="one-fourth  notopmargin">
+	            	<div class="one-fourth notopmargin">
+	                    <h3 class="notopmargin">
+	                    	<a class="link" href="/details/{{koch.koch.slug}}">{{koch.koch.title}}</a>
+	                    </h3>
+	                </div>
+	                <div class="blog-date2 margin15 left">
+	                    <h2 class="notopmargin">9,999</h2>
+	                    <p class="notopmargin">Likes</p>
+	                </div>
+	                <div class="blog-date2 margin15 left last">
+	                    <h2 class="notopmargin"><a href="" class="link">56</a></h2>
+	                    <p class="notopmargin">comments</p>
+	                </div>
+	                <div class="clear"></div>
+	                <div class="dot-separator margin15"></div>
+	                <div class="margin15">
+	                    <p class="notopmargin nobottommargin">
+	                    	<span class="strong">Author: </span><a class="link" href="">{{koch.author.nickname.title}}</a>
+	                    </p>
+	                    {% if koch.tags.count %}
+	                    	<p class="small-italic margin10 nobottommargin">
+		                    	<span class="strong">Tags: </span>
+		                    	{% for tag in koch.tags %}
+		                    		<a href="" class="link">{{tag.value}}</a>	
+		                    	{% endfor %}
+		                    </p>	
+	                    {% endif %}
+	                </div>
+	                <div class="dot-separator margin15"></div>
+	          		<div class="margin15 blog-icons">
+	                    <div class="small-round-icon-gray left">
+	                        <div class="icon-gray-small icon100-gray">
+	                        	<a href="index.html"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a>
+	                        </div>
+	                    </div>
+	                    <div class="small-round-icon-gray left">
+	                        <div class="icon-gray-small icon114-gray">
+	                        	<a href="index.html"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a>
+	                        </div>
+	                    </div>
+	                    <div class="small-round-icon-gray left">
+	                        <div class="icon-gray-small icon96-gray">
+	                        	<a href="index.html"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a>
+	                        </div>
+	                    </div>
+	                    <div class="small-round-icon-gray nobottommargin left">
+	                        <div class="icon-gray-small icon108-gray">
+	                        	<a href="index.html"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a>
+	                        </div>
+	                    </div>
+	                    <div class="small-round-icon-gray nobottommargin left last">
+	                        <div class="icon-gray-small icon27-gray">
+	                        	<a href="index.html"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a>
+	                        </div>
+	                    </div>
+	                    <div class="clear"></div>
+	                </div>
+	            </div>
+	            <div class="one-half last notopmargin">
+	            	<a href="#" class="item-preview" title="">
+	            		<img class="bordered-img img-preview"  src="http://lorempixum.com/450/270/food/" alt=" "/>
+	            	</a>
+	            	{% if koch.koch.notes|length %}
+		        		<h6 class="" style="padding:10px;">{{koch.koch.notes}}</h6>
+		        	{% endif %}
+		            <div class="clear"></div>
+		            <a class="button_readmore right margin15"  href="">View Details</a>
+	        	</div>
+	        </div>
+	        <div class="clear"></div>
+	        <div class="three-fourth last dot-separator margin30"></div>
+	    </div>
+	{% endfor %}
+{% endblock %}
+
+{% block side_content %}
+	<div class="one-fourth notopmargin sidebar-right last">
+		{% include 'sidebar.html' %}
+	</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'right_bar.html' %}
+{% block title %}{{koch.title}}{%endblock%}
+{% block left_content %}
+	<h1 class="welcome nobottommargin left">{{koch.title}}</h1>
+	<h4 class="clear colored">{{koch.notes}}</h4>
+	<div class="separator margin15"></div>
+	<div class="one-fourth left sidebar">
+		<h3 class="notopmargin">Ingredients</h3>
+		<div class="separator margin15"></div>
+		<ul class="list check-list">
+			{% for ingredient in ingredients %}
+				<li>{{ingredient.value}}</li>
+				<li class="dot-sep"></li>
+			{% endfor %}
+		<ul>
+	</div>
+	<div class="one-half last">
+		<a class="item-preview" title="" rel="prettyPhoto" href="#">
+			<img class="bordered-img img-preview" alt=" " src="http://lorempixum.com/460/260/food/">
+		</a>
+		<h3 class="notopmargin">Directions</h3>
+		<div class="separator margin15"></div>
+		{% for direction in directions %}
+			<div class="small-round-icon-black left margin15">
+				<div class="icon-black-small icon209-black">
+					<a href="index.html">
+						<img width="24px" height="24px" alt="" src="/static/images/1px.png">
+					</a>
+				</div>
+			</div>
+			<p>{{direction.value}}</p>
+			<div class="clear"></div>
+		{% endfor %}
+		
+	</div>
+{% endblock %}
+{% block side_content %}
+	<div class="one-fourth notopmargin sidebar-right last">
+		{% include 'sidebar.html' %}
+	</div>
+{% endblock %}

@@ -31,6 +31,7 @@ application = webapp.WSGIApplication(
                                             ('/account'         , account.Overview),
                                             ('/create'          , koch.Create),
                                             ('/cook/(.+)'       , koch.List),
+                                            ('/details/(.+)'     , koch.Detail),
 
 
                                         ],

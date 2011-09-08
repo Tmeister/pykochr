@@ -51,7 +51,7 @@ class Koch(db.Model):
 	created		= db.DateTimeProperty(auto_now_add=True)
 	status		= db.StringProperty(default='publish')
 	private		= db.BooleanProperty(default=False);
-	slug		= db.StringProperty()
+	slug		= db.StringProperty(required=True)
 	notes		= db.TextProperty()
 
 

@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <title>Kochbuchr | {%block title%}{%endblock%}</title>
+        <link href="/static/css/reset.css" rel="stylesheet" type="text/css" />
+        <link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="http://fonts.googleapis.com/css?family=Amaranth:400" rel="stylesheet" type="text/css"> 
+        {% block css %}{% endblock %}
+        <script type="text/javascript" src="/static/js/jquery-1.6.1.min.js"></script>
+        <script type="text/javascript" src="/static/js/superfish-menu/hoverIntent.js"></script>
+        <script type="text/javascript" src="/static/js/superfish-menu/superfish.js"></script>
+        <script type="text/javascript" src="/static/js/scrolltop/scrolltopcontrol.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.simplemodal.1.4.1.min.js"></script>
+        {% block js %}{% endblock %}
+        <script type="text/javascript" src="/static/js/custom.js"></script>
+        
+    </head>
+    <body>
+        <div class="full-top">
+            <div class="wrapper-top">{% include 'top_menu.html'%}</div>    
+        </div><!-- / full-top-->
+        <!-- MAIN WRAPPER -->
+        <div class="wrapper">
+            <!-- MAIN CONTENT -->
+            <!-- CONTENT BLOCK -->
+            {% block content %}{%endblock%}
+            <!-- END CONTENT BLOCK -->
+            <div class="one separator"></div>
+            <!-- END MAIN CONTENT -->
+            <!-- TWITTER -->
+            <div class="one separator"></div>
+            <div class="one notopmargin tweet">
+    			<div class="one-fourth notopmargin">
+                    <div class="small-round-icon-gray left">
+    					<div class="icon-gray-small icon99-gray"><a href="/"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a></div>
+    				</div>
+                    <h4 class="left">Our Recent tweets</h4>
+                </div>
+                <div class="three-fourth notopmargin last">
+                	<!-- TWEET -->
+                </div>
+    		</div>
+            <!-- END TWITTER -->
+            <div class="one separator notopmargin"></div>
+            <!-- FOOTER BLOCK -->
+            <div class="one notopmargin footer"></div>
+            <!-- END FOOTER -->
+            <!-- BOTOOM LINE -->
+            <div class="one separator notopmargin"></div>
+            <div class="one bottom-line notopmargin">
+                <p class="margin15 left">© Copyright 2011</p>
+                <p class="right margin15"></p>
+            </div>
+            <!-- END BOTTOM LINE -->
+            <div class="clear"></div> 
+        </div>
+        <!-- END MAIN WRAPPER -->
+    </body>
+</html>
