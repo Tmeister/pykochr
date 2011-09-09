@@ -361,6 +361,13 @@ a.btn3	{
 		background-color: #212121; /* backup for non-webkit browsers */
 	}
 
+.btn.blue	{
+	background-color: #0099ff; /* backup for non-webkit browsers */
+}
+	a:hover.btn.blue	{	
+		background-color: #212121; /* backup for non-webkit browsers */
+	}
+
 .btn1.grey	{
 	background-color: #e1e1e1; /* backup for non-webkit browsers */
 }
@@ -409,6 +416,8 @@ a.button_readmore:hover {
 		color:#FFF;
 		background:#000000;
 	}
+
+
 /*-------------------------------------------------------------------------------------------------*/
 	/*TEXT FEATURES*/
 /*-------------------------------------------------------------------------------------------------*/
@@ -2615,23 +2624,75 @@ html[xmlns] #nav {
 {
 	padding:10px;
 	width:500px;
+	padding-left:30px;
+	color:#5A5A5A;
 }
+
+
+
+#form_settings .input input[type='text'],
+#form_settings .input input[type='email'],
+#form_settings .input input[type='password'],
+#form_settings .input textarea,
+.input textarea
+{
+	padding:10px;
+}
+
 .input select{
-	width:240px;
-	margin-top:12px;
+	width:500px;	
 }
 .input input[type='checkbox']{
-	margin-top:15px;	
+	margin-top:10px;	
 }
+
 .kochmaker ul{
 	margin-bottom: 20px;
-	margin-left:200px;
+	margin-left:205px;
 }
-.info-box-blue {
-	border:1px solid #006699;
-	padding: 20px 60px;
-	background:#0099FF url(../images/info-box.png) no-repeat 10px 15px;
+.info-box-blue,
+.info-box-red,
+.info-box-green
+ {
+	border:1px solid #5396ad;
+	padding: 20px;
+	background:#68B4CD;
 	color:#ffffff;
 	text-shadow:none;
 	margin-bottom:15px;
+	text-align:center;
+	font-weight:bold;
+}
+.info-box-red {
+	border:1px solid #a82828;
+	background:#cc3333;
+}
+.info-box-green {
+	border:1px solid #5d8045;
+	background:#77A25B;
+}
+
+#koch_ingredient{
+	background:url(../images/fruit1.png) center left no-repeat #fff;
+}
+#koch_name{
+	background:url(../images/fruit2.png) center left no-repeat #fff;	
+}
+#koch_directions{
+	background:url(../images/fruit3.png) center left no-repeat #fff;	
+}
+#koch_tags{
+	background:url(../images/fruit4.png) center left no-repeat #fff;	
+}
+
+#prep_time{
+	background:url(../images/clock.png) center left no-repeat #fff;	
+}
+
+#cook_time{
+	background:url(../images/cook_time.png) center left no-repeat #fff;	
+}
+
+.select{
+	padding:7px;
 }

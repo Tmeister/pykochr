@@ -1,11 +1,12 @@
 {% extends 'right_bar.html' %}
 {% block title %}{{koch.title}}{%endblock%}
+
 {% block left_content %}
 	<h1 class="welcome nobottommargin left">{{koch.title}}</h1>
 	<h4 class="clear colored">{{koch.notes}}</h4>
 	<div class="separator margin15"></div>
-	<div class="one-fourth left sidebar">
-		<h3 class="notopmargin">Ingredients</h3>
+	<div class="one-fourth left sidebar notopmargin">
+		<h3 class="">Ingredients</h3>
 		<div class="separator margin15"></div>
 		<ul class="list check-list">
 			{% for ingredient in ingredients %}
@@ -13,24 +14,46 @@
 				<li class="dot-sep"></li>
 			{% endfor %}
 		<ul>
+  		<div class="margin15 blog-icons">
+            <div class="small-round-icon-gray left">
+                <div class="icon-gray-small icon100-gray">
+                	<a href="index.html"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a>
+                </div>
+            </div>
+            <div class="small-round-icon-gray left">
+                <div class="icon-gray-small icon114-gray">
+                	<a href="index.html"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a>
+                </div>
+            </div>
+            <div class="small-round-icon-gray left">
+                <div class="icon-gray-small icon96-gray">
+                	<a href="index.html"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a>
+                </div>
+            </div>
+            <div class="small-round-icon-gray nobottommargin left">
+                <div class="icon-gray-small icon108-gray">
+                	<a href="index.html"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
 	</div>
-	<div class="one-half last">
-		<a class="item-preview" title="" rel="prettyPhoto" href="#">
-			<img class="bordered-img img-preview" alt=" " src="http://lorempixum.com/460/260/food/">
-		</a>
-		<h3 class="notopmargin">Directions</h3>
+	<div class="one-half last notopmargin">
+		<h3 class="">Directions</h3>
 		<div class="separator margin15"></div>
-		{% for direction in directions %}
-			<div class="small-round-icon-black left margin15">
-				<div class="icon-black-small icon209-black">
-					<a href="index.html">
-						<img width="24px" height="24px" alt="" src="/static/images/1px.png">
-					</a>
+		<a class="item-preview" title="" rel="prettyPhoto" href="#">
+			<img class="bordered-img img-preview" alt=" " src="http://lorempixum.com/450/250/food/">
+		</a>
+		<div class="separator margin15"></div>
+		<div id="" class="">
+			{% for direction in directions %}
+				<div class="small-round-icon-gray left">
+					<div class="icon-gray-small icon209-gray"></div>
 				</div>
-			</div>
-			<p>{{direction.value}}</p>
-			<div class="clear"></div>
-		{% endfor %}
+				<p style="margin-left:45px; text-align:justify; min-height:30px;">{{direction.value}}</p>
+			{% endfor %}	
+		</div><!-- / -->
+		
 		
 	</div>
 {% endblock %}

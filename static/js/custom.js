@@ -97,19 +97,19 @@ $(function($) {
 	};
 	
 
-	$('.field.box').hide();
-	$('.field.box').hide();
+	$('.field.info-box-red').hide();
+	$('.field.info-box-green').hide();
 	$('#koch_name, #koch_ingredient, #koch_directions, #koch_notes').focus(function(){
-		$('.field.box').slideUp('slow');
+		$('.field.info-box-red').slideUp('slow');
 	});
 
 	function show_error (error) {
-		$('.box-red .koch_status').html(error);
-		$('.field.box-red').show();
+		$('.info-box-red .koch_status').html(error);
+		$('.field.info-box-red').show();
 	}
 	function show_success (error) {
-		$('.box-green .koch_status').html(error);
-		$('.field.box-green').show();
+		$('.info-box-green .koch_status').html(error);
+		$('.field.info-box-green').show();
 	}
 
 
@@ -123,7 +123,7 @@ $(function($) {
 
 		if( ! name.length ){show_error('Really, Do you not forget the name?');return;}
 		if( ! ingredients.length ){show_error('A recipe without ingredients is it strange, Huh?');return;}
-		if( ! directions.length ){show_error('We need directions to get it right.');return;}
+		if( ! directions.length ){show_error('We need directions to get it right');return;}
 
 		ingredients_to_go = [];
 		ingredients.each(function(){

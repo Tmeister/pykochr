@@ -4,15 +4,28 @@
 	<script src="/static/js/jquery.autogrowtextarea.js" type="text/javascript" charset="utf-8"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/static/js/jquery.bubbleBox.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function($) {
+			$("input[type=file]").change(function(){
+				$(this).parents(".uploader").find(".filename").val($(this).val());
+			});
+			$("input[type=file]").each(function(){
+				if($(this).val()==""){
+					$(this).parents(".uploader").find(".filename").val("No file selected...");
+				}
+			});
+		});
+				
+	</script>
 {% endblock%}
 {% block css%}
 	<link rel="stylesheet" type="text/css" media="screen" href="/static/css/bubbleBox.css" />
-	<link rel="stylesheet" href="/static/unorderedliststyles/style.css">
+	<link rel="stylesheet" href="/static/css/fakefileinputs.css" />
 {% endblock%}
 
 {% block left_content %}
-	<h1 class="welcome nobottommargin">Create new Koch</h1>
-	<h4 class="notopmargin colored">Koch is the name that we use for a recipe.</h4>
+	<h1 class="welcome nobottommargin">Create new Recipe</h1>
+	<h4 class="notopmargin colored">What are you going to cook today?</h4>
 	<div class="separator margin15"></div>
 	<div class="kochmaker">
 		<form action="" id="form_new_koch" method="post" enctype="multipart/form-data"> 
@@ -23,12 +36,12 @@
 			<div class="input field">
 				<label for="koch_ingredient"><h5>Ingredients *</h5></label>
 				<input type="text" id="koch_ingredient" placeholder="Ingredients +" />
-				<ul id="koch_ingredient_list" class=""></ul>
+				<ul id="koch_ingredient_list" class="list check-list"></ul>
 			</div>
 			<div class="input field">
 				<label for="koch_directions"><h5>Directions *</h5></label>
 				<input type="text" id="koch_directions" placeholder="Directions +" />
-				<ul id="koch_directions_list" class=""></ul>
+				<ul id="koch_directions_list" class="list check-list"></ul>
 			</div>
 			<div class="input field">
 				<label for="prep_time"><h5>Prep Time</h5></label>
@@ -38,9 +51,9 @@
 				<label for="cook_time"><h5>Cook Time</h5></label>
 				<input id="cook_time" name="cook_time" type="text" placeholder="30">
 			</div>
-			<div class="input field">
+			<div class="input field mainselection">
 				<label for="level"><h5>Level</h5></label>
-				<select name="level">
+				<select name="level" class="select tab04b">
 					<option value="easy">Easy</option>
 					<option value="medium">Medium</option>
 					<option value="difficult">Difficult</option>
@@ -49,12 +62,16 @@
 			</div>
 			<div class="input field">
 				<label for="koch_photos"><h5>Image</h5></label>
-				<input id="photos" name="photo" type="file">
+				<div class="uploader white">
+					<input type="text" class="filename" readonly="readonly"/>
+					<input type="button" class="button" value="Browse..."/>
+					<input type="file" name="photo" size="30"/>
+				</div>
 			</div>
 			<div class="input field">
 				<label for="koch_tags"><h5>Tags</h5></label>
 				<input type="text" id="koch_tags" placeholder="Tags +" />
-				<ul id="koch_tags_list" class=""></ul>
+				<ul id="koch_tags_list" class="list check-list"></ul>
 			</div>
 			<div class="input field">
 				<label for="koch_tags"><h5>Notes</h5></label>
@@ -62,11 +79,12 @@
 			</div>
 			<div class="input field">
 				<label for="koch_private"><h5>Private</h5></label>
-				<span id="private"><input type="checkbox" name="private" value="1"> Only you will see this koch.</span>
+				<input type="checkbox" name="private" value="1"><span id="private"> Only you will see this koch.</span>
 			</div>
-			<div class="field box box-red"><span class="koch_status"></span></div>
+			<div class="field info-box-red"><span class="koch_status"></span></div>
 			<div class="field box box-green"><span class="koch_status"></span></div>
-			<input type="button" class="main-button white full-width" id="koch_save" value="Save">
+			<div class="clear"></div>
+			<input type="button" class="button black right" id="koch_save" value="Save Recipe">
 		</form>
 	</div>
 {% endblock %}

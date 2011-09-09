@@ -4,13 +4,13 @@
 }
 
 .ui-bubblebox-item {
-  border-color: -moz-use-text-color -moz-use-text-color #d4d4d4;
+  border-color: -moz-use-text-color -moz-use-text-color #e1e1e1;
   border-style: none none dotted;
   border-width: medium medium 1px;
   padding: 5px 15px 5px 5px;
   margin: 5px 0;
   position: relative;
-  font-size: 11px;
+  color:#5A5A5A;
 }
 
 .ui-bubblebox-item span {
