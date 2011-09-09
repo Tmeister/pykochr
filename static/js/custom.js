@@ -122,8 +122,10 @@ $(function($) {
 		notes = 		$('#koch_notes').val();
 
 		if( ! name.length ){show_error('Really, Do you not forget the name?');return;}
+		if( notes.length < 50 ){show_error('Please write a description at least 50 chars about your recipe');return;}
 		if( ! ingredients.length ){show_error('A recipe without ingredients is it strange, Huh?');return;}
 		if( ! directions.length ){show_error('We need directions to get it right');return;}
+
 
 		ingredients_to_go = [];
 		ingredients.each(function(){
@@ -148,6 +150,65 @@ $(function($) {
 
 	});
 
+	$('.ajax-trigger').click(function(event) {
+		event.preventDefault();
+		target = $(this).find('div');
+		target = $( target[0] );
+		key = target.attr('data-key');
+		if( target.hasClass('up-vote-trigger') ){
+			up_vote( target, key )
+			return 
+		}
+		if( target.hasClass('down-vote-trigger') ){
+			down_vote( target, key )
+			return 
+		}
+	});
+
+	function up_vote(target, key) {
+		$.ajax({
+			url: '/ajax/up-vote',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				key : key
+			},
+			success: function(data, textStatus, xhr) {
+				if( data.status == 'success' ){
+					target.removeClass('blog-date2')
+					.removeClass('up-vote-trigger')
+					.addClass('blog-date-blue2')
+					.addClass('down-vote-trigger');
+					target.find('.votes-count').html( data.votes );
+				}else{
+					alert('nonono')
+				}
+
+			}
+		});
+	}
+
+	function down_vote (target, key) {
+		$.ajax({
+			url: '/ajax/down-vote',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				key : key
+			},
+			success: function(data, textStatus, xhr) {
+				if( data.status == 'success' ){
+					target.removeClass('blog-date-blue2')
+					.removeClass('down-vote-trigger')
+					.addClass('blog-date2')
+					.addClass('up-vote-trigger');
+					target.find('.votes-count').html( data.votes );
+				}else{
+					alert('nonono	')
+				}
+			}
+		});
+	}		
 });
 
 /***************************************************

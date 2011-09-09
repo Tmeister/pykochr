@@ -25,13 +25,17 @@
 
 {% block left_content %}
 	<h1 class="welcome nobottommargin">Create new Recipe</h1>
-	<h4 class="notopmargin colored">What are you going to cook today?</h4>
+	<h4 class="notopmargin colored">Surprise us!</h4>
 	<div class="separator margin15"></div>
 	<div class="kochmaker">
 		<form action="" id="form_new_koch" method="post" enctype="multipart/form-data"> 
 			<div class="input field">
 				<label for="koch_name"><h5>Name *</h5></label>
 				<input type="text" placeholder="Name" id="koch_name" name="name" />
+			</div>
+			<div class="input field">
+				<label for="koch_notes"><h5>Description *</h5></label>
+				<textarea name="notes" id="koch_notes" rows="1" placeholder="Notes"></textarea>
 			</div>
 			<div class="input field">
 				<label for="koch_ingredient"><h5>Ingredients *</h5></label>
@@ -65,17 +69,13 @@
 				<div class="uploader white">
 					<input type="text" class="filename" readonly="readonly"/>
 					<input type="button" class="button" value="Browse..."/>
-					<input type="file" name="photo" size="30"/>
+					<input type="file" name="photo" size="30" id="image_file"/>
 				</div>
 			</div>
 			<div class="input field">
 				<label for="koch_tags"><h5>Tags</h5></label>
 				<input type="text" id="koch_tags" placeholder="Tags +" />
 				<ul id="koch_tags_list" class="list check-list"></ul>
-			</div>
-			<div class="input field">
-				<label for="koch_tags"><h5>Notes</h5></label>
-				<textarea name="notes" id="koch_notes" rows="3" placeholder="Notes"></textarea>
 			</div>
 			<div class="input field">
 				<label for="koch_private"><h5>Private</h5></label>

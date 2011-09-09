@@ -17,6 +17,8 @@ class Home(webapp.RequestHandler):
         session = get_current_session()
         if session.has_key('user'):
             user = session['user']
+
+        loop = range(243)
         self.response.out.write(template.render('templates/home.html', locals()))
 
         
@@ -26,12 +28,16 @@ application = webapp.WSGIApplication(
                                             ('/', Home),
                                             ('/ajax/register'   , account.Register),
                                             ('/ajax/login'      , account.Login),
+                                            ('/ajax/up-vote'    , koch.UpVote),
+                                            ('/ajax/down-vote'  , koch.DownVote),
                                             ('/logout'          , account.Logout),
                                             ('/profile'         , profile.Edit),
                                             ('/account'         , account.Overview),
                                             ('/create'          , koch.Create),
                                             ('/cook/(.+)'       , koch.List),
-                                            ('/details/(.+)'     , koch.Detail),
+                                            ('/details/(.+)'    , koch.Detail),
+                                            ('/image/'          , koch.Image),
+
 
 
                                         ],

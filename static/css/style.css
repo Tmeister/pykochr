@@ -69,7 +69,8 @@ img::-moz-selection {
 	margin-right:15px;
 }
 
-.blog-date2 {
+.blog-date2,
+.blog-date-blue2 {
 	width:100px;
 	height:75px;
 	background:url('../images/blog-bg2.png');
@@ -77,6 +78,11 @@ img::-moz-selection {
 	text-align:center;
 	margin-right:15px;
 }
+
+.blog-date-blue2 {
+	background:url('../images/blog-bg-blue2.png');
+}
+
 .author {
 	width:120px;
 }
@@ -2623,8 +2629,8 @@ html[xmlns] #nav {
 .input textarea
 {
 	padding:10px;
-	width:500px;
-	padding-left:30px;
+	width:450px;
+	padding-left:35px;
 	color:#5A5A5A;
 }
 
@@ -2634,9 +2640,14 @@ html[xmlns] #nav {
 #form_settings .input input[type='email'],
 #form_settings .input input[type='password'],
 #form_settings .input textarea,
-.input textarea
 {
 	padding:10px;
+	width:478px;
+}
+textarea { font: 11px Verdana, Arial, Helvetica, sans-serif; }
+
+.kochmaker textarea{
+	padding-left:35px;
 }
 
 .input select{
@@ -2673,26 +2684,44 @@ html[xmlns] #nav {
 }
 
 #koch_ingredient{
-	background:url(../images/fruit1.png) center left no-repeat #fff;
+	background:url(../images/fruit1.png) 5px 4px no-repeat #fff;
 }
 #koch_name{
-	background:url(../images/fruit2.png) center left no-repeat #fff;	
+	background:url(../images/fruit2.png) 5px 4px no-repeat #fff;	
 }
 #koch_directions{
-	background:url(../images/fruit3.png) center left no-repeat #fff;	
+	background:url(../images/fruit3.png) 5px 2px no-repeat #fff;	
 }
 #koch_tags{
-	background:url(../images/fruit4.png) center left no-repeat #fff;	
+	background:url(../images/fruit4.png) 5px 4px no-repeat #fff;	
 }
 
 #prep_time{
-	background:url(../images/clock.png) center left no-repeat #fff;	
+	background:url(../images/clock.png) 5px 3px no-repeat #fff;	
 }
 
 #cook_time{
-	background:url(../images/cook_time.png) center left no-repeat #fff;	
+	background:url(../images/cook_time.png) 5px 3px no-repeat #fff;	
+}
+#koch_notes{
+	background:url(../images/fruit6.png) 5px 3px no-repeat #fff;	
 }
 
 .select{
 	padding:7px;
+}
+#private{ font: 11px Verdana, Arial, Helvetica, sans-serif; }
+
+.ajax-trigger{ cursor:pointer; }
+
+.blog-date2 .love
+{
+	background:url(../images/love.png) center 0px no-repeat;
+	width:100%;
+	height:30px;
+}
+.blog-date-blue2 .love{
+	background:url(../images/love.png) center -35px no-repeat;	
+	width:100%;
+	height:30px;
 }

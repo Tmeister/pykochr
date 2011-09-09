@@ -77,3 +77,31 @@ class Tag(db.Model):
 	"""docstring for Photos"""
 	koch = db.ReferenceProperty(Koch)
 	value = db.StringProperty(required=True)
+
+class Like(db.Model):
+	"""docstring for Likes"""
+	koch = db.ReferenceProperty(Koch)
+	user = db.ReferenceProperty(User)
+	created = db.DateTimeProperty(auto_now_add=True)
+
+	@staticmethod
+	def up(koch, user):
+		upvote = Like( koch = koch, user = user )
+		upvote.put()
+		koch.likes += 1
+		koch.put()
+		return koch.likes
+	
+	def down(self):
+		self.koch.likes -= 1
+		self.koch.put()
+		self.delete()
+		return self.koch.likes
+	
+	@staticmethod
+	def alreadylike(koch, user):
+		like = Like.all().filter('koch =', koch).filter('user =', user).fetch(1)
+		return True if len( like ) else False
+
+	
+		

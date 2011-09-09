@@ -41,9 +41,11 @@
 	<div class="one-half last notopmargin">
 		<h3 class="">Directions</h3>
 		<div class="separator margin15"></div>
-		<a class="item-preview" title="" rel="prettyPhoto" href="#">
-			<img class="bordered-img img-preview" alt=" " src="http://lorempixum.com/450/250/food/">
-		</a>
+		{% if image %}
+       		<img class="bordered-img img-preview"  src="/image/?img_id={{koch.key}}" alt=" "/>
+        {% else %}
+        	<img class="bordered-img img-preview default"  src="/static/images/default.png" />
+    	{% endif %}
 		<div class="separator margin15"></div>
 		<div id="" class="">
 			{% for direction in directions %}
@@ -52,10 +54,14 @@
 				</div>
 				<p style="margin-left:45px; text-align:justify; min-height:30px;">{{direction.value}}</p>
 			{% endfor %}	
-		</div><!-- / -->
-		
-		
+		</div>
 	</div>
+	<div class="clear"></div>
+	<div class="separator margin15"></div>
+	<div class="three-fourth notopmargin">
+		<h3>Comments</h3>
+	</div>
+
 {% endblock %}
 {% block side_content %}
 	<div class="one-fourth notopmargin sidebar-right last">

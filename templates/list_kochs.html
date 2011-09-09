@@ -14,10 +14,21 @@
 	                    	<a class="link" href="/details/{{koch.koch.slug}}">{{koch.koch.title}}</a>
 	                    </h3>
 	                </div>
-	                <div class="blog-date2 margin15 left">
-	                    <h2 class="notopmargin">9,999</h2>
-	                    <p class="notopmargin">Likes</p>
-	                </div>
+	                <div class="big-like ajax-trigger">
+	                	{% if not koch.alreadylike %}
+	                		<div class="blog-date2 margin15 left up-vote-trigger" data-key="{{koch.koch.key}}">
+			                    <h2 class="notopmargin votes-count">{{koch.humanlikes}}</h2>
+			                    <div class="love"></div>
+			                </div>
+			            {% else %}	
+			            	<div class="blog-date-blue2 margin15 left down-vote-trigger" data-key="{{koch.koch.key}}">
+			                    <h2 class="notopmargin votes-count">{{koch.humanlikes}}</h2>
+			                    <div class="love"></div>
+			                </div>
+	                	{% endif %}
+	                	
+
+	                </div>	
 	                <div class="blog-date2 margin15 left last">
 	                    <h2 class="notopmargin"><a href="" class="link">56</a></h2>
 	                    <p class="notopmargin">comments</p>
@@ -68,14 +79,18 @@
 	                </div>
 	            </div>
 	            <div class="one-half last notopmargin">
-	            	<a href="#" class="item-preview" title="">
-	            		<img class="bordered-img img-preview"  src="http://lorempixum.com/450/270/food/" alt=" "/>
-	            	</a>
+	            	{% if koch.image %}
+	            		<a href="/details/{{koch.koch.slug}}" class="item-preview" title="">
+		            		<img class="bordered-img img-preview"  src="/image/?img_id={{koch.koch.key}}" alt=" "/>
+		            	</a>
+		            {% else %}
+		            	<img class="bordered-img img-preview default"  src="/static/images/default.png" />
+	            	{% endif %}
 	            	{% if koch.koch.notes|length %}
 		        		<h6 class="" style="padding:10px;">{{koch.koch.notes}}</h6>
 		        	{% endif %}
 		            <div class="clear"></div>
-		            <a class="button_readmore right margin15"  href="">View Details</a>
+		            <a class="button_readmore right margin15"  href="/details/{{koch.koch.slug}}">View Details</a>
 	        	</div>
 	        </div>
 	        <div class="clear"></div>
