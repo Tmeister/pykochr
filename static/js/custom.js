@@ -1,5 +1,9 @@
 $(function($) {
 	
+	$(".input-tooltip").tipTip({activation: 'focus', maxWidth: "auto", edgeOffset: 5, defaultPosition:'left'});
+	$(".subtooltip, .toptooltip").tipTip({maxWidth: "auto", edgeOffset: 5, defaultPosition:'top'});
+
+
 	$('#top-login, #top-register').click(function(event) {
 		event.preventDefault();
 		target = ( $(this).attr('id') == 'top-login' ) ? $('#login-form') : $('#register-form');
@@ -164,6 +168,8 @@ $(function($) {
 			return 
 		}
 	});
+			
+
 
 	function up_vote(target, key) {
 		$.ajax({
@@ -181,7 +187,7 @@ $(function($) {
 					.addClass('down-vote-trigger');
 					target.find('.votes-count').html( data.votes );
 				}else{
-					alert('nonono')
+					user_message(data.message, 'error');
 				}
 
 			}
@@ -204,11 +210,15 @@ $(function($) {
 					.addClass('up-vote-trigger');
 					target.find('.votes-count').html( data.votes );
 				}else{
-					alert('nonono	')
+					user_message(data.message, 'error');
 				}
 			}
 		});
-	}		
+	}
+
+	function user_message( message, theme ){
+		$.jGrowl(message, {theme:theme, position: 'bottom-left'});
+	}
 });
 
 /***************************************************

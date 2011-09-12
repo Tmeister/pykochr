@@ -1,6 +1,9 @@
 import htmlentitydefs, re
 import random
 
+from models import (User, Koch, Like)
+from django.contrib.humanize.templatetags.humanize import intcomma
+
 def sluglify(text, separator = "-"):
   ret = ""
   for c in text.lower():
@@ -14,3 +17,37 @@ def sluglify(text, separator = "-"):
   ret = re.sub(" +", separator, ret)
  
   return ret.strip()
+
+def paginate(entities, page=0):
+  PAGESIZE = 10
+  max_results = 2000 
+  max_pages = (max_results - PAGESIZE) / PAGESIZE 
+  start = page*PAGESIZE   
+  entities = entities.fetch(PAGESIZE+1, start)
+  more_entities = len(entities) > PAGESIZE   
+  prev_page = None   
+  if page:
+    prev_page = str(page - 1)   
+
+  next_page = None   
+  if more_entities:   
+    next_page = str(page + 1)   
+    
+  return entities[:PAGESIZE], next_page, prev_page
+
+def get_kochs_data(entities, author=None):
+  kochs = []
+  user = User.is_logged()
+  for koch in entities:
+    if user:
+      alreadylike = Like.alreadylike( koch, user )
+    else:
+      alreadylike = False
+
+    kochs.append({
+        'koch'      : koch,
+        'humanlikes'  : intcomma( int( koch.likes) ),
+        'alreadylike' : alreadylike
+      })
+
+  return kochs

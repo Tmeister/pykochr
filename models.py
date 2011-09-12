@@ -4,6 +4,7 @@ use_library('django', '1.2')
 from google.appengine.ext import webapp, db
 import hashlib
 import keys
+from gaesessions import get_current_session
 
 
 class User(db.Model):
@@ -36,7 +37,14 @@ class User(db.Model):
 		for x in range(iterations):
 		  h.update(h.digest())
 		return h.hexdigest()
-		
+	
+	@staticmethod
+	def is_logged():
+		session = get_current_session()
+		if session.has_key('user'):
+			return session['user']
+		else:
+			return False
 
 
 class Koch(db.Model):
@@ -50,33 +58,29 @@ class Koch(db.Model):
 	likes		= db.IntegerProperty(default=0)
 	created		= db.DateTimeProperty(auto_now_add=True)
 	status		= db.StringProperty(default='publish')
-	private		= db.BooleanProperty(default=False);
+	private		= db.BooleanProperty(default=False)
 	slug		= db.StringProperty(required=True)
 	notes		= db.TextProperty()
-
-
-
-
-
-class Photo(db.Model):
-	"""docstring for Photos"""
-	koch = db.ReferenceProperty(Koch)
-	value = db.BlobProperty(required=True)
-
-class Ingredient(db.Model):
-	"""docstring for Ingredients"""
-	koch = db.ReferenceProperty(Koch)
-	value = db.StringProperty(required=True)
-
-class Direction(db.Model):
-	"""docstring for Directions"""
-	koch = db.ReferenceProperty(Koch)
-	value = db.TextProperty(required=True)
+	tags 		= db.StringListProperty()
+	ingredients	= db.StringListProperty()
+	directions  = db.StringListProperty()
+	photo 		= db.BlobProperty()
 
 class Tag(db.Model):
-	"""docstring for Photos"""
-	koch = db.ReferenceProperty(Koch)
-	value = db.StringProperty(required=True)
+	"""docstring for Tag"""
+	name = db.StringProperty(required=True)
+	counter = db.IntegerProperty(default=1)
+
+	@staticmethod
+	def up(name):
+		tag = Tag.all().filter('name =', name).fetch(1)
+		if len(tag) == 1:
+			tag = tag[0]
+			tag.counter += 1	
+		else:
+			tag = Tag(name=name)
+
+		tag.put()
 
 class Like(db.Model):
 	"""docstring for Likes"""

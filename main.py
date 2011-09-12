@@ -34,7 +34,8 @@ application = webapp.WSGIApplication(
                                             ('/profile'         , profile.Edit),
                                             ('/account'         , account.Overview),
                                             ('/create'          , koch.Create),
-                                            ('/cook/(.+)'       , koch.List),
+                                            ('/cook/(.+)'       , koch.ListByAuthor),
+                                            ('/tag/(.+)'       , koch.ListByTag),
                                             ('/details/(.+)'    , koch.Detail),
                                             ('/image/'          , koch.Image),
 

@@ -1,8 +1,7 @@
 {% extends 'right_bar.html' %}
-{% block title %}Explore{%endblock%}
+{% block title %}{{title}}{%endblock%}
 {% block left_content %}
-	<h1 class="welcome nobottommargin left">Explore</h1>
-	<p class="left description ">: Other text</p>
+	<h1 class="welcome nobottommargin left">{{title}}</h1>
 	<h4 class="clear colored">Some other text...  </h4>
 	<div class="separator margin15"></div>
 	{% for koch in kochs %}
@@ -16,18 +15,16 @@
 	                </div>
 	                <div class="big-like ajax-trigger">
 	                	{% if not koch.alreadylike %}
-	                		<div class="blog-date2 margin15 left up-vote-trigger" data-key="{{koch.koch.key}}">
+	                		<div class="blog-date2 margin15 left up-vote-trigger toptooltip" data-key="{{koch.koch.key}}" title="Click to like">
 			                    <h2 class="notopmargin votes-count">{{koch.humanlikes}}</h2>
 			                    <div class="love"></div>
 			                </div>
 			            {% else %}	
-			            	<div class="blog-date-blue2 margin15 left down-vote-trigger" data-key="{{koch.koch.key}}">
+			            	<div class="blog-date-blue2 margin15 left down-vote-trigger toptooltip" data-key="{{koch.koch.key}}" title="I dont like anymore">
 			                    <h2 class="notopmargin votes-count">{{koch.humanlikes}}</h2>
 			                    <div class="love"></div>
 			                </div>
 	                	{% endif %}
-	                	
-
 	                </div>	
 	                <div class="blog-date2 margin15 left last">
 	                    <h2 class="notopmargin"><a href="" class="link">56</a></h2>
@@ -37,49 +34,39 @@
 	                <div class="dot-separator margin15"></div>
 	                <div class="margin15">
 	                    <p class="notopmargin nobottommargin">
-	                    	<span class="strong">Author: </span><a class="link" href="">{{koch.author.nickname.title}}</a>
+	                    	<span class="strong">Author: </span><a class="link" href="">{{koch.koch.author.nickname.title}}</a>
 	                    </p>
-	                    {% if koch.tags.count %}
+	                    {% if koch.koch.level %}
+	                    	<p class="nobottommargin margin10">
+	                    		<span class="strong">Level: </span>
+	                    		{{koch.koch.level|title}}
+	                    	</p>
+	                    {% endif %}
+	                    {% if koch.koch.prep_time %}
+	                    	<p class="nobottommargin margin10">
+	                    		<span class="strong">Prep. time: </span>
+	                    		{{koch.koch.prep_time}} min.
+	                    	</p>
+	                    {% endif %}
+	                    {% if koch.koch.cook_time %}
+	                    	<p class="nobottommargin margin10">
+	                    		<span class="strong">Cook time: </span>
+	                    		{{koch.koch.cook_time}} min.
+	                    	</p>
+	                    {% endif %}
+	                    {% if koch.koch.tags %}
 	                    	<p class="small-italic margin10 nobottommargin">
 		                    	<span class="strong">Tags: </span>
-		                    	{% for tag in koch.tags %}
-		                    		<a href="" class="link">{{tag.value}}</a>	
+		                    	{% for tag in koch.koch.tags %}
+		                    		<a href="/tag/{{tag}}" class="link">{{tag}}</a>	
 		                    	{% endfor %}
 		                    </p>	
 	                    {% endif %}
 	                </div>
-	                <div class="dot-separator margin15"></div>
-	          		<div class="margin15 blog-icons">
-	                    <div class="small-round-icon-gray left">
-	                        <div class="icon-gray-small icon100-gray">
-	                        	<a href="index.html"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a>
-	                        </div>
-	                    </div>
-	                    <div class="small-round-icon-gray left">
-	                        <div class="icon-gray-small icon114-gray">
-	                        	<a href="index.html"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a>
-	                        </div>
-	                    </div>
-	                    <div class="small-round-icon-gray left">
-	                        <div class="icon-gray-small icon96-gray">
-	                        	<a href="index.html"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a>
-	                        </div>
-	                    </div>
-	                    <div class="small-round-icon-gray nobottommargin left">
-	                        <div class="icon-gray-small icon108-gray">
-	                        	<a href="index.html"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a>
-	                        </div>
-	                    </div>
-	                    <div class="small-round-icon-gray nobottommargin left last">
-	                        <div class="icon-gray-small icon27-gray">
-	                        	<a href="index.html"><img src="/static/images/1px.png" alt="" width="24px" height="24px" /></a>
-	                        </div>
-	                    </div>
-	                    <div class="clear"></div>
-	                </div>
+	                
 	            </div>
 	            <div class="one-half last notopmargin">
-	            	{% if koch.image %}
+	            	{% if koch.koch.photo %}
 	            		<a href="/details/{{koch.koch.slug}}" class="item-preview" title="">
 		            		<img class="bordered-img img-preview"  src="/image/?img_id={{koch.koch.key}}" alt=" "/>
 		            	</a>
@@ -97,6 +84,15 @@
 	        <div class="three-fourth last dot-separator margin30"></div>
 	    </div>
 	{% endfor %}
+
+	{% if next_page %}   
+		<a href="?page={{ next_page }}">Next Page</a>   
+	{% endif %}   
+	   
+	{% if prev_page %}   
+		<a href="?page={{ prev_page }}">Previous Page</a>   
+	{% endif %}   
+
 {% endblock %}
 
 {% block side_content %}

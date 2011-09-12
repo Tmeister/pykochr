@@ -2725,3 +2725,5 @@ textarea { font: 11px Verdana, Arial, Helvetica, sans-serif; }
 	width:100%;
 	height:30px;
 }
+.subheader{margin-right:20px;}
+.details-time{/*margin:15px 0px;*/}
