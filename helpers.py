@@ -1,5 +1,8 @@
 import htmlentitydefs, re
 import random
+import urllib, hashlib
+import datetime
+
 
 from models import (User, Koch, Like)
 from django.contrib.humanize.templatetags.humanize import intcomma
@@ -47,7 +50,14 @@ def get_kochs_data(entities, author=None):
     kochs.append({
         'koch'      : koch,
         'humanlikes'  : intcomma( int( koch.likes) ),
-        'alreadylike' : alreadylike
+        'alreadylike' : alreadylike,
       })
 
   return kochs
+
+def get_gravatar(email, size=90):
+  default = "http://localhost:8080/static/images/default-thumb.png"
+  gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
+  gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
+  return gravatar_url
+

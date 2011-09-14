@@ -1,0 +1,25 @@
+<h4 class="notopmargin">About {{author.nickname|title}}</h4>
+<div class="dot-separator"></div>
+<div class="margin15">
+	<div class="left">
+		<p class="pink notopmargin nobottommargin marginb5">
+			<a href="/cook/{{author.nickname}}">{{author_recipes_count}} Recipes</a>
+		</p>
+		<p class="pink notopmargin nobottommargin marginb5">9,999 Followers</p>
+		<p class="pink notopmargin nobottommargin marginb5">9,999 Following</p>
+		{% if author.location %}
+			<p class="pink notopmargin nobottommargin marginb5">From: {{author.location}}</p>
+		{% endif %}
+	</div>
+	<a href="/cook/{{author.nickname}}">
+		<img class="bordered-img right" src="{{avatar}}"/>
+	</a>
+	<div class="clear"></div>
+	{% if author.about %}
+		<div class="dot-separator margin15"></div>
+		<p>{{author.about}}</p>
+	{% endif %}
+	<div class="dot-separator"></div>
+	
+</div>
+<div class="clear"></div>

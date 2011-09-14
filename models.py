@@ -17,7 +17,8 @@ class User(db.Model):
 	email               = db.EmailProperty(required=False)
 	admin               = db.BooleanProperty(default=False)
 	active				= db.BooleanProperty(default=False)
-	avatar				= db.StringProperty(required=False, default="")
+	avatar				= db.BlobProperty()
+	usegravatar			= db.BooleanProperty(default=True)
 	firstname			= db.StringProperty(required=False, default="")
 	lastname			= db.StringProperty(required=False, default="")
 
@@ -65,6 +66,7 @@ class Koch(db.Model):
 	ingredients	= db.StringListProperty()
 	directions  = db.StringListProperty()
 	photo 		= db.BlobProperty()
+	thumb		= db.BlobProperty()
 
 class Tag(db.Model):
 	"""docstring for Tag"""

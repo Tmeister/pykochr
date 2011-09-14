@@ -5,6 +5,7 @@
 {% if not user %}
 	
 	<div class="three-fourth-last notopmargin right">
+		<a class="btn1 tab04b grey" href="/explore">Explore</a>
 		<a class="btn1 tab04b grey" title="" href="#" id="top-login">Login</a>
 		<a class="btn1 tab04b grey" title="" href="#" id="top-register">Register</a>
 		<div id="register-form" class="hide">
@@ -61,12 +62,13 @@
 	<div class="three-fourth-last notopmargin right">
 		<ul id="nav"> 
 			<li>
-				<a href="/cook/{{user.nickname}}">{{user.nickname.title}}</a> 
+				<a href="#">{{user.nickname.title}}</a> 
 				<ul> 
-					<li><a href="/profile">Your Profile</a></li> 
+					<li><a href="/cook/{{user.nickname}}">Your Cookbook</a></li> 
 					<li><a href="/account">Your Account</a></li> 
 				</ul> 
 			</li>
+			<li><a href="/explore">Explore</a></li>
 			<li><a href="/create">Add Recipe</a> 
 			<li><a href="/logout">Logout</a></li> 
 		</ul>

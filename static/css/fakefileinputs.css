@@ -82,7 +82,7 @@
 	opacity:0;
 }
 
-.uploader  input[type=button]::-moz-focus-inner{padding:0; border:0 none; -moz-box-sizing:content-box;}
+.uploader input[type=button]::-moz-focus-inner{padding:0; border:0 none; -moz-box-sizing:content-box;}
 .uploader input[type=button]::-webkit-focus-inner{padding:0; border:0 none; -webkit-box-sizing:content-box;}
 .uploader input[type=text]::-moz-focus-inner{padding:0; border:0 none; -moz-box-sizing:content-box;}
 .uploader input[type=text]::-webkit-focus-inner{padding:0; border:0 none; -webkit-box-sizing:content-box;}

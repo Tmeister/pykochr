@@ -1,12 +1,6 @@
-<h3 class=" notopmargin">Side Navigation</h3>
-<ul class="content-navigation">
-	<li class="sep margin15"></li>
-	<li><a href="" title="">Link</a></li>
-	<li class="sep"></li>
-	<li><a href="" title="">Link</a></li>
-	<li class="sep"></li>
-	<li><a href="" title="">Link</a></li>
-	<li class="sep"></li>
-	<li><a href="" title="">Link</a></li>
-	<li class="sep"></li>
-</ul><!-- / -->
+<div clas="one-fourth sidebar-right last notopmargin margin17">
+	{% if author %}
+		{% include "sideavatar.html" %}	
+	{% endif %}
+	{% include "sidemore.html" %}
+</div>

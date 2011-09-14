@@ -2,6 +2,12 @@ $(function($) {
 	
 	$(".input-tooltip").tipTip({activation: 'focus', maxWidth: "auto", edgeOffset: 5, defaultPosition:'left'});
 	$(".subtooltip, .toptooltip").tipTip({maxWidth: "auto", edgeOffset: 5, defaultPosition:'top'});
+	$('#sendavatar').click(function(event) {
+		event.preventDefault();
+		$('#uploadavatar').submit();
+	});
+			
+			
 
 
 	$('#top-login, #top-register').click(function(event) {
@@ -154,16 +160,16 @@ $(function($) {
 
 	});
 
-	$('.ajax-trigger').click(function(event) {
+	$('.ajax-like-trigger').click(function(event) {
 		event.preventDefault();
-		target = $(this).find('div');
+		target = $(this).find('a');
 		target = $( target[0] );
 		key = target.attr('data-key');
-		if( target.hasClass('up-vote-trigger') ){
+		if( target.hasClass('like') ){
 			up_vote( target, key )
 			return 
 		}
-		if( target.hasClass('down-vote-trigger') ){
+		if( target.hasClass('liked') ){
 			down_vote( target, key )
 			return 
 		}
@@ -181,11 +187,7 @@ $(function($) {
 			},
 			success: function(data, textStatus, xhr) {
 				if( data.status == 'success' ){
-					target.removeClass('blog-date2')
-					.removeClass('up-vote-trigger')
-					.addClass('blog-date-blue2')
-					.addClass('down-vote-trigger');
-					target.find('.votes-count').html( data.votes );
+					target.parent().html( '<a href="#" title="You like this, Click to unlike" class="liked" data-key="'+key+'">'+data.votes+' Likes</a>' );
 				}else{
 					user_message(data.message, 'error');
 				}
@@ -204,11 +206,7 @@ $(function($) {
 			},
 			success: function(data, textStatus, xhr) {
 				if( data.status == 'success' ){
-					target.removeClass('blog-date-blue2')
-					.removeClass('down-vote-trigger')
-					.addClass('blog-date2')
-					.addClass('up-vote-trigger');
-					target.find('.votes-count').html( data.votes );
+					target.parent().html( '<a href="#" title="You like this, Click to unlike" class="like" data-key="'+key+'">'+data.votes+' Likes</a>' );
 				}else{
 					user_message(data.message, 'error');
 				}

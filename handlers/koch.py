@@ -1,5 +1,4 @@
 import helpers
-import paging
 import time
 
 from google.appengine.ext import webapp
@@ -17,8 +16,6 @@ from django.contrib.humanize.templatetags.humanize import intcomma
 from gaesessions import get_current_session
 from models import (User, Koch, Like, Tag)
 
-from paging import *
-
 
 class Create(webapp.RequestHandler):
 	"""docstring for Create"""
@@ -35,10 +32,12 @@ class Create(webapp.RequestHandler):
 		if not session.has_key('user'):
 			self.redirect('/')
 
+		tags =  [a.lower() for a in self.request.get_all('tags[]')]
+
 		user = session['user']
 		ingredients	= self.request.get_all('ingredients[]')
 		directions	= self.request.get_all('directions[]')
-		tags		= self.request.get_all('tags[]')
+		tags		= tags
 		name		= self.request.get('name')
 		notes		= self.request.get('notes')
 		prep 		= self.request.get('prep_time')
@@ -46,16 +45,26 @@ class Create(webapp.RequestHandler):
 		level 		= self.request.get('level')
 		private 	= True if self.request.get('private') == "1" else False
 		slug 		= helpers.sluglify( name )
-		thumb 		= None 
+		thumb 		= None
+		tinythumb 	= None
+
+
 
 		if self.request.get('photo'):
 			try:
 				img_data = self.request.POST.get('photo').file.read()
+
 				img = images.Image(img_data)
 				img.im_feeling_lucky()
 				png_data = img.execute_transforms(images.PNG)
 				img.resize(450)
 				thumb = img.execute_transforms(images.PNG)
+
+				thmb = images.Image(img_data)
+				thmb.im_feeling_lucky()
+				png_data = thmb.execute_transforms(images.PNG)
+				thmb.resize(80, 80)
+				tinythumb = thmb.execute_transforms(images.PNG)				
 
 			except images.BadImageError:
 				pass
@@ -80,6 +89,7 @@ class Create(webapp.RequestHandler):
 		
 		if thumb is not None:
 			koch.photo = thumb
+			koch.thumb = tinythumb
 		
 		for tag in tags:
 			Tag.up(tag)
@@ -96,10 +106,18 @@ class ListByAuthor(webapp.RequestHandler):
 			self.redirect('/')
 
 		author = author[0]
-		title = "Recipes by %s" %(author.nickname)
+		title = "%s's CookBook" %(author.nickname)
+		subhead = "Another main text..."
+		author_recipes_count = Koch.all().filter('author =', author).count();
+		if not author.usegravatar and author.avatar:
+			avatar = "/avatar/?user_id=%s" %(author.key())
+		else:
+			avatar = helpers.get_gravatar( author.email, 90 )
 		page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
   		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().filter('author =', author).order('-created'), page ) 
 		kochs = helpers.get_kochs_data(tmp_kochs)
+		last_kochs = Koch.all().filter('author =', author).fetch(5);
+		last_from_all = Koch.all().fetch(5);
 		self.response.out.write(template.render('templates/list_kochs.html', locals()))
 		
 
@@ -107,11 +125,28 @@ class ListByTag(webapp.RequestHandler):
 	"""docstring for ListByTag"""
 	def get(self, tag):
 		user = User.is_logged()
+		tag = tag.replace('-', ' ')
 		page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
 		title = "Explore %s" %(tag)
+		subhead = "Another main text..."
   		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().filter('tags =', tag).order('-created'), page ) 
 		kochs = helpers.get_kochs_data(tmp_kochs)
+		last_from_all = Koch.all().fetch(5);
 		self.response.out.write(template.render('templates/list_kochs.html', locals()))
+
+class ListByDate(webapp.RequestHandler):
+	"""docstring for ListByDate"""
+	def get(self):
+		user = User.is_logged()
+		page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
+		title = "Explore Recipes"
+		subtitle = "Explore recipes from all cooks"
+		subhead = "Another main text..."
+  		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().order('-created'), page )
+		kochs = helpers.get_kochs_data(tmp_kochs)
+		last_from_all = Koch.all().fetch(5);
+		self.response.out.write(template.render('templates/list_kochs.html', locals()))		
+		
 
 class Detail(webapp.RequestHandler):
 	"""docstring for Detail"""
@@ -125,6 +160,18 @@ class Detail(webapp.RequestHandler):
 			else:
 				alreadylike = False
 			
+			author = koch.author
+			author_recipes_count = Koch.all().filter('author =', author).count();
+			
+			if not author.usegravatar and author.avatar:
+				avatar = "/avatar/?user_id=%s" %(author.key())
+			else:
+				avatar = helpers.get_gravatar( author.email, 90 )
+
+			last_kochs = Koch.all().filter('author =', author).fetch(5);
+			last_from_all = Koch.all().fetch(5);
+
+			humanlikes = intcomma( int( koch.likes) )
 			self.response.out.write(template.render('templates/details_koch.html', locals()))
 		else:
 			print '404'
@@ -186,8 +233,11 @@ class DownVote(webapp.RequestHandler):
 		self.response.out.write( simplejson.dumps({'status':'success', 'message':'An error occurred please contact the developer'}) )
 
 class Image (webapp.RequestHandler):
-  def get(self):
-    koch = db.get(self.request.get("img_id"))
-    if koch:
-      self.response.headers['Content-Type'] = "image/png"
-      self.response.out.write(koch.photo)
+	def get(self):
+		koch = db.get(self.request.get("img_id"))
+		if koch:
+			self.response.headers['Content-Type'] = "image/png"
+			if self.request.get("size") == 'thumb':
+				self.response.out.write(koch.thumb)
+			else:
+				self.response.out.write(koch.photo)

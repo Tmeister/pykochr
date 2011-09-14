@@ -2,89 +2,78 @@
 {% block title %}{{title}}{%endblock%}
 {% block left_content %}
 	<h1 class="welcome nobottommargin left">{{title}}</h1>
-	<h4 class="clear colored">Some other text...  </h4>
+	{% if subtitle %}<p class="left description"> :: {{subtitle}}</p>{% endif %}
+	{% if subhead %}<h4 class="clear colored">{{subhead}}</h4>{% endif %}
 	<div class="separator margin15"></div>
-	{% for koch in kochs %}
-		<div class="three-fourth left">
-	        <div class="three-fourth notopmargin last">
-	        	<div class="one-fourth  notopmargin">
-	            	<div class="one-fourth notopmargin">
-	                    <h3 class="notopmargin">
-	                    	<a class="link" href="/details/{{koch.koch.slug}}">{{koch.koch.title}}</a>
-	                    </h3>
-	                </div>
-	                <div class="big-like ajax-trigger">
-	                	{% if not koch.alreadylike %}
-	                		<div class="blog-date2 margin15 left up-vote-trigger toptooltip" data-key="{{koch.koch.key}}" title="Click to like">
-			                    <h2 class="notopmargin votes-count">{{koch.humanlikes}}</h2>
-			                    <div class="love"></div>
-			                </div>
-			            {% else %}	
-			            	<div class="blog-date-blue2 margin15 left down-vote-trigger toptooltip" data-key="{{koch.koch.key}}" title="I dont like anymore">
-			                    <h2 class="notopmargin votes-count">{{koch.humanlikes}}</h2>
-			                    <div class="love"></div>
-			                </div>
-	                	{% endif %}
-	                </div>	
-	                <div class="blog-date2 margin15 left last">
-	                    <h2 class="notopmargin"><a href="" class="link">56</a></h2>
-	                    <p class="notopmargin">comments</p>
-	                </div>
-	                <div class="clear"></div>
-	                <div class="dot-separator margin15"></div>
-	                <div class="margin15">
-	                    <p class="notopmargin nobottommargin">
-	                    	<span class="strong">Author: </span><a class="link" href="">{{koch.koch.author.nickname.title}}</a>
-	                    </p>
-	                    {% if koch.koch.level %}
-	                    	<p class="nobottommargin margin10">
-	                    		<span class="strong">Level: </span>
-	                    		{{koch.koch.level|title}}
-	                    	</p>
-	                    {% endif %}
-	                    {% if koch.koch.prep_time %}
-	                    	<p class="nobottommargin margin10">
-	                    		<span class="strong">Prep. time: </span>
-	                    		{{koch.koch.prep_time}} min.
-	                    	</p>
-	                    {% endif %}
-	                    {% if koch.koch.cook_time %}
-	                    	<p class="nobottommargin margin10">
-	                    		<span class="strong">Cook time: </span>
-	                    		{{koch.koch.cook_time}} min.
-	                    	</p>
-	                    {% endif %}
-	                    {% if koch.koch.tags %}
-	                    	<p class="small-italic margin10 nobottommargin">
-		                    	<span class="strong">Tags: </span>
-		                    	{% for tag in koch.koch.tags %}
-		                    		<a href="/tag/{{tag}}" class="link">{{tag}}</a>	
-		                    	{% endfor %}
-		                    </p>	
-	                    {% endif %}
-	                </div>
-	                
-	            </div>
-	            <div class="one-half last notopmargin">
-	            	{% if koch.koch.photo %}
-	            		<a href="/details/{{koch.koch.slug}}" class="item-preview" title="">
-		            		<img class="bordered-img img-preview"  src="/image/?img_id={{koch.koch.key}}" alt=" "/>
-		            	</a>
-		            {% else %}
-		            	<img class="bordered-img img-preview default"  src="/static/images/default.png" />
-	            	{% endif %}
-	            	{% if koch.koch.notes|length %}
-		        		<h6 class="" style="padding:10px;">{{koch.koch.notes}}</h6>
-		        	{% endif %}
-		            <div class="clear"></div>
-		            <a class="button_readmore right margin15"  href="/details/{{koch.koch.slug}}">View Details</a>
-	        	</div>
-	        </div>
-	        <div class="clear"></div>
-	        <div class="three-fourth last dot-separator margin30"></div>
-	    </div>
-	{% endfor %}
-
+    {% if kochs %}
+    	{% for koch in kochs %}
+    		<div class="three-fourth left margin10">
+                <div class="one-fourth margin15">
+                    <div class="left">
+                    	{% if koch.koch.thumb %}
+                    		<a href="/details/{{koch.koch.slug}}">
+                    			<img class="bordered-img preview-img img-preview" src="/image/?img_id={{koch.koch.key}}&size=thumb" />
+                    		</a>
+                    		
+                    	{% else %}
+                    		<a href="/details/{{koch.koch.slug}}">
+                    			<img class="bordered-img" src="/static/images/default-thumb.png" />	
+                    		</a>
+                    	{% endif %}
+                    	
+                    </div>
+                    <div class="left author left5">
+                    	<p class="notopmargin nobottommargin marginb5 ajax-like-trigger">
+                    		{% if not koch.alreadylike %}
+                    			<a href="" title="Do you like?" class="like" data-key="{{koch.koch.key}}">
+                    			{{koch.humanlikes}} Likes
+                    			</a>
+                    		{% else %}	
+                    			<a href="" title="You like this, Click to unlike" class="liked" data-key="{{koch.koch.key}}">
+                    			{{koch.humanlikes}} Likes
+                    			</a>
+                    		{% endif %}
+                    		
+                    	</p>
+    	                {% if koch.koch.level %}
+                            <p class="notopmargin nobottommargin marginb5">
+                                <span class="strong">Level: </span>
+                                {{koch.koch.level|title}}
+                            </p>
+                        {% endif %}
+                        {% if koch.koch.cook_time %}
+                            <p class="notopmargin nobottommargin marginb5">
+                                <span class="strong">Cook time: </span>
+                                {{koch.koch.cook_time}} min.
+                            </p>
+                        {% endif %}
+                        {% if koch.koch.tags %}
+                            <p class="small-italic notopmargin nobottommargin marginb5">
+                                <span class="strong">Tags: </span>
+                                {% for tag in koch.koch.tags %}
+                                    <a href="/tag/{{tag|slugify}}" class="link">{{tag}}</a> 
+                                {% endfor %}
+                            </p>    
+                        {% endif %}
+                        
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="one-half blog-content last margin15">
+                    <h3 class="notopmargin"><a class="link" href="/details/{{koch.koch.slug}}">{{koch.koch.title}}</a></h3>
+                    <p class="notopmargin small-italic">by: <a class="link strong" href="/cook/{{koch.koch.author.nickname}}">{{koch.koch.author.nickname|title}}</a> | {{koch.koch.created}}</p>
+                    <div class="clear"></div>
+                    {% if koch.koch.notes|length %}
+                        <p class="notopmargin">{{koch.koch.notes}}</p>
+                    {% endif %}
+                    <div class="clear"></div>
+                </div>
+                <div class="three-fourth last dot-separator margin30"></div>
+            </div>
+    	{% endfor %}
+    {% else %}
+        <h3>{{author.nickname}} has no published recipes</h3>
+    {% endif %}
 	{% if next_page %}   
 		<a href="?page={{ next_page }}">Next Page</a>   
 	{% endif %}   
@@ -96,7 +85,5 @@
 {% endblock %}
 
 {% block side_content %}
-	<div class="one-fourth notopmargin sidebar-right last">
-		{% include 'sidebar.html' %}
-	</div>
+    {% include "sidebar.html" %}
 {% endblock %}

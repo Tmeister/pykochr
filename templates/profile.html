@@ -1,5 +1,41 @@
 {% extends 'right_bar.html' %}
 {% block title %}Account Settings{% endblock %}
+
+{% block js %}
+	<script type="text/javascript">
+		$(function($) {
+			$("input[type=file]").change(function(){
+				$(this).parents(".uploader").find(".filename").val($(this).val());
+
+			});
+			$("input[type=file]").each(function(){
+				if($(this).val()==""){
+					$(this).parents(".uploader").find(".filename").val("No file selected...");
+				}
+			});
+			$('#changeavatar').click(function(event) {
+				event.preventDefault();
+				$('#uploadavatar').show();
+				$('#actionavatar').hide();
+						
+			});
+
+			$('#cancelavatar').click(function(event) {
+				event.preventDefault()
+				$('#uploadavatar').hide();
+				$('#actionavatar').show();
+			});
+					
+					
+					
+					
+		});
+	</script>
+{% endblock%}
+{% block css%}
+	<link rel="stylesheet" href="/static/css/fakefileinputs.css" />
+{% endblock%}
+
 {% block left_content %}
 	<h1 class="welcome nobottommargin">Account Settings</h1>
 	<h4 class="notopmargin colored">You may change your account settings here.</h4>
@@ -11,7 +47,7 @@
 	{% endif %}
 
 	{% if profile_fail %}
-		<div class="box box-red">
+		<div class="info-box-red">
 			{% for error in profile_errors %}
 				{{error}}<br>
 			{% endfor %}
@@ -62,8 +98,29 @@
 		</div>
 	</form>
 {% endblock %}
+
 {% block side_content %}
-	<div class="one-fourth notopmargin sidebar-right last">
-		{% include 'sidebar.html' %}
+	<div class="one-fourth sidebar-right last">
+		<h2 class="notopmargin margin10">Your Avatar</h2>
+		<div class="separator margin15"></div>
+		<div class="margin15">
+			<img class="bordered-img left" src="{{avatar}}"/>
+			<div class="notopmargin" id="actionavatar">
+				<a href="#" class="notopmargin button black right" id="changeavatar">Change</a><br />
+			</div><!-- / -->
+			<form id="uploadavatar"action="/account/change-avatar" method="post" enctype="multipart/form-data">
+				<div class="uploader white margin15">
+					<input type="text" class="filename" readonly="readonly" style="width:85px !important	;"/>
+					<input type="button" class="button" value="Change Avatar"/>
+					<input type="file" name="photo" size="30" id="image_file"/>
+				</div>
+				<div class="margin15 rigth">
+					<a href="#" class="button black rigth margin15" id="cancelavatar">Cancel</a>
+					<a href="#" class="button black rigth margin15" id="sendavatar">Upload</a>
+				</div>
+			</form>	
+		</div>
+		<div class="clear"></div>
+		<div class="separator margin15"></div>		
 	</div>
 {% endblock %}

@@ -34,7 +34,19 @@
 				<div class="level left"><h4 class="notopmargin colored">{{koch.level|title}}</h4></div>
 			</div>
 		{% endif %}
-		<div class="clear"></div>
+	</div>
+	<div class="one-fourth last rigth notopmargin margin15">
+		<div style="margin-top:8px;" class="ajax-like-trigger right">
+			{% if not alreadylike %}
+				<a href="" title="Do you like?" class="like" data-key="{{koch.key}}">
+				{{humanlikes}} Likes
+				</a>
+			{% else %}	
+				<a href="" title="You like this, Click to unlike" class="liked" data-key="{{koch.key}}">
+				{{humanlikes}} Likes
+				</a>
+			{% endif %}
+		</div>
 	</div>
 	<div class="clear"></div>
 	<div class="separator margin15"></div>
@@ -49,46 +61,26 @@
 		<ul>
 	</div>
 	<div class="one-half last notopmargin">
-		<h3 class="">Directions</h3>
+		<h3 class="">&nbsp</h3>
 		<div class="separator margin15"></div>
 		{% if koch.photo %}
-       		<img class="bordered-img img-preview"  src="/image/?img_id={{koch.key}}" alt=" "/>
+       		<img class="bordered-img margin10"  src="/image/?img_id={{koch.key}}" alt=" "/>
         {% else %}
-        	<img class="bordered-img img-preview default"  src="/static/images/default.png" />
+        	<img class="bordered-img default"  src="/static/images/default.png" />
     	{% endif %}
-    	<div class="right margin15">
-    		<div class="small-round-icon-gray left subtooltip" title="Share in Twitter" data-key="{{koch.key}}">
-                <div class="icon-gray-small icon100-gray"></div>
-			</div>
-			<div class="small-round-icon-gray left subtooltip" title="Share in Facebook" data-key="{{koch.key}}">
-                <div class="icon-gray-small icon113-gray"></div>
-			</div>
-    		<div class="subheader right small">
-				{% if not alreadylike %}
-					<div class="small-round-icon-gray left subtooltip" title="Click to like" data-key="{{koch.key}}">
-		                <div class="icon-gray-small icon114-gray"></div>
-					</div>
-					<div class="level left"><h4 class="notopmargin colored">{{koch.likes}}</h4></div>	
-				{% else %}
-					<div class="small-round-icon-gray left subtooltip" title="I dont like anymore" data-key="{{koch.key}}">
-		                <div class="icon-gray-small icon114-gray"></div>
-					</div>
-					<div class="level left"><h4 class="notopmargin colored like-count">{{koch.likes}}</h4></div>	
-				{% endif %}
-			</div>
-    	</div>
     	<div class="clear"></div>
-		<div class="separator margin15"></div>
-		<div id="" class="">
-			{% for direction in koch.directions %}
-				<div class="small-round-icon-gray left">
-					<div class="icon-gray-small icon209-gray"></div>
-				</div>
-				<p style="margin-left:45px; text-align:justify; min-height:30px;">{{direction}}</p>
-			{% endfor %}	
-		</div>
 	</div>
 	<div class="clear"></div>
+	<h3 class="">Directions</h3>
+	<div class="separator margin15"></div>
+	<div id="" class="">
+		{% for direction in koch.directions %}
+			<div class="small-round-icon-gray left">
+				<div class="icon-gray-small icon209-gray"></div>
+			</div>
+			<p style="margin-left:45px; text-align:justify; min-height:30px;">{{direction}}</p>
+		{% endfor %}	
+	</div>
 	<div class="separator margin15"></div>
 	<div class="three-fourth notopmargin">
 		<h3>Comments</h3>
@@ -96,7 +88,5 @@
 
 {% endblock %}
 {% block side_content %}
-	<div class="one-fourth notopmargin sidebar-right last">
-		{% include 'sidebar.html' %}
-	</div>
+	{% include "sidebar.html" %}
 {% endblock %}
