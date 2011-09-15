@@ -1,13 +1,13 @@
 <div class="one-fourth notopmargin">
-	logo	
+	<h2 class="notopmargin colored">Kuchbuchr</h2>	
 </div>
 
 {% if not user %}
 	
 	<div class="three-fourth-last notopmargin right">
-		<a class="btn1 tab04b grey" href="/explore">Explore</a>
 		<a class="btn1 tab04b grey" title="" href="#" id="top-login">Login</a>
 		<a class="btn1 tab04b grey" title="" href="#" id="top-register">Register</a>
+		<a class="btn1 tab04b grey" href="/explore">Explore</a>
 		<div id="register-form" class="hide">
 			<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
 				<span id="ui-dialog-title-2" class="ui-dialog-title">Signup to use Kochbuchr</span>
@@ -16,9 +16,9 @@
 				<div class="logo">logo</div>
 				<div class="formright">
 					<form target="dont_mind_me" id="login" method="post">
-						<input class="input-login" type="text" id="register-username" name="username" placeholder="Username" />
-						<input class="input-login" type="email" id="register-email" name="email" placeholder="Email" />
-						<input class="input-login" type="password" id="register-password" name="passwd" placeholder="Password" />
+						<input class="input-login login-tooltip" type="text" id="register-username" name="username" placeholder="Username" title="Please choice your username" />
+						<input class="input-login login-tooltip" type="email" id="register-email" name="email" placeholder="Email" title="Please enter your email" />
+						<input class="input-login login-tooltip" type="password" id="register-password" name="passwd" placeholder="Password" title="Please choice your password" />
 					</form>
 					<div class="errorwrap"><p class="error-register"></p></div>
 				</div>
@@ -27,7 +27,7 @@
 			<!-- LOGIN BUTTONS -->
 				<div class="loginbuttons">
 					<!--<fb:login-button perms="email" >Login with Facebook</fb:login-button>-->
-					<a class="btn tab04b black right" title="" href="#" id="showregistersubmit">Register Now</a>
+					<a class="right blue-button" title="" href="#" id="showregistersubmit">Register Now</a>
 					<img src='/static/images/ajax-loader.gif' id='account-loader' alt='' />                     
 				</div>
 			</div>
@@ -41,18 +41,19 @@
 				<div class="ui-dialog-content ui-widget-content">
 					<div class="logo">logo</div>
 					<div class="formright">
-						<input class="input-login" type="text" id="user_login" name="username" placeholder="Username" />
-						<input class="input-login" type="password" id="user_pass" name="passwd" placeholder="Password" />
+						<input class="input-login login-tooltip" type="text" id="user_login" name="username" placeholder="Username" title="Please enter your username"/>
+						<input class="input-login login-tooltip" type="password" id="user_pass" name="passwd" placeholder="Password" title="Please enter your password"/>
 						<input type="hidden" name="redirect_to" value="/" />
-						<input type="hidden" name="testcookie" value="1" />                          
+						<input type="hidden" name="testcookie" value="1" />
 						<div class="errorwrap"><p class="error-password"></p></div>
 					</div>
 				</div>  
+				<div class="clear"></div>
 				<div id="account-buttons" class="ui-dialog-buttonset">
 					<!-- LOGIN BUTTONS -->
 					<div class="loginbuttons">
-						<p class="pwd"><a id="showforgotpw" href="#">Forgot password?</a></p>
-						<a class="btn tab04b black right" title="" href="#" id="loginsubmit">Login</a>
+						<!--<p class="pwd"><a id="showforgotpw" href="#">Forgot password?</a></p>-->
+						<a class="right blue-button marginb5" title="" href="#" id="loginsubmit">Login</a>
 					</div>
 				</div>
 			</form>

@@ -1,14 +1,17 @@
 $(function($) {
 	
 	$(".input-tooltip").tipTip({activation: 'focus', maxWidth: "auto", edgeOffset: 5, defaultPosition:'left'});
+	$(".login-tooltip").tipTip({activation: 'focus', maxWidth: "auto", edgeOffset: 5, defaultPosition:'top'});
 	$(".subtooltip, .toptooltip").tipTip({maxWidth: "auto", edgeOffset: 5, defaultPosition:'top'});
 	$('#sendavatar').click(function(event) {
 		event.preventDefault();
 		$('#uploadavatar').submit();
 	});
-			
-			
 
+	$('#user_login, #user_pass').focus(function(){
+		$('.error-password').html('');
+	})
+			
 
 	$('#top-login, #top-register').click(function(event) {
 		event.preventDefault();
@@ -165,7 +168,6 @@ $(function($) {
 		target = $(this).find('a');
 		target = $( target[0] );
 		key = target.attr('data-key');
-		console.log( key )
 	});
 			
 			
@@ -191,8 +193,6 @@ $(function($) {
 		target = $( target[0] );
 		fan = target.attr('data-fan');
 		star = target.attr('data-star');
-		console.log( fan )
-		console.log( star )
 		if (target.hasClass('follow-button')){
 			do_follow( target, fan, star )
 			return
@@ -216,7 +216,9 @@ $(function($) {
 			},
 			success: function(data, textStatus, xhr) {
 				user_message('Now you are following to ' + data.star, 'success');
-				console.log( data )
+				link = '<a href="#" class="unfollow-button block small-size" data-fan="'+ String(data.fan_key) +'" data-star="'+String(data.star_key)+'">Unfollow</a>';
+				target.parent().html(link);
+				$('.followers span').html( data.star_followers +' Followers')
 			}
 		});					
 	}
@@ -232,6 +234,10 @@ $(function($) {
 			},
 			success: function(data, textStatus, xhr) {
 				user_message('Unfollow ' + data.star, 'success');
+				link = '<a href="#" class="follow-button block small-size" data-fan="'+String(data.fan_key)+'" data-star="'+String(data.star_key)+'">Follow</a>';
+				target.parent().html(link);
+				$('.followers span').html( data.star_followers +' Followers')
+						
 			}
 		});
 		
@@ -276,7 +282,7 @@ $(function($) {
 	}
 
 	function user_message( message, theme ){
-		$.jGrowl(message, {theme:theme, position: 'bottom-left'});
+		$.jGrowl(message, {theme:theme, position: 'bottom-right'});
 	}
 });
 

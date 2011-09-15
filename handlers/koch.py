@@ -106,9 +106,16 @@ class ListByAuthor(webapp.RequestHandler):
 			self.redirect('/')
 
 		author = author[0]
+			
+		if user:
+			alreadyfollow = Friendship.alreadyfollow( user, author  )
+
+		
 		title = "%s's CookBook" %(author.nickname)
 		subhead = "Another main text..."
 		author_recipes_count = Koch.all().filter('author =', author).count();
+		
+
 		if not author.usegravatar and author.avatar:
 			avatar = "/avatar/?user_id=%s" %(author.key())
 		else:
@@ -117,8 +124,8 @@ class ListByAuthor(webapp.RequestHandler):
 		page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
   		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().filter('author =', author).order('-created'), page ) 
 		kochs = helpers.get_kochs_data(tmp_kochs)
-		last_kochs = Koch.all().filter('author =', author).fetch(5);
-		last_from_all = Koch.all().fetch(5);
+		last_kochs = Koch.all().filter('author =', author).order('-created').fetch(5);
+		last_from_all = Koch.all().order('-created').fetch(5);
 		self.response.out.write(template.render('templates/list_kochs.html', locals()))
 		
 
@@ -132,7 +139,7 @@ class ListByTag(webapp.RequestHandler):
 		subhead = "Another main text..."
   		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().filter('tags =', tag).order('-created'), page ) 
 		kochs = helpers.get_kochs_data(tmp_kochs)
-		last_from_all = Koch.all().fetch(5);
+		last_from_all = Koch.all().order('-created').fetch(5);
 		self.response.out.write(template.render('templates/list_kochs.html', locals()))
 
 class ListByDate(webapp.RequestHandler):
@@ -145,7 +152,7 @@ class ListByDate(webapp.RequestHandler):
 		subhead = "Another main text..."
   		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().order('-created'), page )
 		kochs = helpers.get_kochs_data(tmp_kochs)
-		last_from_all = Koch.all().fetch(5);
+		last_from_all = Koch.all().order('-created').fetch(5);
 		self.response.out.write(template.render('templates/list_kochs.html', locals()))		
 		
 
@@ -171,8 +178,8 @@ class Detail(webapp.RequestHandler):
 			if not author.usegravatar and author.avatar:
 				avatar = "/avatar/?user_id=%s" %(author.key())
 				
-			last_kochs = Koch.all().filter('author =', author).fetch(5);
-			last_from_all = Koch.all().fetch(5);
+			last_kochs = Koch.all().filter('author =', author).order('-created').fetch(5);
+			last_from_all = Koch.all().order('-created').fetch(5);
 
 			humanlikes = intcomma( int( koch.likes) )
 			self.response.out.write(template.render('templates/details_koch.html', locals()))

@@ -4,19 +4,25 @@
 }
 
 .ui-bubblebox-item {
-  border-color: -moz-use-text-color -moz-use-text-color #e1e1e1;
+  /*border-color: -moz-use-text-color -moz-use-text-color #e1e1e1;
   border-style: none none dotted;
-  border-width: medium medium 1px;
-  padding: 5px 15px 5px 5px;
+  border-width: medium medium 1px;*/
   margin: 5px 0;
   position: relative;
   color:#5A5A5A;
+  padding: 7px 0 7px 35px !important;
+  background: url("/static/images/check.png") no-repeat scroll 5px center transparent !important;
 }
 
 .ui-bubblebox-item span {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.ui-bubblebox-item:hover{
+  background-color:#C3D7F4 !important;
+  color:#222;
 }
 
 .ui-bubblebox-removeItem {

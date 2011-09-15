@@ -37,6 +37,7 @@ img::-moz-selection {
 .bordered-img {
 	border:5px solid #fff;
 	background:#f0f0f0;
+	box-shadow:0px 0px 3px #555;
 }
 .description {
 	margin-top:30px;
@@ -922,6 +923,9 @@ p.error{
 }
 .marginb5 {
 	margin-bottom:5px !important;
+}
+.margin5 {
+	margin-top:5px !important;
 }
 .separator {
 	background-image:url('../images/sep.png');
@@ -2361,7 +2365,7 @@ footer .flickr {
 }
 
 #simplemodal-container a.modalCloseImg {
-    background: url('../images/cross.png') no-repeat;
+    background: url('../images/cancel.png') no-repeat;
     width: 25px;
     height: 29px;
     display: inline;
@@ -2508,8 +2512,14 @@ p.pwd a {
     text-shadow: 0 1px 1px #FFFFFF;
 }
 
-.errorwrap {
+.errorwrap,
+.errorwraplogin,
+.error-password,
+.error-register
+ {
     color: #FF0000;
+    text-align:center;
+    font-size:12px;
 }
 .center{text-align:center; width:100%;}
 .bold{font-weight:bold;}
@@ -2669,9 +2679,9 @@ html[xmlns] #nav {
 #form_settings .input input[type='text'],
 #form_settings .input input[type='email'],
 #form_settings .input input[type='password'],
-#form_settings .input textarea,
+#form_settings .input textarea
 {
-	padding:10px;
+	padding:10px !important;
 	width:478px;
 }
 textarea { font: 11px Verdana, Arial, Helvetica, sans-serif; }
@@ -2765,7 +2775,7 @@ textarea { font: 11px Verdana, Arial, Helvetica, sans-serif; }
 }
 .pink{
 	font-weight: bold;
-	color:#EA4C85
+	color:#EA4C85 !important;
 }
 .like:hover{background: url(../images/icons-like.png) 0 -18px no-repeat;}
 .liked{color:#EA4C85;background: url(../images/icons-like.png) 0 -36px no-repeat;}
@@ -2792,6 +2802,11 @@ textarea { font: 11px Verdana, Arial, Helvetica, sans-serif; }
 		0px 1px 3px rgba(000,000,000,0.2),
 		inset 0px 0px 1px rgba(255,255,255,1);
 }
+
+.small-size{
+	padding: 5px 10px;
+}
+
 .follow-button{
 	background: -moz-linear-gradient(
 		top,
@@ -2855,5 +2870,62 @@ textarea { font: 11px Verdana, Arial, Helvetica, sans-serif; }
 		to(#40669c));
 	border: 1px solid #507ebf;
 }
+
+.nav-width{width:100px;display:block;}
+.navigation{width: 300px; margin:0 auto;}
+
 .block{display:block;}
 .form-width{width:495px;}
+.author-widget{
+	background: #F9F9F9;
+    border: 1px solid #D7D7D7;
+    border-radius: 5px 5px 0px 0px;
+    padding: 10px;
+}
+.author-widget .avatar{
+	width:60px;
+	border: 1px solid #D7D7D7;
+	box-shadow:0px 0px 2px #555;
+}
+.author-widget .star-details{width:125px;}
+
+.followers,
+.following{
+	padding:10px 5px;
+	background:#f9f9f9;
+	border:1px solid #d7d7d7;
+	border-top:none;
+	width:98px;
+	text-align:center;
+	border-radius: 0px 0px 5px 5px;
+	background: -moz-linear-gradient(
+		top,
+		#fafafa 0%,
+		#e6e6e6);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#fafafa),
+		to(#e6e6e6));
+}
+.followers{
+	border-right:1px solid #d7d7d7;
+	border-radius: 0px 0px 0px 5px;
+}
+.following{
+	border-left:1px solid #d7d7d7;
+	border-radius: 0px 0px 5px 0px;
+}
+
+.author-widget .avatar{
+	width:60px;
+	border: 1px solid #D7D7D7;
+	box-shadow:0px 0px 2px #555;
+}
+
+.koch_mini_list img{
+	width:45px;
+	margin-right:10px;
+}
+
+.center{text-align: center;}
+.nouppercase{text-transform:none;}

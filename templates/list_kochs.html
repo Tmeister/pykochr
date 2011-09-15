@@ -70,17 +70,28 @@
                 </div>
                 <div class="three-fourth last dot-separator margin30"></div>
             </div>
+
     	{% endfor %}
     {% else %}
-        <h3>{{author.nickname}} has no published recipes</h3>
+        {% if author.nickname %}
+            <h3>{{author.nickname}} has no published recipes</h3>
+        {% else %}
+            <h3>Sorry there is nothing to show</h3>
+        {% endif %}
+        
     {% endif %}
-	{% if next_page %}   
-		<a href="?page={{ next_page }}">Next Page</a>   
-	{% endif %}   
+    <div class="clear"></div>
+    <div class="navigation margin30">
+        {% if prev_page %}   
+        <a href="?page={{ prev_page }}" class="blue-button nav-width left">« Previous</a>   
+        {% endif %}   
+        {% if next_page %}   
+            <a href="?page={{ next_page }}" class="blue-button nav-width right">Next »</a>   
+        {% endif %}       
+    </div>
+	
 	   
-	{% if prev_page %}   
-		<a href="?page={{ prev_page }}">Previous Page</a>   
-	{% endif %}   
+	
 
 {% endblock %}
 

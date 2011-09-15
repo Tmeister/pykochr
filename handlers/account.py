@@ -21,20 +21,20 @@ class Register(webapp.RequestHandler):
         email    = self.request.get('email')
         passwd   = self.request.get('password')
 
-        if len (username.strip()) < 3:
-            return self._send_error('El user debe ser de almenos 3')
+        if len (username.strip()) < 3 or len (username.strip()) > 12:
+            return self._send_error('The username must be between 3 and 12 chars')
 
         if not email_re.match(email):
-            return self._send_error('Not a valid email')
+            return self._send_error('Sorry, is not a valid email address')
 
-        if len (passwd.strip()) < 5:
-            return self._send_error('El password debe ser de almenos 5 caracteres')
+        if len (passwd.strip()) < 6:
+            return self._send_error('The password must be at least 6 chars')
 
         if User.is_nickname_exists( username ):
-            return self._send_error('El user ya esta tomado')
+            return self._send_error('Sorry, that user is already taken')
         
         if User.is_email_exists(email):
-            return self._send_error('El email ya esta tomado')
+            return self._send_error('Sorry, this email is already in use')
 
         user = User( nickname=username, email=email, password= User.slow_hash(passwd) );
         user.put()
@@ -78,7 +78,7 @@ class Login(webapp.RequestHandler):
             session['user'] = user[0]
             self.response.out.write( simplejson.dumps({'status':'success'}) )
         else:
-            self.response.out.write( simplejson.dumps({'status':'error', 'message':'Login or password incorrect'}) )
+            self.response.out.write( simplejson.dumps({'status':'error', 'message':'Sorry, Login or password incorrect'}) )
 
 
 class Logout(webapp.RequestHandler):
@@ -167,7 +167,7 @@ class Overview(webapp.RequestHandler):
                         if len(pass1.strip()) >= 5:
                             user.password = User.slow_hash( pass1 )
                         else:
-                            error.append('The password must be at least 6 characters')
+                            error.append('The password must be at least 6 chars')
                     else:
                         error.append('Password do not match.')
         
@@ -175,11 +175,11 @@ class Overview(webapp.RequestHandler):
         if email_re.match(email):
             if email != user.email:
                 if User.is_email_exists(email):
-                    error.append('El email ya esta tomado')
+                    error.append('Sorry, this email is already in use')
                 else:
                     user.email = email
         else:
-            error.append('Not a valid email')
+            error.append('Sorry, is not a valid email address')
 
         if len(error):
             session['profile_fail'] = True;
@@ -218,7 +218,8 @@ class Follow(webapp.RequestHandler):
     def post(self):
         fan = db.get( self.request.get('fan') )
         star = db.get( self.request.get('star') )
-        if fan and star:
+        already = Friendship.all().filter('follower =', fan).filter('following =', star).fetch(1)
+        if fan and star and len( already ) == 0:
             follow = Friendship.follow( fan, star )
             if follow:
                 self.response.out.write( 
@@ -226,7 +227,10 @@ class Follow(webapp.RequestHandler):
                         {   
                             'status'    : 'success', 
                             'message'   : 'follow',
-                            'star'      : star.nickname
+                            'star'      : star.nickname,
+                            'star_key'  : self.request.get('star'),
+                            'fan_key'   : self.request.get('fan'),
+                            'star_followers' : follow.following.followers
                         }
                     ) 
                 )
@@ -257,7 +261,10 @@ class Unfollow(webapp.RequestHandler):
                         {   
                             'status'    : 'success', 
                             'message'   : 'unfollow',
-                            'star'      : star.nickname
+                            'star'      : star.nickname,
+                            'star_key'  : self.request.get('star'),
+                            'fan_key'   : self.request.get('fan'),
+                            'star_followers' : follow.following.followers
                         }
                     ) 
                 )
