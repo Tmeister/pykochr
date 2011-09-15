@@ -9,7 +9,7 @@ from django.core.validators import email_re
 
 from gaesessions import get_current_session
 
-from models import User
+from models import User, Friendship
 import helpers
 
 
@@ -201,3 +201,72 @@ class Avatar (webapp.RequestHandler):
         if user:
             self.response.headers['Content-Type'] = "image/png"
             self.response.out.write(user.avatar)     
+
+
+class Edit(webapp.RequestHandler):
+    """docstring for Edit"""
+    def get(self):
+        session = get_current_session()
+        if session.has_key('user'):
+            user = session['user']
+            self.response.out.write(template.render('templates/home.html', locals()))
+        else:
+            self.response.out.write('Nonono')
+        
+class Follow(webapp.RequestHandler):
+    """docstring for Follow"""
+    def post(self):
+        fan = db.get( self.request.get('fan') )
+        star = db.get( self.request.get('star') )
+        if fan and star:
+            follow = Friendship.follow( fan, star )
+            if follow:
+                self.response.out.write( 
+                    simplejson.dumps(
+                        {   
+                            'status'    : 'success', 
+                            'message'   : 'follow',
+                            'star'      : star.nickname
+                        }
+                    ) 
+                )
+            else:
+                self.response.out.write( 
+                    simplejson.dumps(
+                        {   
+                            'status'    : 'error', 
+                            'message'   : 'follow'
+                        }
+                    ) 
+                )
+           
+
+
+class Unfollow(webapp.RequestHandler):
+    """docstring for Unfollow"""
+    def post(self):
+        fan = db.get( self.request.get('fan') )
+        star = db.get( self.request.get('star') )
+        if fan and star:
+            query = Friendship.all().filter('follower =', fan).filter('following =', star).fetch(1)
+            follow = query[0]
+            if follow:
+                follow.unfollow()
+                self.response.out.write( 
+                    simplejson.dumps(
+                        {   
+                            'status'    : 'success', 
+                            'message'   : 'unfollow',
+                            'star'      : star.nickname
+                        }
+                    ) 
+                )
+            else:
+                self.response.out.write( 
+                    simplejson.dumps(
+                        {   
+                            'status'    : 'error', 
+                            'message'   : 'unfollow'
+                        }
+                    ) 
+                ) 

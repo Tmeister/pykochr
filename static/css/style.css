@@ -811,7 +811,7 @@ p.error{
 	margin-left: auto;
 	margin-right: auto;
 	min-width: 940px;
-	min-height: 940px;
+	min-height: 760px;
 	width:940px;
 	padding-left:30px;
 	padding-right:30px;
@@ -830,6 +830,15 @@ p.error{
 	padding-right:30px;
 	padding-top:30px;
 	background-color:#292929;
+	background-repeat:repeat-y;
+}
+.wrapper-footer {
+	margin-left: auto;
+	margin-right: auto;
+	min-width: 940px;
+	width:940px;
+	padding-left:30px;
+	padding-right:30px;
 	background-repeat:repeat-y;
 }
 .left {
@@ -2304,9 +2313,13 @@ li.sfHover > a > .sf-sub-indicator {
 	padding-top:7px;
 }
 .footer {
-	background-image:url('../images/footer.png');
-	height:200px;
+	/*background-image:url('../images/footer.png');*/
+	background:#e8e8e8;
 }
+.full-footer-bottom{
+	background:#ededed;
+}
+
 .from-blog {
 	width:200px;
 	float:left;
@@ -2335,6 +2348,7 @@ footer .flickr {
 .full-top{
 	 background:#292929; 
 }
+
 /******************************************************************************
 ** Simple Modal
 ******************************************************************************/
@@ -2756,3 +2770,90 @@ textarea { font: 11px Verdana, Arial, Helvetica, sans-serif; }
 .like:hover{background: url(../images/icons-like.png) 0 -18px no-repeat;}
 .liked{color:#EA4C85;background: url(../images/icons-like.png) 0 -36px no-repeat;}
 #uploadavatar{display:none;}
+
+.follow-button,
+.unfollow-button,
+.action-button,
+.save-button,
+.blue-button
+ {
+	color: #ffffff;
+	padding: 10px 20px;
+	text-align:center;
+	font-weight:bold;
+	font-size:11px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.2),
+		inset 0px 0px 1px rgba(255,255,255,1);
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.2),
+		inset 0px 0px 1px rgba(255,255,255,1);
+}
+.follow-button{
+	background: -moz-linear-gradient(
+		top,
+		#b5d24e 0%,
+		#507200);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#b5d24e),
+		to(#507200));
+	border: 1px solid #8EAD24;
+	text-shadow:
+		0px 2px 0px rgba(082,140,006,0.7),
+		0px 2px 0px rgba(255,255,255,0.3);
+}
+
+.unfollow-button{
+	background: -moz-linear-gradient(
+		top,
+		#f06666 0%,
+		#b10303);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#f06666),
+		to(#b10303));
+	border: 1px solid #b40505;
+	text-shadow:
+		0px -1px 0px rgba(97,5,23,0.7),
+		0px 1px 0px rgba(255,255,255,0.3);
+}
+.action-button{
+	background: -moz-linear-gradient(
+		top,
+		#ea4c89 0%,
+		#b03464);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#ea4c89),
+		to(#b03464));
+	border: 1px solid #bd6e8c;
+}
+.save-button{
+	background: -moz-linear-gradient(
+		top,
+		#f55929 0%,
+		#cc512b);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#f55929),
+		to(#cc512b));
+	border: 1px solid #e66943;
+	}
+
+.blue-button{
+	background: -moz-linear-gradient(
+		top,
+		#63a1ff 0%,
+		#40669c);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#63a1ff),
+		to(#40669c));
+	border: 1px solid #507ebf;
+}
+.block{display:block;}
+.form-width{width:495px;}

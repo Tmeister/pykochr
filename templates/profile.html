@@ -92,11 +92,15 @@
 			<label for="location"><h5>Location</h5></label>
 			<input type="text" name="location" value="{{user.location}}">
 		</div>
+		<div class="clear"></div>
 		<div class="input">
 			<label for="location"><h5>&nbsp;</h5></label>
-			<input type="submit" class="button black right" value="Save Settings">
+			<input type="submit" class="blue-button block form-width" value="Save Settings">
 		</div>
+		<div class="clear"></div>	
 	</form>
+	<div class="margin15"></div>		
+	
 {% endblock %}
 
 {% block side_content %}
@@ -106,7 +110,7 @@
 		<div class="margin15">
 			<img class="bordered-img left" src="{{avatar}}"/>
 			<div class="notopmargin" id="actionavatar">
-				<a href="#" class="notopmargin button black right" id="changeavatar">Change</a><br />
+				<a href="#" class="notopmargin blue-button right" id="changeavatar">Change</a><br />
 			</div><!-- / -->
 			<form id="uploadavatar"action="/account/change-avatar" method="post" enctype="multipart/form-data">
 				<div class="uploader white margin15">
@@ -114,9 +118,9 @@
 					<input type="button" class="button" value="Change Avatar"/>
 					<input type="file" name="photo" size="30" id="image_file"/>
 				</div>
-				<div class="margin15 rigth">
-					<a href="#" class="button black rigth margin15" id="cancelavatar">Cancel</a>
-					<a href="#" class="button black rigth margin15" id="sendavatar">Upload</a>
+				<div class="margin20 rigth">
+					<a href="#" class="unfollow-button rigth margin15" id="cancelavatar">Cancel</a>
+					<a href="#" class="blue-button rigth margin15" id="sendavatar">Upload</a>
 				</div>
 			</form>	
 		</div>

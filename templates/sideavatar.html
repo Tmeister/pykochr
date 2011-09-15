@@ -1,25 +1,50 @@
-<h4 class="notopmargin">About {{author.nickname|title}}</h4>
+<h4 class="notopmargin margin15">About {{author.nickname|title}}</h4>
 <div class="dot-separator"></div>
 <div class="margin15">
-	<div class="left">
-		<p class="pink notopmargin nobottommargin marginb5">
-			<a href="/cook/{{author.nickname}}">{{author_recipes_count}} Recipes</a>
-		</p>
-		<p class="pink notopmargin nobottommargin marginb5">9,999 Followers</p>
-		<p class="pink notopmargin nobottommargin marginb5">9,999 Following</p>
-		{% if author.location %}
-			<p class="pink notopmargin nobottommargin marginb5">From: {{author.location}}</p>
-		{% endif %}
+	<div class="author-widget">
+		<div class="left">
+			<p class="pink notopmargin nobottommargin marginb5">
+				<a href="/cook/{{author.nickname}}">{{author_recipes_count}} Recipes</a>
+			</p>
+			<p class="pink notopmargin nobottommargin marginb5">
+				{{author.followers}} Followers
+			</p>
+			<p class="pink notopmargin nobottommargin marginb5">
+				{{author.following}} Following
+			</p>
+			{% if author.location %}
+				<p class="pink notopmargin nobottommargin marginb5">From: {{author.location}}</p>
+			{% endif %}
+		</div>
+		<a href="/cook/{{author.nickname}}">
+			<img class="bordered-img right" src="{{avatar}}"/>
+		</a>
+		<div class="clear"></div>
+		{% if user %}
+			<div class="dot-separator margin15"></div>
+			<div class="margin15">
+				{% if user.nickname != author.nickname %}
+					{% if not alreadyfollow %}
+						<div class="ajax-follow-trigger">
+							<a href="#" class="follow-button block" data-fan="{{user.key}}" data-star="{{author.key}}">Follow {{author.nickname|title}}</a>	
+						</div>
+					{% else %}
+						<div class="ajax-follow-trigger">
+							<a href="#" class="unfollow-button block" data-fan="{{user.key}}" data-star="{{author.key}}">Unfollow {{author.nickname|title}}</a>	
+						</div>	
+					{% endif %}
+					
+				
+				{% else %}
+					<a href="/account" class="blue-button block">Edit your account</a>
+				{% endif %}
+			</div>
+		{% endif %}	
 	</div>
-	<a href="/cook/{{author.nickname}}">
-		<img class="bordered-img right" src="{{avatar}}"/>
-	</a>
-	<div class="clear"></div>
 	{% if author.about %}
 		<div class="dot-separator margin15"></div>
 		<p>{{author.about}}</p>
 	{% endif %}
-	<div class="dot-separator"></div>
-	
+	<div class="dot-separator margin15"></div>
 </div>
 <div class="clear"></div>

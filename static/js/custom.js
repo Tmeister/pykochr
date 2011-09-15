@@ -160,6 +160,16 @@ $(function($) {
 
 	});
 
+	$('.follow-trigger').click(function(event) {
+		event.preventDefault()
+		target = $(this).find('a');
+		target = $( target[0] );
+		key = target.attr('data-key');
+		console.log( key )
+	});
+			
+			
+
 	$('.ajax-like-trigger').click(function(event) {
 		event.preventDefault();
 		target = $(this).find('a');
@@ -174,7 +184,58 @@ $(function($) {
 			return 
 		}
 	});
+
+	$('.ajax-follow-trigger').click(function(event) {
+		event.preventDefault();
+		target = $(this).find('a');
+		target = $( target[0] );
+		fan = target.attr('data-fan');
+		star = target.attr('data-star');
+		console.log( fan )
+		console.log( star )
+		if (target.hasClass('follow-button')){
+			do_follow( target, fan, star )
+			return
+		};
+		if (target.hasClass('unfollow-button')){
+			do_unfollow( target, fan, star )
+			return
+		};
+	});
 			
+			
+
+	function do_follow (target, key) {
+		$.ajax({
+			url: '/ajax/follow',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				fan : fan,
+				star : star
+			},
+			success: function(data, textStatus, xhr) {
+				user_message('Now you are following to ' + data.star, 'success');
+				console.log( data )
+			}
+		});					
+	}
+
+	function do_unfollow (target, key) {
+		$.ajax({
+			url: '/ajax/unfollow',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				fan : fan,
+				star : star	
+			},
+			success: function(data, textStatus, xhr) {
+				user_message('Unfollow ' + data.star, 'success');
+			}
+		});
+		
+	}
 
 
 	function up_vote(target, key) {

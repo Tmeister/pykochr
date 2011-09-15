@@ -2,6 +2,7 @@ from google.appengine.dist import use_library
 use_library('django', '1.2')
 
 from google.appengine.ext import webapp, db
+from google.appengine.ext.db import polymodel
 import hashlib
 import keys
 from gaesessions import get_current_session
@@ -21,6 +22,8 @@ class User(db.Model):
 	usegravatar			= db.BooleanProperty(default=True)
 	firstname			= db.StringProperty(required=False, default="")
 	lastname			= db.StringProperty(required=False, default="")
+	followers			= db.IntegerProperty(default=0)
+	following			= db.IntegerProperty(default=0)
 
 	@staticmethod
 	def is_nickname_exists(user):
@@ -109,5 +112,29 @@ class Like(db.Model):
 		like = Like.all().filter('koch =', koch).filter('user =', user).fetch(1)
 		return True if len( like ) else False
 
+class Friendship(db.Model):
+	follower = db.ReferenceProperty(User, collection_name="fans")
+	following = db.ReferenceProperty(User, collection_name="stars")
+	@staticmethod
+	def follow(fan, star):
+		follow = Friendship( follower = fan, following = star )
+		follow.put()
+		fan.following += 1
+		star.followers += 1
+		fan.put()
+		star.put()
+		return follow
 	
-		
+	def unfollow(self):
+		fan = self.follower
+		star = self.following
+		fan.following -= 1
+		star.followers -= 1
+		fan.put()
+		star.put()
+		self.delete()
+
+	@staticmethod
+	def alreadyfollow(fan, star):
+		follow = Friendship.all().filter('follower =', fan).filter('following =', star).fetch(1)
+		return True if len( follow ) else False

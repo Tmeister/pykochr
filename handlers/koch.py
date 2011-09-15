@@ -14,7 +14,7 @@ from django.core.validators import email_re
 from django.contrib.humanize.templatetags.humanize import intcomma
 
 from gaesessions import get_current_session
-from models import (User, Koch, Like, Tag)
+from models import (User, Koch, Like, Tag, Friendship)
 
 
 class Create(webapp.RequestHandler):
@@ -113,6 +113,7 @@ class ListByAuthor(webapp.RequestHandler):
 			avatar = "/avatar/?user_id=%s" %(author.key())
 		else:
 			avatar = helpers.get_gravatar( author.email, 90 )
+		
 		page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
   		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().filter('author =', author).order('-created'), page ) 
 		kochs = helpers.get_kochs_data(tmp_kochs)
@@ -155,19 +156,21 @@ class Detail(webapp.RequestHandler):
 		query = Koch.all().filter( 'slug =', slug).fetch(1)
 		if len( query ):
 			koch = query[0];
-			if user:
-				alreadylike = Like.alreadylike( koch, user )
-			else:
-				alreadylike = False
+			alreadylike = False
+			alreadyfollow = False
+			
 			
 			author = koch.author
+			avatar = helpers.get_gravatar( author.email, 90 )
 			author_recipes_count = Koch.all().filter('author =', author).count();
-			
+
+			if user:
+				alreadylike = Like.alreadylike( koch, user )
+				alreadyfollow = Friendship.alreadyfollow( user, author  )
+
 			if not author.usegravatar and author.avatar:
 				avatar = "/avatar/?user_id=%s" %(author.key())
-			else:
-				avatar = helpers.get_gravatar( author.email, 90 )
-
+				
 			last_kochs = Koch.all().filter('author =', author).fetch(5);
 			last_from_all = Koch.all().fetch(5);
 

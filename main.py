@@ -26,19 +26,22 @@ application = webapp.WSGIApplication(
                     ('/', Home),
                     ('/ajax/register'           , account.Register),
                     ('/ajax/login'              , account.Login),
+                    ('/avatar/'                 , account.Avatar),
+                    ('/account/change-avatar'   , account.SaveAvatar),
+                    ('/logout'                  , account.Logout),
+                    ('/profile'                 , account.Edit),
+                    ('/account'                 , account.Overview),
+                    ('/ajax/follow'             , account.Follow),
+                    ('/ajax/unfollow'           , account.Unfollow),
                     ('/ajax/up-vote'            , koch.UpVote),
                     ('/ajax/down-vote'          , koch.DownVote),
-                    ('/logout'                  , account.Logout),
-                    ('/profile'                 , profile.Edit),
-                    ('/account'                 , account.Overview),
                     ('/create'                  , koch.Create),
                     ('/cook/(.+)'               , koch.ListByAuthor),
                     ('/tag/(.+)'                , koch.ListByTag),
                     ('/explore'                 , koch.ListByDate),
                     ('/details/(.+)'            , koch.Detail),
                     ('/image/'                  , koch.Image),
-                    ('/avatar/'                 , account.Avatar),
-                    ('/account/change-avatar'   , account.SaveAvatar)
+                    
                 ],
                 debug=True)
 
