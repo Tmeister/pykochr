@@ -8,22 +8,11 @@ from django.utils import simplejson
 from models import *
 from gaesessions import get_current_session
 
-from handlers import (account, profile, koch)
-
-class Home(webapp.RequestHandler):
-    def get(self):
-        session = get_current_session()
-        if session.has_key('user'):
-            user = session['user']
-
-        loop = range(243)
-        self.response.out.write(template.render('templates/home.html', locals()))
-
-        
+from handlers import (account, profile, koch, site)
 
 application = webapp.WSGIApplication(
                 [
-                    ('/', Home),
+                    ('/'                        , site.Home),
                     ('/ajax/register'           , account.Register),
                     ('/ajax/login'              , account.Login),
                     ('/avatar/'                 , account.Avatar),

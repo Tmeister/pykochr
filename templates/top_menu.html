@@ -1,19 +1,24 @@
 <div class="one-fourth notopmargin">
-	<h2 class="notopmargin colored">Kuchbuchr</h2>	
+	<h2 class="margin5 colored">
+		<a href="/" title="Home">Kuchbuchr</a>
+		
+	</h2>	
 </div>
 
 {% if not user %}
 	
 	<div class="three-fourth-last notopmargin right">
-		<a class="btn1 tab04b grey" title="" href="#" id="top-login">Login</a>
-		<a class="btn1 tab04b grey" title="" href="#" id="top-register">Register</a>
-		<a class="btn1 tab04b grey" href="/explore">Explore</a>
+		<ul id="nav"> 
+			<li><a href="#" id="top-login">Login</a></li>
+			<li><a href="#" id="top-register">Register</a></li>
+			<li><a href="/explore">Explore</a> 
+		</ul>
 		<div id="register-form" class="hide">
 			<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
 				<span id="ui-dialog-title-2" class="ui-dialog-title">Signup to use Kochbuchr</span>
 			</div>
 			<div class="ui-dialog-content ui-widget-content">
-				<div class="logo">logo</div>
+				<div class="logo"></div>
 				<div class="formright">
 					<form target="dont_mind_me" id="login" method="post">
 						<input class="input-login login-tooltip" type="text" id="register-username" name="username" placeholder="Username" title="Please choice your username" />
@@ -39,7 +44,7 @@
 			</div>
 			<form id="login" method="post" action="">
 				<div class="ui-dialog-content ui-widget-content">
-					<div class="logo">logo</div>
+					<div class="logo"></div>
 					<div class="formright">
 						<input class="input-login login-tooltip" type="text" id="user_login" name="username" placeholder="Username" title="Please enter your username"/>
 						<input class="input-login login-tooltip" type="password" id="user_pass" name="passwd" placeholder="Password" title="Please enter your password"/>

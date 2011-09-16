@@ -13,29 +13,16 @@ $(function($) {
 	})
 			
 
-	$('#top-login, #top-register').click(function(event) {
+	$('#top-login, #top-register, #create-account').click(function(event) {
 		event.preventDefault();
-		target = ( $(this).attr('id') == 'top-login' ) ? $('#login-form') : $('#register-form');
-		target.modal({
-			onOpen: 	function(dialog){
-				dialog.overlay.fadeIn( 'slow', function(){
-					dialog.data.hide();
-					dialog.container.fadeIn( 'slow', function(){
-						dialog.data.slideDown('slow')
-					});
-				});
-			},
-			onClose: 	function(dialog){
-				$('#account-loader').hide();
-				dialog.data.slideUp('slow', function () {
-					dialog.container.fadeOut('slow', function () {
-						dialog.overlay.fadeOut('slow', function () {
-							$.modal.close();
-						});
-					});
-				});
-			}
-		});//modal close
+		switch($(this).attr('id')){
+			case 'top-login':
+			case 'create-account':
+				$('#login-form').modal();
+			case 'top-register':
+				$('#register-form').modal();
+
+		}
 	});
 
 	$('#showregistersubmit').click(function(event) {
@@ -60,7 +47,7 @@ $(function($) {
 		    			$('.error-register').html( data.message );
 		    		}
 		    		if( data.status == 'success' ){
-		    			location.href = '/'
+		    			location.href = location.href
 		    			//$('#register-form .loginbuttons').html('<p class="success_message">' + data.message+ '</p>');
 		    		}
 			}
@@ -87,7 +74,7 @@ $(function($) {
 	    			$('.error-password').html( data.message );
 	    		}
 				if( data.status == 'success' ){
-					location.href = '/'
+					location.href = location.href
 				}
 
 

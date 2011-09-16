@@ -1,18 +1,31 @@
 {% extends 'base.html' %}
 {% block title %}Welcome{% endblock %}
 {% block content %}
-
-		<div class="one-third margin30">
-        	<h1 class="nobottommargin welcome">SOME COOL WORDS GGOGoogo</h1>
-            <h1 class="notopmargin welcome-small colored">ABOUT KOCHBUCHr</h1>
+		<div class="margin30">
+        	<h1 class="welcome-home center"><span class="colored">Share</span> &amp; <span class="colored">Discover</span>  recipes</h1>
+            <h1 class=" notopmargin  welcome-small center">make your kitchen social</h2>
         </div>
-        <div class="two-third margin30 last">
-        	<div class="block-left"></div>
-            <p class="left welcome-words notopmargin"><span class="bold">Lorem Ipsum</span> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make .a type specimen book.<br/><br/>Lorem Ipsum is simply dummy text of the <a class="link" href="">printing and typesetting industry</a>. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. </p>
-            {% for i in loop %}
-            	<div class="icon-gray-small icon{{i}}-gray"></div>{{i}}
-            {% endfor %}
-            <div class="block-right"></div>
+        <div id="call-to-action">
+            <div class="one-third"></div>
+            <div class="one-third center notopmargin">
+                <a href="#" title="" class="welcome-small blue-button big-size" id="create-account">Create your Account</a>
+                <div class="clear"></div>
+                <h6 class="margin30 center">sign up, it only takes 23.5 seconds ;)</h6>
+            </div>
+            <div class="one-third-last"></div>
+            <div class="clear"></div>
         </div>
-
+        <div class="margin30 dot-separator"></div>
+        <div id="steps" style="margin-top:90px;">
+            <div class="one-third notopmargin">
+                <div class="centre-line"><h2 class="center back-text">Sign up</h2></div>
+            </div>
+            <div class="one-third notopmargin">
+                <div class="centre-line"><h2 class="center back-text">Write</h2></div>
+            </div>
+            <div class="one-third notopmargin last">
+                <div class="centre-line"><h2 class="center back-text">Share</h2></div>
+            </div>    
+            <div class="clear"></div>
+        </div><!-- /steps -->
 {% endblock%}
