@@ -48,6 +48,11 @@ class Create(webapp.RequestHandler):
 		thumb 		= None
 		tinythumb 	= None
 
+		slug_exists = Koch.all().filter('slug =', slug).fetch(1)
+
+		if len ( slug_exists ) == 1:
+			#alreadyexists
+			slug = "%s-%s" % (slug, helpers.random_string())
 
 
 		if self.request.get('photo'):
@@ -102,8 +107,10 @@ class ListByAuthor(webapp.RequestHandler):
 	def get(self, cook):
 		user = User.is_logged()
 		author = User.all().filter('nickname =', cook.lower()).fetch(1)
-		if len( author ) == 0:
-			self.redirect('/')
+
+		if not len( author ):
+			self.error(404)
+			return
 
 		author = author[0]
 			
@@ -112,7 +119,7 @@ class ListByAuthor(webapp.RequestHandler):
 
 		
 		title = "%s's CookBook" %(author.nickname)
-		subhead = "Another main text..."
+		subhead = "Discover what %s has shared"  % (author.nickname)
 		author_recipes_count = Koch.all().filter('author =', author).count();
 		
 
@@ -136,7 +143,7 @@ class ListByTag(webapp.RequestHandler):
 		tag = tag.replace('-', ' ')
 		page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
 		title = "Explore %s" %(tag)
-		subhead = "Another main text..."
+		subhead = "You can find hidden treasures."
   		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().filter('tags =', tag).order('-created'), page ) 
 		kochs = helpers.get_kochs_data(tmp_kochs)
 		last_from_all = Koch.all().order('-created').fetch(5);
@@ -149,7 +156,7 @@ class ListByDate(webapp.RequestHandler):
 		page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
 		title = "Explore Recipes"
 		subtitle = "Explore recipes from all cooks"
-		subhead = "Another main text..."
+		subhead = "You can find hidden treasures."
   		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().order('-created'), page )
 		kochs = helpers.get_kochs_data(tmp_kochs)
 		last_from_all = Koch.all().order('-created').fetch(5);
@@ -184,7 +191,8 @@ class Detail(webapp.RequestHandler):
 			humanlikes = intcomma( int( koch.likes) )
 			self.response.out.write(template.render('templates/details_koch.html', locals()))
 		else:
-			print '404'
+			self.error(404)
+		
 
 
 class UpVote(webapp.RequestHandler):

@@ -2,6 +2,7 @@ import htmlentitydefs, re
 import random
 import urllib, hashlib
 import datetime
+import os
 
 
 from models import (User, Koch, Like)
@@ -61,3 +62,8 @@ def get_gravatar(email, size=90):
   gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
   return gravatar_url
 
+def random_string(wordLen=3):
+  word = ''
+  for i in range(wordLen):
+    word += random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')
+  return word

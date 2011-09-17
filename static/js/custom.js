@@ -17,9 +17,9 @@ $(function($) {
 		event.preventDefault();
 		switch($(this).attr('id')){
 			case 'top-login':
-			case 'create-account':
 				$('#login-form').modal();
 			case 'top-register':
+			case 'create-account':
 				$('#register-form').modal();
 
 		}
