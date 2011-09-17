@@ -57,7 +57,7 @@ def get_kochs_data(entities, author=None):
   return kochs
 
 def get_gravatar(email, size=90):
-  default = "http://localhost:8080/static/images/default-thumb.png"
+  default = "http://www.kochster.com/static/images/default-thumb.png"
   gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
   gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
   return gravatar_url
