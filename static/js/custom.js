@@ -220,7 +220,7 @@ $(function($) {
 				star : star	
 			},
 			success: function(data, textStatus, xhr) {
-				user_message('Unfollow ' + data.star, 'success');
+				user_message('You do not follow ' + data.star, 'success');
 				link = '<a href="#" class="follow-button block small-size" data-fan="'+String(data.fan_key)+'" data-star="'+String(data.star_key)+'">Follow</a>';
 				target.parent().html(link);
 				$('.followers span').html( data.star_followers +' Followers')

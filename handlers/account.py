@@ -10,8 +10,8 @@ from django.core.validators import email_re
 from gaesessions import get_current_session
 
 from models import User, Friendship
+from libs import Mailing
 import helpers
-
 
 
 class Register(webapp.RequestHandler):
@@ -45,11 +45,19 @@ class Register(webapp.RequestHandler):
         session.regenerate_id()
         session['user'] = user
 
-        #TODO SEND WELCOME EMAIL
-        #mail.send_mail(sender="no-reply@example.com",
-        #      to="noone@tmeister.net",
-        #      subject="Your account has been approved",
-        #      body="test")
+        body = '''Hello %s,
+
+Your account has been created and is ready to use.
+
+Your login details are:
+
+Username is <strong>%s</strong>
+Password is <strong>%s</strong>
+
+Thanks and bon appetit!'''
+
+        mail =  Mailing.Notification()
+        mail.send(email, 'Welcome to Kochster', body)
 
         self.response.out.write( simplejson.dumps({'status':'success', 'message':'Success'}) )
 
