@@ -45,16 +45,7 @@ class Register(webapp.RequestHandler):
         session.regenerate_id()
         session['user'] = user
 
-        body = '''Hello %s,
-
-Your account has been created and is ready to use.
-
-Your login details are:
-
-Username is <strong>%s</strong>
-Password is <strong>%s</strong>
-
-Thanks and bon appetit!'''
+        body = 'Hello %s,<br/>Your account has been created and is ready to use.<br/><br/>Your login details are:<br/><br/>Username <strong>%s</strong><br/>Password <strong>%s</strong><br/><br/>Thanks and bon appetit!' %  ( username, username, passwd )
 
         mail =  Mailing.Notification()
         mail.send(email, 'Welcome to Kochster', body)

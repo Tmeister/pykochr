@@ -9,11 +9,11 @@ class Notification:
 		template = template.replace( "%_title_mail_%", title )
 		template = template.replace( "%_content_%", content )
 
-		mail = mail.EmailMessage(sender="Kochster <contact@kochster.com>",subject=title)
-		mail.to = to
-		mail.body = content
-		mail.html = template
-		mail.send()
+		message = mail.EmailMessage(sender="Kochster <contact@kochster.com>",subject=title)
+		message.to = to
+		message.body = content
+		message.html = template
+		message.send()
 
 
 	def get_template(self):
