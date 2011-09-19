@@ -3132,3 +3132,7 @@ top,
 .nouppercase {
 	text-transform: none;
 }
+
+.logo{
+	background:url(../images/hat.png) no-repeat 80% 15%;
+}
