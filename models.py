@@ -24,6 +24,7 @@ class User(db.Model):
 	lastname			= db.StringProperty(required=False, default="")
 	followers			= db.IntegerProperty(default=0)
 	following			= db.IntegerProperty(default=0)
+	recipes				= db.IntegerProperty(default=0)
 
 	@staticmethod
 	def is_nickname_exists(user):
@@ -113,8 +114,9 @@ class Like(db.Model):
 		return True if len( like ) else False
 
 class Friendship(db.Model):
-	follower = db.ReferenceProperty(User, collection_name="fans")
+	follower  = db.ReferenceProperty(User, collection_name="fans")
 	following = db.ReferenceProperty(User, collection_name="stars")
+	created   = db.DateTimeProperty(auto_now_add=True)
 	@staticmethod
 	def follow(fan, star):
 		follow = Friendship( follower = fan, following = star )

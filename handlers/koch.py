@@ -99,6 +99,8 @@ class Create(webapp.RequestHandler):
 		for tag in tags:
 			Tag.up(tag)
 
+		user.recipes += 1
+		user.put() 
 		koch.put()
 		self.redirect('/')
 

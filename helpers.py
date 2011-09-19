@@ -5,7 +5,7 @@ import datetime
 import os
 
 
-from models import (User, Koch, Like)
+from models import (User, Koch, Like, Friendship )
 from django.contrib.humanize.templatetags.humanize import intcomma
 
 def sluglify(text, separator = "-"):
@@ -22,8 +22,8 @@ def sluglify(text, separator = "-"):
  
   return ret.strip()
 
-def paginate(entities, page=0):
-  PAGESIZE = 10
+def paginate(entities, page=0, per_page=10):
+  PAGESIZE = per_page
   max_results = 2000 
   max_pages = (max_results - PAGESIZE) / PAGESIZE 
   start = page*PAGESIZE   
@@ -55,6 +55,55 @@ def get_kochs_data(entities, author=None):
       })
 
   return kochs
+
+def get_followers_data(entities):
+  fans = []
+  user  = User.is_logged()
+  for fan in entities:
+    if not fan.follower.usegravatar and fan.follower.avatar:
+      avatar = "/avatar/?user_id=%s" %(fan.follower.key())
+    else:
+      avatar = get_gravatar( fan.follower.email )  
+
+    friendship = False
+    if user:
+      query = Friendship.all().filter('follower =', user).filter('following =', fan.follower).fetch(1)
+      if query:
+        follow = query[0]
+        if follow:
+          friendship = True
+     
+    fans.append({
+      'fan': fan.follower,
+      'avatar' : avatar,
+      'friend' : friendship
+    })
+  return fans
+
+def get_following_data(entities):
+  fans = []
+  user  = User.is_logged()
+  for fan in entities:
+    if not fan.following.usegravatar and fan.following.avatar:
+      avatar = "/avatar/?user_id=%s" %(fan.following.key())
+    else:
+      avatar = get_gravatar( fan.following.email )  
+
+    friendship = False
+    if user:
+      query = Friendship.all().filter('following =', user).filter('follower =', fan.following).fetch(1)
+      if query:
+        follow = query[0]
+        if follow:
+          friendship = True
+     
+    fans.append({
+      'fan': fan.following,
+      'avatar' : avatar,
+      'friend' : friendship
+    })
+  return fans
+
 
 def get_gravatar(email, size=90):
   default = "http://www.kochster.com/static/images/default-thumb.png"

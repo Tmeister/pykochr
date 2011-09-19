@@ -1,7 +1,7 @@
 <div class=" notopmargin margin15">
 	<div class="author-widget">
 		<div class="right star-details notopmargin">
-			<h4 class="notopmargin nouppercase link">
+			<h4 class="notopmargin link">
 				<a href="/cook/{{author.nickname}}" title="">{{author.nickname|title}}</a>
 			</h4>
 			{% if user %}
@@ -31,10 +31,10 @@
 	</div>
 
 	<div class="followers left">
-		<span class="strong small">{{author.followers}} Followers</span>
+		<a href="/followers/{{author.nickname}}" class="link"><span class="strong small">{{author.followers}} Followers</span></a>
 	</div>
 	<div class="following right">
-		<span class="strong small">{{author.following}} Following</span>
+		<a href="/following/{{author.nickname}}" class="link"><span class="strong small">{{author.following}} Following</span></a>
 	</div>
 	<div class="clear"></div>
 

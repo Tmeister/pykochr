@@ -127,8 +127,7 @@ input[type=email],input[type=text]:focus,input[type=password]:focus,input.text:f
 }
 select {
 	background-color:#fff;
-	border-width:1px;
-	border-style:solid;
+	border: 1px solid #E1E1E1;
 }
 input[type=email],input[type=text],input[type=password],input.text,input.title,textarea,select {
 }

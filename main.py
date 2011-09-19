@@ -22,6 +22,8 @@ application = webapp.WSGIApplication(
                     ('/account'                 , account.Overview),
                     ('/ajax/follow'             , account.Follow),
                     ('/ajax/unfollow'           , account.Unfollow),
+                    ('/followers/(.+)'          , account.Followers), 
+                    ('/following/(.+)'          , account.Following), 
                     ('/ajax/up-vote'            , koch.UpVote),
                     ('/ajax/down-vote'          , koch.DownVote),
                     ('/create'                  , koch.Create),

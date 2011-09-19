@@ -1,0 +1,64 @@
+{% extends 'right_bar.html' %}
+{% block title %}{{title}}{%endblock%}
+{% block left_content %}
+	<h1 class="welcome nobottommargin left">{{title}}</h1>
+	{% if subtitle %}<p class="left description"> :: {{subtitle}}</p>{% endif %}
+	{% if subhead %}<h4 class="clear colored">{{subhead}}</h4>{% endif %}
+	<div class="separator margin15"></div>
+	{% for x in followers  %}
+		{% if forloop.counter|divisibleby:"3"%}
+			<div class="one-fourth last margin10">
+		{% else %}
+			<div class="one-fourth margin10">	
+		{% endif %}
+			<div class="author-widget">
+				<div class="right star-details notopmargin">
+					<h4 class="notopmargin link">
+						<a href="/cook/{{x.fan.nickname}}" title="">{{x.fan.nickname|title}}</a>
+					</h4>
+					{% if user %}
+						<div class="margin5">
+							{% if user.nickname != x.fan.nickname %}
+								{% if not x.friend %}
+									<div class="ajax-follow-trigger">
+										<a href="#" class="follow-button block small-size" data-fan="{{user.key}}" data-star="{{x.fan.key}}">Follow</a>	
+									</div>
+								{% else %}
+									<div class="ajax-follow-trigger">
+										<a href="#" class="unfollow-button block small-size" data-fan="{{user.key}}" data-star="{{x.fan.key}}">Unfollow</a>	
+									</div>
+								{% endif %}
+							{% else %}
+								This is you
+							{% endif %}
+						</div>				
+					{% endif %}
+				</div>
+				<div>
+					<a href="/cook/{{x.fan.nickname}}">
+						<img class="left avatar" src="{{x.avatar}}"/>
+					</a>	
+				</div>
+				<div class="clear"></div>
+				<div class="foot margin10">
+					<a href="/cook/{{x.fan.nickname}}" class="btn1 tab01a grey">{{x.fan.recipes}} Recipes</a>
+				</div><!-- / -->
+			</div>
+		</div>
+		{% if forloop.counter|divisibleby:"3"%}
+		<div class="clear"></div>
+		{% endif %}	
+	{% endfor %}
+	<div class="clear"></div>
+	<div class="navigation margin30">
+        {% if prev_page %}   
+        <a href="?page={{ prev_page }}" class="blue-button nav-width left">« Previous</a>   
+        {% endif %}   
+        {% if next_page %}   
+            <a href="?page={{ next_page }}" class="blue-button nav-width right">Next »</a>   
+        {% endif %}       
+    </div>
+	
+{% endblock %}
+{% block side_content %}
+{% endblock %}

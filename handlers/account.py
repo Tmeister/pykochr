@@ -277,3 +277,31 @@ class Unfollow(webapp.RequestHandler):
                         }
                     ) 
                 ) 
+
+class Followers(webapp.RequestHandler):
+    """docstring for Followers"""
+    def get(self, star):
+        user = User.is_logged()
+        query = User.all().filter('nickname =', star.lower()).fetch(1)
+        if len( query ) == 1:
+            star = query[0]
+            title = "%s's followers" % ( star.nickname )
+            subhead = "on Kochster"
+            page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
+            foll_tmp, next_page, prev_page = helpers.paginate( Friendship.all().filter('following =', star).order('-created'), page, 12 ) 
+            followers = helpers.get_followers_data( foll_tmp )
+            self.response.out.write(template.render('templates/followers.html', locals()))
+
+class Following(webapp.RequestHandler):
+    """docstring for Followers"""
+    def get(self, star):
+        user = User.is_logged()
+        query = User.all().filter('nickname =', star.lower()).fetch(1)
+        if len( query ) == 1:
+            fan = query[0]
+            title = "%s is following" % ( fan.nickname )
+            subhead = "Favorites cooks"
+            page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
+            foll_tmp, next_page, prev_page = helpers.paginate( Friendship.all().filter('follower =',  fan).order('-created'), page, 12 ) 
+            followers = helpers.get_following_data( foll_tmp )
+            self.response.out.write(template.render('templates/followers.html', locals()))
