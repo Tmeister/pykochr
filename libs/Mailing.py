@@ -9,7 +9,7 @@ class Notification:
 		template = template.replace( "%_title_mail_%", title )
 		template = template.replace( "%_content_%", content )
 		mail.send_mail(
-				sender="no-reply@kochster.com",
+				sender="contact@kochster.com",
 				to=to,
 				subject=title,
 				body=template
