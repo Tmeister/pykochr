@@ -6,7 +6,7 @@
 	{% if koch.notes|length %}
 		<h4 class="clear colored">{{koch.notes}}</h4>
 	{% endif %}
-	<div class="separator"></div>
+	<div class="dot-separator"></div>
 	<div class="details-time one-half margin15">
 		{% if koch.prep_time %}
 			<div class="subheader left">
@@ -49,10 +49,10 @@
 		</div>
 	</div>
 	<div class="clear"></div>
-	<div class="separator margin15"></div>
+	<div class="dot-separator margin15"></div>
 	<div class="one-fourth left sidebar notopmargin">
 		<h3 class="">Ingredients</h3>
-		<div class="separator margin15"></div>
+		<div class="dot-separator margin15"></div>
 		<ul class="list check-list">
 			{% for ingredient in koch.ingredients %}
 				<li>{{ingredient}}</li>
@@ -62,7 +62,7 @@
 	</div>
 	<div class="one-half last notopmargin">
 		<h3 class="">&nbsp</h3>
-		<div class="separator margin15"></div>
+		<div class="dot-separator margin15"></div>
 		{% if koch.photo %}
        		<img class="bordered-img margin10"  src="/image/?img_id={{koch.key}}" alt=" "/>
         {% else %}
@@ -72,7 +72,7 @@
 	</div>
 	<div class="clear"></div>
 	<h3 class="">Directions</h3>
-	<div class="separator margin15"></div>
+	<div class="dot-separator margin15"></div>
 	<div id="" class="">
 		{% for direction in koch.directions %}
 			<div class="small-round-icon-gray left">
@@ -81,10 +81,28 @@
 			<p style="margin-left:45px; text-align:justify; min-height:30px;">{{direction}}</p>
 		{% endfor %}	
 	</div>
-	<!--<div class="separator margin15"></div>
+	{% if likesusers %}
+		<div class="dot-separator margin15"></div>
+		<div class="three-fourth notopmargin">
+			<h3>Users who liked this recipe</h3>
+			<div class="dot-separator margin15"></div>
+			<div class="likes margin15">
+				{% for user in likesusers %}
+					<div class="left likeuser">
+						<a href="/cook/{{user.nickname}}" title="">
+							<img src="{{user.avatar}}" class="likeavatar toptooltip" title="{{user.nickname|title}}">
+						</a>
+					</div><!-- / -->
+				{% endfor %}				
+			</div>
+		</div>	
+	{% endif %}
+	<!--<div class="dot-separator margin15"></div>
 	<div class="three-fourth notopmargin">
 		<h3>Comments</h3>
 	</div>-->
+	<div class="clear"></div>
+	<div class="margin15"></div>
 
 {% endblock %}
 {% block side_content %}

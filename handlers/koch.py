@@ -134,7 +134,7 @@ class ListByAuthor(webapp.RequestHandler):
   		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().filter('author =', author).order('-created'), page ) 
 		kochs = helpers.get_kochs_data(tmp_kochs)
 		last_kochs = Koch.all().filter('author =', author).order('-created').fetch(5);
-		last_from_all = Koch.all().order('-created').fetch(5);
+		last_from_all = Koch.get_random()
 		self.response.out.write(template.render('templates/list_kochs.html', locals()))
 		
 
@@ -148,7 +148,7 @@ class ListByTag(webapp.RequestHandler):
 		subhead = "You can find hidden treasures."
   		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().filter('tags =', tag).order('-created'), page ) 
 		kochs = helpers.get_kochs_data(tmp_kochs)
-		last_from_all = Koch.all().order('-created').fetch(5);
+		last_from_all = Koch.get_random()
 		self.response.out.write(template.render('templates/list_kochs.html', locals()))
 
 class ListByDate(webapp.RequestHandler):
@@ -161,7 +161,7 @@ class ListByDate(webapp.RequestHandler):
 		subhead = "You can find hidden treasures."
   		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().order('-created'), page )
 		kochs = helpers.get_kochs_data(tmp_kochs)
-		last_from_all = Koch.all().order('-created').fetch(5);
+		last_from_all = Koch.get_random()
 		self.response.out.write(template.render('templates/list_kochs.html', locals()))		
 		
 
@@ -174,11 +174,21 @@ class Detail(webapp.RequestHandler):
 			koch = query[0];
 			alreadylike = False
 			alreadyfollow = False
+			likesusers = []
 			
 			
 			author = koch.author
 			avatar = helpers.get_gravatar( author.email, 90 )
 			author_recipes_count = Koch.all().filter('author =', author).count();
+			for like in Like.all().filter( 'koch =', koch ):
+				lavatar = helpers.get_gravatar( like.user.email, 90 )
+				if not like.user.usegravatar and like.user.avatar:
+					lavatar = "/avatar/?user_id=%s" %(like.user.key())
+
+				likesusers.append({
+					'nickname' : like.user.nickname,
+					'avatar'   : lavatar
+				})
 
 			if user:
 				alreadylike = Like.alreadylike( koch, user )
@@ -188,7 +198,7 @@ class Detail(webapp.RequestHandler):
 				avatar = "/avatar/?user_id=%s" %(author.key())
 				
 			last_kochs = Koch.all().filter('author =', author).order('-created').fetch(5);
-			last_from_all = Koch.all().order('-created').fetch(5);
+			last_from_all = Koch.get_random()
 
 			humanlikes = intcomma( int( koch.likes) )
 			self.response.out.write(template.render('templates/details_koch.html', locals()))

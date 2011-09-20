@@ -57,52 +57,44 @@ def get_kochs_data(entities, author=None):
   return kochs
 
 def get_followers_data(entities):
-  fans = []
+  friends = []
   user  = User.is_logged()
-  for fan in entities:
-    if not fan.follower.usegravatar and fan.follower.avatar:
-      avatar = "/avatar/?user_id=%s" %(fan.follower.key())
+  for friend in entities:
+    if not friend.fan.usegravatar and friend.fan.avatar:
+      avatar = "/avatar/?user_id=%s" %(friend.fan.key())
     else:
-      avatar = get_gravatar( fan.follower.email )  
+      avatar = get_gravatar( friend.fan.email )  
 
     friendship = False
     if user:
-      query = Friendship.all().filter('follower =', user).filter('following =', fan.follower).fetch(1)
-      if query:
-        follow = query[0]
-        if follow:
-          friendship = True
+      friendship = Friendship.alreadyfollow( friend.fan, user )
      
-    fans.append({
-      'fan': fan.follower,
+    friends.append({
+      'fan': friend.fan,
       'avatar' : avatar,
       'friend' : friendship
     })
-  return fans
+  return friends
 
 def get_following_data(entities):
-  fans = []
+  friends = []
   user  = User.is_logged()
-  for fan in entities:
-    if not fan.following.usegravatar and fan.following.avatar:
-      avatar = "/avatar/?user_id=%s" %(fan.following.key())
+  for friend in entities:
+    if not friend.star.usegravatar and friend.star.avatar:
+      avatar = "/avatar/?user_id=%s" %(friend.star.key())
     else:
-      avatar = get_gravatar( fan.following.email )  
+      avatar = get_gravatar( friend.star.email )  
 
     friendship = False
     if user:
-      query = Friendship.all().filter('following =', user).filter('follower =', fan.following).fetch(1)
-      if query:
-        follow = query[0]
-        if follow:
-          friendship = True
+      friendship = Friendship.alreadyfollow( user, friend.star ) 
      
-    fans.append({
-      'fan': fan.following,
+    friends.append({
+      'fan': friend.star,
       'avatar' : avatar,
       'friend' : friendship
     })
-  return fans
+  return friends
 
 
 def get_gravatar(email, size=90):

@@ -72,6 +72,10 @@ class Koch(db.Model):
 	photo 		= db.BlobProperty()
 	thumb		= db.BlobProperty()
 
+	@staticmethod
+	def get_random(limit=5):
+		return Koch.all().order('-created').fetch(limit);
+
 class Tag(db.Model):
 	"""docstring for Tag"""
 	name = db.StringProperty(required=True)
@@ -114,12 +118,12 @@ class Like(db.Model):
 		return True if len( like ) else False
 
 class Friendship(db.Model):
-	follower  = db.ReferenceProperty(User, collection_name="fans")
-	following = db.ReferenceProperty(User, collection_name="stars")
+	fan  = db.ReferenceProperty(User, collection_name="fans")
+	star = db.ReferenceProperty(User, collection_name="stars")
 	created   = db.DateTimeProperty(auto_now_add=True)
 	@staticmethod
 	def follow(fan, star):
-		follow = Friendship( follower = fan, following = star )
+		follow = Friendship( fan = fan, star = star )
 		follow.put()
 		fan.following += 1
 		star.followers += 1
@@ -128,8 +132,8 @@ class Friendship(db.Model):
 		return follow
 	
 	def unfollow(self):
-		fan = self.follower
-		star = self.following
+		fan = self.fan
+		star = self.star
 		fan.following -= 1
 		star.followers -= 1
 		fan.put()
@@ -138,5 +142,5 @@ class Friendship(db.Model):
 
 	@staticmethod
 	def alreadyfollow(fan, star):
-		follow = Friendship.all().filter('follower =', fan).filter('following =', star).fetch(1)
+		follow = Friendship.all().filter('fan =', fan).filter('star =', star).fetch(1)
 		return True if len( follow ) else False

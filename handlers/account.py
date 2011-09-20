@@ -9,7 +9,7 @@ from django.core.validators import email_re
 
 from gaesessions import get_current_session
 
-from models import User, Friendship
+from models import User, Friendship, Koch
 from libs import Mailing
 import helpers
 
@@ -217,7 +217,7 @@ class Follow(webapp.RequestHandler):
     def post(self):
         fan = db.get( self.request.get('fan') )
         star = db.get( self.request.get('star') )
-        already = Friendship.all().filter('follower =', fan).filter('following =', star).fetch(1)
+        already = Friendship.all().filter('fan =', fan).filter('star =', star).fetch(1)
         if fan and star and len( already ) == 0:
             follow = Friendship.follow( fan, star )
             if follow:
@@ -229,7 +229,7 @@ class Follow(webapp.RequestHandler):
                             'star'      : star.nickname,
                             'star_key'  : self.request.get('star'),
                             'fan_key'   : self.request.get('fan'),
-                            'star_followers' : follow.following.followers
+                            'star_followers' : follow.star.followers
                         }
                     ) 
                 )
@@ -251,31 +251,32 @@ class Unfollow(webapp.RequestHandler):
         fan = db.get( self.request.get('fan') )
         star = db.get( self.request.get('star') )
         if fan and star:
-            query = Friendship.all().filter('follower =', fan).filter('following =', star).fetch(1)
-            follow = query[0]
-            if follow:
-                follow.unfollow()
-                self.response.out.write( 
-                    simplejson.dumps(
-                        {   
-                            'status'    : 'success', 
-                            'message'   : 'unfollow',
-                            'star'      : star.nickname,
-                            'star_key'  : self.request.get('star'),
-                            'fan_key'   : self.request.get('fan'),
-                            'star_followers' : follow.following.followers
-                        }
+            query = Friendship.all().filter('fan =', fan).filter('star =', star).fetch(1)
+            if len( query ) == 1:
+                follow = query[0]
+                if follow:
+                    follow.unfollow()
+                    self.response.out.write( 
+                        simplejson.dumps(
+                            {   
+                                'status'    : 'success', 
+                                'message'   : 'unfollow',
+                                'star'      : star.nickname,
+                                'star_key'  : self.request.get('star'),
+                                'fan_key'   : self.request.get('fan'),
+                                'star_followers' : follow.star.followers
+                            }
+                        ) 
+                    )
+                else:
+                    self.response.out.write( 
+                        simplejson.dumps(
+                            {   
+                                'status'    : 'error', 
+                                'message'   : 'unfollow'
+                            }
+                        ) 
                     ) 
-                )
-            else:
-                self.response.out.write( 
-                    simplejson.dumps(
-                        {   
-                            'status'    : 'error', 
-                            'message'   : 'unfollow'
-                        }
-                    ) 
-                ) 
 
 class Followers(webapp.RequestHandler):
     """docstring for Followers"""
@@ -287,8 +288,9 @@ class Followers(webapp.RequestHandler):
             title = "%s's followers" % ( star.nickname )
             subhead = "on Kochster"
             page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
-            foll_tmp, next_page, prev_page = helpers.paginate( Friendship.all().filter('following =', star).order('-created'), page, 12 ) 
+            foll_tmp, next_page, prev_page = helpers.paginate( Friendship.all().filter('star =', star).order('-created'), page, 12 ) 
             followers = helpers.get_followers_data( foll_tmp )
+            last_from_all = Koch.get_random()
             self.response.out.write(template.render('templates/followers.html', locals()))
 
 class Following(webapp.RequestHandler):
@@ -301,6 +303,7 @@ class Following(webapp.RequestHandler):
             title = "%s is following" % ( fan.nickname )
             subhead = "Favorites cooks"
             page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
-            foll_tmp, next_page, prev_page = helpers.paginate( Friendship.all().filter('follower =',  fan).order('-created'), page, 12 ) 
+            foll_tmp, next_page, prev_page = helpers.paginate( Friendship.all().filter('fan =',  fan).order('-created'), page, 12 ) 
             followers = helpers.get_following_data( foll_tmp )
+            last_from_all = Koch.get_random()
             self.response.out.write(template.render('templates/followers.html', locals()))
