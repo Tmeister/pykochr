@@ -288,9 +288,9 @@ $(document).ready(function() {
 			SuperFish Menu
 ***************************************************/	
 // initialise plugins
-	jQuery.noConflict()(function(){
+	/*jQuery.noConflict()(function(){
 		jQuery('ul.sf-menu').superfish();
-	});
+	});*/
 
 /***************************************************
 			PRETTY PHOTO
