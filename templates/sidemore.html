@@ -5,7 +5,11 @@
 		<div class="margin15 koch_mini_list">
 			<div class="left block">
 				<a href="/details/{{koch.slug}}">
-                    <img class="bordered-img preview-img" src="/image/?img_id={{koch.key}}&size=thumb" />
+                    {% if koch.thumb %}
+						<img class="bordered-img preview-img" src="/image/?img_id={{koch.key}}&size=thumb" />	
+					{% else %}
+						<img class="bordered-img preview-img" src="/static/images/default-thumb.png" />	
+					{% endif %}
 				</a>
 			</div>
 			<div class="rigth">
@@ -30,7 +34,11 @@
 	<div class="margin15 koch_mini_list">
 			<div class="left block">
 				<a href="/details/{{koch.slug}}">
-                    <img class="bordered-img preview-img" src="/image/?img_id={{koch.key}}&size=thumb" />
+					{% if koch.thumb %}
+						<img class="bordered-img preview-img" src="/image/?img_id={{koch.key}}&size=thumb" />	
+					{% else %}
+						<img class="bordered-img preview-img" src="/static/images/default-thumb.png" />	
+					{% endif %}
 				</a>
 			</div>
 			<div class="rigth">

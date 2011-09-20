@@ -27,3 +27,9 @@ indexes:
   - name: author
   - name: created
     direction: desc
+
+- kind: Koch
+  properties:
+  - name: tags
+  - name: created
+    direction: desc

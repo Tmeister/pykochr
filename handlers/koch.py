@@ -142,6 +142,7 @@ class ListByTag(webapp.RequestHandler):
 	"""docstring for ListByTag"""
 	def get(self, tag):
 		user = User.is_logged()
+		tag = helpers.sluglify(tag)
 		tag = tag.replace('-', ' ')
 		page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
 		title = "Explore %s" %(tag)

@@ -69,6 +69,20 @@
         	<img class="bordered-img default"  src="/static/images/default.png" />
     	{% endif %}
     	<div class="clear"></div>
+    	{% if koch.tags %}
+	    	<div class="dot-separator margin15">
+	    		<ul>
+		    		{% for tag in koch.tags %}
+			    		<li>
+				        	<a href="/tag/{{tag|slugify}}" class="tag">
+				        		<span class="tag_name">{{tag}}</span>
+								<span class="tag_count"></span>
+						    </a>
+						</li>
+	                {% endfor %}	
+	    		</ul>
+	    	</div>
+        {% endif %}
 	</div>
 	<div class="clear"></div>
 	<h3 class="">Directions</h3>
