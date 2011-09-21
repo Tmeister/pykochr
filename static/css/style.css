@@ -2621,3 +2621,8 @@ top,
 	top: 1px; 
 	z-index: 5; 
 }
+
+h5.home{
+	line-height: 20px;
+	text-align: center;
+}

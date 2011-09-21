@@ -59,6 +59,26 @@
             })();
         </script>
     </body>
+    <!--[if lte IE 7]>
+	<script src="/static/js/en_US.js"></script>
+	<script src="/static/js/warning.js"></script>
+	<script>
+		window.onload=function(){
+		  ie6Warning(function() {
+		    var languageMap = {};
+		      //specifies a JSON hash table for localization
+		    if(window.IE6WarningLocalizations) {
+		      languageMap = window.IE6WarningLocalizations;
+		    }
+		    
+		    return {
+		      imgPath: "./i/", //specifies the path to the icons of each browser
+		      localizations:  languageMap
+		    };
+		  });
+		};
+	</script>
+	<![endif]-->
 </html>
 
 

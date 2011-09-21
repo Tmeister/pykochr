@@ -31,20 +31,20 @@
 		<form action="" id="form_new_koch" method="post" enctype="multipart/form-data"> 
 			<div class="input field">
 				<label for="koch_name"><h5>Name *</h5></label>
-				<input type="text" placeholder="Name" id="koch_name" name="name" title="TEstttt" class="input-tooltip"/>
+				<input type="text" placeholder="Name" id="koch_name" name="name" />
 			</div>
 			<div class="input field">
 				<label for="koch_notes"><h5>Description *</h5></label>
-				<textarea name="notes" id="koch_notes" rows="1" placeholder="Notes"></textarea>
+				<textarea name="notes" id="koch_notes" rows="1" placeholder="Notes" class="input-tooltip" title="Please enter a description of at least 50 chars."></textarea>
 			</div>
 			<div class="input field">
 				<label for="koch_ingredient"><h5>Ingredients *</h5></label>
-				<input type="text" id="koch_ingredient" placeholder="Ingredients +" />
+				<input type="text" id="koch_ingredient" placeholder="Ingredients +" class="input-tooltip" title="Write a ingredient and hit enter." />
 				<ul id="koch_ingredient_list" class="list check-list"></ul>
 			</div>
 			<div class="input field">
 				<label for="koch_directions"><h5>Directions *</h5></label>
-				<input type="text" id="koch_directions" placeholder="Directions +" />
+				<input type="text" id="koch_directions" placeholder="Directions +" class="input-tooltip" title="Write a direction and hit enter." />
 				<ul id="koch_directions_list" class="list check-list"></ul>
 			</div>
 			<div class="input field">
@@ -74,7 +74,7 @@
 			</div>
 			<div class="input field">
 				<label for="koch_tags"><h5>Tags</h5></label>
-				<input type="text" id="koch_tags" placeholder="Tags +" />
+				<input type="text" id="koch_tags" placeholder="Tags +" class="input-tooltip" title="Write a tag and hit enter." />
 				<ul id="koch_tags_list" class="list check-list"></ul>
 			</div>
 			<!--
