@@ -158,7 +158,7 @@ class ListByDate(webapp.RequestHandler):
 		user = User.is_logged()
 		page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
 		title = "Explore Recipes"
-		subtitle = "Explore recipes from all cooks"
+		subtitle = ""
 		subhead = "You can find hidden treasures."
   		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().order('-created'), page )
 		kochs = helpers.get_kochs_data(tmp_kochs)

@@ -14,35 +14,36 @@
 			<li><a href="/explore">Explore</a></li>
 		</ul>
 		<div id="register-form" class="hide">
-			<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-				<span id="ui-dialog-title-2" class="ui-dialog-title">Signup to use Kochster</span>
-			</div>
-			<div class="ui-dialog-content ui-widget-content">
-				<div class="logo"></div>
-				<div class="formright">
-					<form target="" id="login" method="post" action="">
+			<form id="register-send" method="post" action="">
+				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+					<span id="ui-dialog-title-2" class="ui-dialog-title">Signup to use Kochster</span>
+				</div>
+				<div class="ui-dialog-content ui-widget-content">
+					<div class="logo"></div>
+					<div class="formright">
 						<input class="input-login login-tooltip" type="text" id="register-username" name="username" placeholder="Username" title="Please choice your username" />
 						<input class="input-login login-tooltip" type="email" id="register-email" name="email" placeholder="Email" title="Please enter your email" />
 						<input class="input-login login-tooltip" type="password" id="register-password" name="passwd" placeholder="Password" title="Please choice your password" />
-					</form>
-					<div class="errorwrap"><p class="error-register"></p></div>
+						<div class="errorwrap"><p class="error-register"></p></div>
+					</div>
+				</div>  
+				<div id="account-buttons" class="ui-dialog-buttonset">
+				<!-- LOGIN BUTTONS -->
+					<div class="loginbuttons">
+						<!--<fb:login-button perms="email" >Login with Facebook</fb:login-button>-->
+						<input type="submit" class="right blue-button" value="Register Now" />
+
+						<img src='/static/images/ajax-loader.gif' id='account-loader' alt='' />                     
+					</div>
 				</div>
-			</div>  
-			<div id="account-buttons" class="ui-dialog-buttonset">
-			<!-- LOGIN BUTTONS -->
-				<div class="loginbuttons">
-					<!--<fb:login-button perms="email" >Login with Facebook</fb:login-button>-->
-					<a class="right blue-button" title="" href="#" id="showregistersubmit">Register Now</a>
-					<img src='/static/images/ajax-loader.gif' id='account-loader' alt='' />                     
-				</div>
-			</div>
+			</form>
 		</div>
 
 		<div id="login-form" class="hide">
 			<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
 				<span id="ui-dialog-title-2" class="ui-dialog-title">Login to use Kochster</span>
 			</div>
-			<form id="login" method="post" action="">
+			<form id="login-send" method="post" action="">
 				<div class="ui-dialog-content ui-widget-content">
 					<div class="logo"></div>
 					<div class="formright">
@@ -58,7 +59,7 @@
 					<!-- LOGIN BUTTONS -->
 					<div class="loginbuttons">
 						<!--<p class="pwd"><a id="showforgotpw" href="#">Forgot password?</a></p>-->
-						<a class="right blue-button marginb5" title="" href="#" id="loginsubmit">Login</a>
+						<input type="submit" value="Login" class="right blue-button marginb5" />
 					</div>
 				</div>
 			</form>

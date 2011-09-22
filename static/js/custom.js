@@ -25,7 +25,7 @@ $(function($) {
 		}
 	});
 
-	$('#showregistersubmit').click(function(event) {
+	$('#register-send').submit(function(event) {
 		event.preventDefault();
 		targetBtn = $(this);
 		//targetBtn.attr('disabled', 'disabled');
@@ -54,7 +54,8 @@ $(function($) {
 	 	});
 	});
 
-	$('#loginsubmit').click(function(event) {
+	$('#login-send').submit(function(event) {
+		console.log("Fuck")
 		event.preventDefault();
 		targetBtn = $(this);
 		targetBtn.attr('disabled', 'disabled');
