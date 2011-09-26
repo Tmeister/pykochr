@@ -116,11 +116,11 @@ $(function($) {
 
 	$('#koch_save').click(function(e) {
 		e.preventDefault();
-		name = 		$.trim( $('#koch_name').val() );
+		name        = 	$.trim( $('#koch_name').val() );
 		ingredients = 	$('#koch_ingredient_list > li');
-		directions = 	$('#koch_directions_list > li');
-		tags = 		$('#koch_tags_list > li');
-		notes = 		$('#koch_notes').val();
+		directions  = 	$('#koch_directions_list > li');
+		tags        = 	$('#koch_tags_list > li');
+		notes       = 	$('#koch_notes').val();
 
 		if( ! name.length ){show_error('Really, Do you not forget the name?');return;}
 		if( notes.length < 50 ){show_error('Please write a description at least 50 chars about your recipe');return;}

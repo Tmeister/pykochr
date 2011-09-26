@@ -24,44 +24,66 @@
 {% endblock%}
 
 {% block left_content %}
-	<h1 class="welcome nobottommargin">Create new Recipe</h1>
-	<h4 class="notopmargin colored">Surprise us!</h4>
+	{% if not is_editing %}
+		<h1 class="welcome nobottommargin">Create new Recipe</h1>
+		<h4 class="notopmargin colored">Surprise us!</h4>
+	{% else %}
+		<h1 class="welcome nobottommargin">Edit Recipe</h1>
+		<h4 class="notopmargin colored">Too much salt?</h4>
+	{% endif %}
+	
 	<div class="separator margin15"></div>
 	<div class="kochmaker">
-		<form action="" id="form_new_koch" method="post" enctype="multipart/form-data"> 
+		<form action="/create" id="form_new_koch" method="post" enctype="multipart/form-data"> 
+			{% if is_editing %}
+				<input type="hidden" name="edit" value="{{koch.key}}">
+			{% endif %}
 			<div class="input field">
 				<label for="koch_name"><h5>Name *</h5></label>
-				<input type="text" placeholder="Name" id="koch_name" name="name" />
+				<input type="text" placeholder="Name" id="koch_name" name="name" value="{{koch.title}}" />
 			</div>
 			<div class="input field">
 				<label for="koch_notes"><h5>Description *</h5></label>
-				<textarea name="notes" id="koch_notes" rows="1" placeholder="Notes" class="input-tooltip" title="Please enter a description of at least 50 chars."></textarea>
+				<textarea name="notes" id="koch_notes" rows="1" placeholder="Notes" class="input-tooltip" title="Please enter a description of at least 50 chars.">{{koch.notes}}</textarea>
 			</div>
 			<div class="input field">
 				<label for="koch_ingredient"><h5>Ingredients *</h5></label>
 				<input type="text" id="koch_ingredient" placeholder="Ingredients +" class="input-tooltip" title="Write a ingredient and hit enter." maxlength="450" />
-				<ul id="koch_ingredient_list" class="list check-list"></ul>
+				<ul id="koch_ingredient_list" class="list check-list">
+					{% for ingredient in koch.ingredients %}
+						<li class="ui-bubblebox-item">
+							<span>{{ingredient}}</span>
+							<div class="ui-bubblebox-removeItem">x</div>
+						</li>
+					{% endfor %}
+				</ul>
 			</div>
 			<div class="input field">
 				<label for="koch_directions"><h5>Directions *</h5></label>
 				<input type="text" id="koch_directions" placeholder="Directions +" class="input-tooltip" title="Write a direction and hit enter."  maxlength="450" />
-				<ul id="koch_directions_list" class="list check-list"></ul>
+				<ul id="koch_directions_list" class="list check-list">
+					{% for direction in koch.directions %}
+						<li class="ui-bubblebox-item">
+							<span>{{direction}}</span>
+							<div class="ui-bubblebox-removeItem">x</div>
+						</li>
+					{% endfor %}
+				</ul>
 			</div>
 			<div class="input field">
 				<label for="prep_time"><h5>Prep Time</h5></label>
-				<input id="prep_time" name="prep_time" type="text" placeholder="90" maxlength="3" />
+				<input id="prep_time" name="prep_time" type="text" placeholder="90" maxlength="3" value="{{koch.prep_time}}" />
 			</div>
 			<div class="input field">
 				<label for="cook_time"><h5>Cook Time</h5></label>
-				<input id="cook_time" name="cook_time" type="text" placeholder="30" maxlength="3" />
+				<input id="cook_time" name="cook_time" type="text" placeholder="30" maxlength="3" value="{{koch.cook_time}}" />
 			</div>
 			<div class="input field mainselection">
 				<label for="level"><h5>Level</h5></label>
 				<select name="level" class="select tab04b">
-					<option value="easy">Easy</option>
-					<option value="medium">Medium</option>
-					<option value="difficult">Difficult</option>
-					option
+					<option value="easy" {% if koch.level == 'easy'%} selected="selected" {%endif%}>Easy</option>
+					<option value="medium" {% if koch.level == 'medium'%} selected="selected" {%endif%}>Medium</option>
+					<option value="difficult" {% if koch.level == 'difficult'%} selected="selected" {%endif%}>Difficult</option>
 				</select>	
 			</div>
 			<div class="input field">
@@ -72,10 +94,32 @@
 					<input type="file" name="photo" size="30" id="image_file"/>
 				</div>
 			</div>
+
+			{% if is_editing %}
+			<div class="input field">
+				<label><h5>&nbsp;</h5></label>
+				<div style="width:300px;">
+					{% if koch.photo %}
+						<img class="bordered-img preview-img img-preview" src="/image/?img_id={{koch.key}}&size=thumb" />
+					{% else %}
+						<img class="bordered-img" src="/static/images/default-thumb.png" />	
+					{% endif %}	
+				</div>
+				<div class="clear"></div>	
+			</div>
+			{% endif %}
+
 			<div class="input field">
 				<label for="koch_tags"><h5>Tags</h5></label>
 				<input type="text" id="koch_tags" placeholder="Tags +" class="input-tooltip" title="Write a tag and hit enter." maxlength="20" />
-				<ul id="koch_tags_list" class="list check-list"></ul>
+				<ul id="koch_tags_list" class="list check-list">
+					{% for tag in koch.tags %}
+						<li class="ui-bubblebox-item">
+							<span>{{tag}}</span>
+							<div class="ui-bubblebox-removeItem">x</div>
+						</li>
+					{% endfor %}
+				</ul>
 			</div>
 			<!--
 			<div class="input field">

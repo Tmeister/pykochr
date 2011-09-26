@@ -32,28 +32,27 @@ class Create(webapp.RequestHandler):
 		if not session.has_key('user'):
 			self.redirect('/')
 
-		tags =  [a.lower() for a in self.request.get_all('tags[]')]
-
-		user = session['user']
-		ingredients	= self.request.get_all('ingredients[]')
-		directions	= self.request.get_all('directions[]')
-		tags		= tags
-		name		= self.request.get('name')
-		notes		= self.request.get('notes')
-		prep 		= self.request.get('prep_time')
-		cook 		= self.request.get('cook_time')
-		level 		= self.request.get('level')
-		private 	= True if self.request.get('private') == "1" else False
-		slug 		= helpers.sluglify( name )
-		thumb 		= None
-		tinythumb 	= None
+		key 		= self.request.get('edit')
+		tags        = [a.lower() for a in self.request.get_all('tags[]')]
+		user        = session['user']
+		ingredients = self.request.get_all('ingredients[]')
+		directions  = self.request.get_all('directions[]')
+		tags        = tags
+		name        = self.request.get('name')
+		notes       = self.request.get('notes')
+		prep        = self.request.get('prep_time')
+		cook        = self.request.get('cook_time')
+		level       = self.request.get('level')
+		private     = True if self.request.get('private') == "1" else False
+		slug        = helpers.sluglify( name )
+		thumb       = None
+		tinythumb   = None
 
 		slug_exists = Koch.all().filter('slug =', slug).fetch(1)
 
 		if len ( slug_exists ) == 1:
 			#alreadyexists
 			slug = "%s-%s" % (slug, helpers.random_string())
-
 
 		if self.request.get('photo'):
 			try:
@@ -78,19 +77,24 @@ class Create(webapp.RequestHandler):
 			except images.LargeImageError:
 				pass
 
-		koch = Koch(
-						author		= user, 
-						title		= name, 
-						notes		= notes,
-						prep_time	= prep,
-						cook_time	= cook,
-						level		= level,
-						private 	= private,
-						slug 		= slug,
-						tags 		= tags,
-						ingredients = ingredients,
-						directions  = directions
-					)
+		if key:
+			koch = Koch.get( key )
+		else:
+			koch = Koch()
+			koch.slug = slug
+		
+
+		koch.author      = user 
+		koch.title       = name 
+		koch.notes       = notes
+		koch.prep_time   = prep
+		koch.cook_time   = cook
+		koch.level       = level
+		koch.private     = private
+		koch.tags        = tags
+		koch.ingredients = ingredients
+		koch.directions  = directions
+					
 		
 		if thumb is not None:
 			koch.photo = thumb
@@ -99,8 +103,10 @@ class Create(webapp.RequestHandler):
 		for tag in tags:
 			Tag.up(tag)
 
-		user.recipes += 1
-		user.put() 
+		if key:
+			user.recipes += 1
+			user.put() 
+		
 		koch.put()
 		self.redirect('/')
 
@@ -118,7 +124,6 @@ class ListByAuthor(webapp.RequestHandler):
 			
 		if user:
 			alreadyfollow = Friendship.alreadyfollow( user, author  )
-
 		
 		title = "%s's CookBook" %(author.nickname)
 		subhead = "Discover what %s has shared"  % (author.nickname)
@@ -194,6 +199,7 @@ class Detail(webapp.RequestHandler):
 			if user:
 				alreadylike = Like.alreadylike( koch, user )
 				alreadyfollow = Friendship.alreadyfollow( user, author  )
+				is_owner = True if user.key() == author.key() else False
 
 			if not author.usegravatar and author.avatar:
 				avatar = "/avatar/?user_id=%s" %(author.key())
@@ -206,6 +212,22 @@ class Detail(webapp.RequestHandler):
 		else:
 			self.error(404)
 		
+class Edit(webapp.RequestHandler):
+	"""docstring for Edit"""
+	def get(self, key):
+		user = User.is_logged()
+		if not user:
+			self.error(404)
+			return
+		koch = Koch.get( key )
+		if not koch:
+			self.error(404)
+			return	
+	
+		is_editing = True
+		self.response.out.write( template.render('templates/new_koch.html', locals()))
+		
+
 
 
 class UpVote(webapp.RequestHandler):

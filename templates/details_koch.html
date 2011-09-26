@@ -34,6 +34,17 @@
 				<div class="level left"><h4 class="notopmargin colored">{{koch.level|title}}</h4></div>
 			</div>
 		{% endif %}
+		{% if is_owner %}
+			<a href="/edit/{{koch.key}}" title="">
+				<div class="subheader left">
+					<div class="small-round-icon-gray left toptooltip" title="Edit your recipe">
+		                <div class="icon-gray-small icon64-gray">
+						</div>
+					</div>
+					<div class="level left"><h4 class="notopmargin colored">Edit</h4></div>
+				</div>
+			</a>
+		{% endif %}
 	</div>
 	<div class="one-fourth last rigth notopmargin margin15">
 		<div style="margin-top:8px;" class="ajax-like-trigger right">

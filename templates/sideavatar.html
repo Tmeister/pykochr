@@ -37,6 +37,13 @@
 	</div>
 	<div class="clear"></div>
 
+	{% if is_owner %}
+		<div class="margin15">
+			<a href="/edit/{{koch.key}}" title="" class="follow-button block">Edit Recipe</a>
+		</div><!-- / -->
+		<div class="clear"></div>
+	{% endif %}
+
 	{% if author.about %}
 		<div class="dot-separator margin15"></div>
 		<p>{{author.about}}</p>

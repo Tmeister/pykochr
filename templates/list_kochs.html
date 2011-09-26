@@ -14,13 +14,11 @@
                     		<a href="/details/{{koch.koch.slug}}">
                     			<img class="bordered-img preview-img img-preview" src="/image/?img_id={{koch.koch.key}}&size=thumb" />
                     		</a>
-                    		
                     	{% else %}
                     		<a href="/details/{{koch.koch.slug}}">
                     			<img class="bordered-img" src="/static/images/default-thumb.png" />	
                     		</a>
                     	{% endif %}
-                    	
                     </div>
                     <div class="left author left5">
                     	<p class="notopmargin nobottommargin marginb5 ajax-like-trigger">
@@ -41,12 +39,6 @@
                                 {{koch.koch.level|title}}
                             </p>
                         {% endif %}
-                        {% if koch.koch.cook_time %}
-                            <p class="notopmargin nobottommargin marginb5">
-                                <span class="strong">Cook time: </span>
-                                {{koch.koch.cook_time}} min.
-                            </p>
-                        {% endif %}
                         {% if koch.koch.tags %}
                             <p class="small-italic notopmargin nobottommargin marginb5">
                                 <span class="strong">Tags: </span>
@@ -55,7 +47,6 @@
                                 {% endfor %}
                             </p>    
                         {% endif %}
-                        
                     </div>
                     <div class="clear"></div>
                 </div>
