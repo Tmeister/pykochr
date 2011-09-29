@@ -10,7 +10,7 @@ from django.core.validators import email_re
 from gaesessions import get_current_session
 
 from models import User, Friendship, Koch
-from libs import Mailing
+from libs import Mailing, facebook
 import helpers
 
 
@@ -94,7 +94,7 @@ class SaveAvatar(webapp.RequestHandler):
     """docstring for Avatar"""
     def post(self):
         session = get_current_session()
-        user = User.is_logged();
+        user = User.is_logged(self)
         if not user:
             self.redirect('/account')
 
@@ -281,7 +281,7 @@ class Unfollow(webapp.RequestHandler):
 class Followers(webapp.RequestHandler):
     """docstring for Followers"""
     def get(self, star):
-        user = User.is_logged()
+        user = User.is_logged(self)
         query = User.all().filter('nickname =', star.lower()).fetch(1)
         if len( query ) == 1:
             star = query[0]
@@ -296,7 +296,7 @@ class Followers(webapp.RequestHandler):
 class Following(webapp.RequestHandler):
     """docstring for Followers"""
     def get(self, star):
-        user = User.is_logged()
+        user = User.is_logged(self)
         query = User.all().filter('nickname =', star.lower()).fetch(1)
         if len( query ) == 1:
             fan = query[0]
@@ -307,3 +307,56 @@ class Following(webapp.RequestHandler):
             followers = helpers.get_following_data( foll_tmp )
             last_from_all = Koch.get_random()
             self.response.out.write(template.render('templates/followers.html', locals()))
+
+class Facebook(webapp.RequestHandler):
+    """docstring for Facebook"""
+    FB_APP_ID = "255979894444070"
+    FB_SECRET = "9a2328e5fdee55ac6eb7e7720605c53f"
+    def get(self):
+        fbcookie = facebook.get_user_from_cookie(self.request.cookies, self.FB_APP_ID, self.FB_SECRET)
+        if not fbcookie:
+            self.redirect('/')
+            return
+        
+        user = User.is_logged(self)
+        graph = facebook.GraphAPI(fbcookie["access_token"])
+        profile = graph.get_object("me")
+        if not user:
+            password = helpers.random_string(8)
+            user = User(nickname = profile['username'], password = User.slow_hash(password));
+            user.fb_access_token = fbcookie["access_token"]
+            try: user.about = profile['bio'] 
+            except: pass
+
+            try: user.location = profile['location']['name'] 
+            except: pass    
+
+            try: user.firstname = profile['first_name'] 
+            except: pass    
+
+            try: user.lastname = profile['last_name'] 
+            except: pass    
+
+            try: user.fb_profile_url = profile['link']
+            except: pass    
+
+            try: user.fb_ui = profile['id']
+            except: pass    
+
+            user.put()
+
+            session = get_current_session()
+            session.regenerate_id()
+            session['user'] = user
+            self.redirect('/')
+        else:
+            if str(user.fb_ui) == str(profile['id']):
+                self.redirect('/')
+            else:
+                #TODO
+                #USUARIO CAMBIO DE ID?? o ESTA VINCULANDO A CUENTA EXISTENTE
+                pass
+
+
+        
+                

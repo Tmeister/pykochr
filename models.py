@@ -1,30 +1,32 @@
 from google.appengine.dist import use_library
-use_library('django', '1.2')
-
 from google.appengine.ext import webapp, db
 from google.appengine.ext.db import polymodel
 import hashlib
 import keys
 from gaesessions import get_current_session
+from libs import facebook
 
 
 class User(db.Model):
-	nickname            = db.StringProperty(required=True)
-	password            = db.StringProperty(required=True)
-	created             = db.DateTimeProperty(auto_now_add=True)
-	about               = db.TextProperty(required=False)
-	location            = db.StringProperty(required=False, default="")
-	twitter             = db.StringProperty(required=False, default="")
-	email               = db.EmailProperty(required=False)
-	admin               = db.BooleanProperty(default=False)
-	active				= db.BooleanProperty(default=False)
-	avatar				= db.BlobProperty()
-	usegravatar			= db.BooleanProperty(default=True)
-	firstname			= db.StringProperty(required=False, default="")
-	lastname			= db.StringProperty(required=False, default="")
-	followers			= db.IntegerProperty(default=0)
-	following			= db.IntegerProperty(default=0)
-	recipes				= db.IntegerProperty(default=0)
+	nickname        = db.StringProperty(required=True)
+	password        = db.StringProperty(required=True)
+	created         = db.DateTimeProperty(auto_now_add=True)
+	about           = db.TextProperty(required=False)
+	location        = db.StringProperty(required=False, default="")
+	twitter         = db.StringProperty(required=False, default="")
+	email           = db.EmailProperty(required=False)
+	admin           = db.BooleanProperty(default=False)
+	active          = db.BooleanProperty(default=False)
+	avatar          = db.BlobProperty()
+	usegravatar     = db.BooleanProperty(default=True)
+	firstname       = db.StringProperty(required=False, default="")
+	lastname        = db.StringProperty(required=False, default="")
+	followers       = db.IntegerProperty(default=0)
+	following       = db.IntegerProperty(default=0)
+	recipes         = db.IntegerProperty(default=0)
+	fb_profile_url  = db.StringProperty(required=False, default="")
+	fb_access_token = db.StringProperty(required=False, default="")
+	fb_ui           = db.StringProperty(required=False, default="")
 
 	@staticmethod
 	def is_nickname_exists(user):
@@ -44,12 +46,39 @@ class User(db.Model):
 		return h.hexdigest()
 	
 	@staticmethod
-	def is_logged():
+	def is_logged(rhandler=None):
+		FB_APP_ID = "255979894444070"
+   		FB_SECRET = "9a2328e5fdee55ac6eb7e7720605c53f"
 		session = get_current_session()
 		if session.has_key('user'):
 			return session['user']
 		else:
+			if rhandler is not None:
+				fbcookie = facebook.get_user_from_cookie(rhandler.request.cookies, FB_APP_ID, FB_SECRET)
+				if fbcookie:
+					graph = facebook.GraphAPI(fbcookie["access_token"])
+					profile = graph.get_object("me")
+					query = User.all().filter('fb_ui =', profile['id']).fetch(1);
+					if len( query ) == 1:
+					    session = get_current_session()
+					    user = query[0]
+					    if session.is_active():
+					        session.terminate()
+					    session.regenerate_id()
+					    session['user'] = user
+
+					    #update access_token.....
+					    if user.fb_access_token != fbcookie["access_token"]:
+					    	user.fb_access_token = fbcookie["access_token"]
+					    	user.put();
+
+		if session.has_key('user'):
+			return session['user']
+		else:
 			return False
+
+		
+		
 
 
 class Koch(db.Model):

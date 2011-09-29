@@ -25,6 +25,13 @@ $(function($) {
 		}
 	});
 
+	$('#nav #logout').click(function(event) {
+		event.preventDefault();
+		FB.logout();
+	});
+			
+			
+
 	$('#register-send').submit(function(event) {
 		event.preventDefault();
 		targetBtn = $(this);

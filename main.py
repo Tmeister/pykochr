@@ -15,6 +15,7 @@ application = webapp.WSGIApplication(
                     ('/'                        , site.Home),
                     ('/ajax/register'           , account.Register),
                     ('/ajax/login'              , account.Login),
+                    ('/login/facebook'          , account.Facebook),
                     ('/avatar/'                 , account.Avatar),
                     ('/account/change-avatar'   , account.SaveAvatar),
                     ('/logout'                  , account.Logout),

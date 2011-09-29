@@ -20,16 +20,15 @@ from models import (User, Koch, Like, Tag, Friendship)
 class Create(webapp.RequestHandler):
 	"""docstring for Create"""
 	def get(self):
-		session = get_current_session()
-		if session.has_key('user'):
-			user = session['user']
+		user = User.is_logged(self)
+		if user:
 			self.response.out.write(template.render('templates/new_koch.html', locals()))
 		else:
 			self.redirect('/')
 		
 	def post(self):
-		session = get_current_session()
-		if not session.has_key('user'):
+		user = User.is_logged(self)
+		if not user:
 			self.redirect('/')
 
 		key 		= self.request.get('edit')
@@ -113,7 +112,7 @@ class Create(webapp.RequestHandler):
 class ListByAuthor(webapp.RequestHandler):
 	"""docstring for MyKochs"""
 	def get(self, cook):
-		user = User.is_logged()
+		user = User.is_logged(self)
 		author = User.all().filter('nickname =', cook.lower()).fetch(1)
 
 		if not len( author ):
@@ -130,7 +129,9 @@ class ListByAuthor(webapp.RequestHandler):
 		author_recipes_count = Koch.all().filter('author =', author).count();
 		
 
-		if not author.usegravatar and author.avatar:
+		if author.fb_profile_url:
+			avatar = "https://graph.facebook.com/%s/picture" % (author.nickname)
+		elif not author.usegravatar and author.avatar:
 			avatar = "/avatar/?user_id=%s" %(author.key())
 		else:
 			avatar = helpers.get_gravatar( author.email, 90 )
@@ -146,7 +147,7 @@ class ListByAuthor(webapp.RequestHandler):
 class ListByTag(webapp.RequestHandler):
 	"""docstring for ListByTag"""
 	def get(self, tag):
-		user = User.is_logged()
+		user = User.is_logged(self)
 		tag = helpers.sluglify(tag)
 		tag = tag.replace('-', ' ')
 		page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
@@ -160,7 +161,7 @@ class ListByTag(webapp.RequestHandler):
 class ListByDate(webapp.RequestHandler):
 	"""docstring for ListByDate"""
 	def get(self):
-		user = User.is_logged()
+		user = User.is_logged(self)
 		page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
 		title = "Explore Recipes"
 		subtitle = ""
@@ -174,7 +175,7 @@ class ListByDate(webapp.RequestHandler):
 class Detail(webapp.RequestHandler):
 	"""docstring for Detail"""
 	def get(self, slug):
-		user = User.is_logged()
+		user = User.is_logged(self)
 		query = Koch.all().filter( 'slug =', slug).fetch(1)
 		if len( query ):
 			koch = query[0];
@@ -184,12 +185,17 @@ class Detail(webapp.RequestHandler):
 			
 			
 			author = koch.author
+			
 			avatar = helpers.get_gravatar( author.email, 90 )
+			
 			author_recipes_count = Koch.all().filter('author =', author).count();
 			for like in Like.all().filter( 'koch =', koch ):
-				lavatar = helpers.get_gravatar( like.user.email, 90 )
-				if not like.user.usegravatar and like.user.avatar:
+				if like.user.fb_profile_url:
+					lavatar = "https://graph.facebook.com/%s/picture" % (like.user.nickname)
+				elif not like.user.usegravatar and like.user.avatar:
 					lavatar = "/avatar/?user_id=%s" %(like.user.key())
+				else:
+					lavatar = helpers.get_gravatar( like.user.email, 90 )
 
 				likesusers.append({
 					'nickname' : like.user.nickname,
@@ -201,9 +207,13 @@ class Detail(webapp.RequestHandler):
 				alreadyfollow = Friendship.alreadyfollow( user, author  )
 				is_owner = True if user.key() == author.key() else False
 
-			if not author.usegravatar and author.avatar:
+			if author.fb_profile_url:
+				avatar = "https://graph.facebook.com/%s/picture" % (author.nickname)
+			elif not author.usegravatar and author.avatar:
 				avatar = "/avatar/?user_id=%s" %(author.key())
-				
+			else:
+				avatar = helpers.get_gravatar( author.email, 90 )
+
 			last_kochs = Koch.all().filter('author =', author).order('-created').fetch(5);
 			last_from_all = Koch.get_random()
 
@@ -215,7 +225,7 @@ class Detail(webapp.RequestHandler):
 class Edit(webapp.RequestHandler):
 	"""docstring for Edit"""
 	def get(self, key):
-		user = User.is_logged()
+		user = User.is_logged(self)
 		if not user:
 			self.error(404)
 			return
@@ -233,13 +243,11 @@ class Edit(webapp.RequestHandler):
 class UpVote(webapp.RequestHandler):
 	"""docstring for vote"""
 	def post(self):
-		session = get_current_session()
-		if session.has_key('user'):
-			user = session['user']
-		else:
+		user = User.is_logged(self)
+		if not user:
 			self.response.out.write( simplejson.dumps({'status':'error', 'message':'In order to vote you must sign in.'}) )
 			return
-
+		
 		key = self.request.get('key')
 		koch = db.get(key)
 		vote = Like.all().filter('koch =', koch).filter('user =', user).fetch(1)
@@ -261,10 +269,8 @@ class UpVote(webapp.RequestHandler):
 class DownVote(webapp.RequestHandler):
 	"""docstring for DownVote"""
 	def post(self):
-		session = get_current_session()
-		if session.has_key('user'):
-			user = session['user']
-		else:
+		user = User.is_logged(self)
+		if not user:
 			self.response.out.write( simplejson.dumps({'status':'error', 'message':'In order to vote you must sign in.'}) )
 			return
 		

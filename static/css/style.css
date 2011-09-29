@@ -2626,3 +2626,42 @@ h5.home{
 	line-height: 20px;
 	text-align: center;
 }
+
+#register-form .loginbuttons{
+	float: right;
+	width:220px;
+}
+
+#login-form .loginbuttons{
+	float: right;
+	width:180px;
+}
+
+.fb_button {
+    background: url("//duv2rxyjq20ja.cloudfront.net/wlcom1/images/facebooklogin.png") no-repeat !important;
+    display: block;
+    /*float: right;*/
+    height: 31px;
+    margin-left: 12px;
+    width: 84px;
+}
+.fb_button .fb_button_text, .fb_button_rtl .fb_button_text {
+    background: url("https://s-static.ak.facebook.com/rsrc.php/v1/yL/r/FGFbc80dUKj.png") #5F78AB;
+    border-bottom: 1px solid #1A356E;
+    border-top: 1px solid #879AC0;
+    color: #FFFFFF;
+    display: block;
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+    font-weight: bold;
+    margin: 1px 1px 0 21px;
+    padding: 2px 6px 3px;
+    text-shadow: none;
+}
+.fb_button:hover{
+	background-position: 0 -31px !important;
+}
+.fb_button_text {
+    background: none!important;
+    border: medium none !important;
+    text-indent: -23981px;
+}
