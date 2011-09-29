@@ -47,14 +47,12 @@ class User(db.Model):
 	
 	@staticmethod
 	def is_logged(rhandler=None):
-		FB_APP_ID = "255979894444070"
-   		FB_SECRET = "9a2328e5fdee55ac6eb7e7720605c53f"
 		session = get_current_session()
 		if session.has_key('user'):
 			return session['user']
 		else:
 			if rhandler is not None:
-				fbcookie = facebook.get_user_from_cookie(rhandler.request.cookies, FB_APP_ID, FB_SECRET)
+				fbcookie = facebook.get_user_from_cookie(rhandler.request.cookies)
 				if fbcookie:
 					graph = facebook.GraphAPI(fbcookie["access_token"])
 					profile = graph.get_object("me")

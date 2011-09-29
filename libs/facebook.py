@@ -188,7 +188,7 @@ class GraphAPIError(Exception):
         self.type = type
 
 
-def get_user_from_cookie(cookies, app_id, app_secret):
+def get_user_from_cookie(cookies, app_id="", app_secret=""):
     """Parses the cookie set by the official Facebook JavaScript SDK.
 
     cookies should be a dictionary-like object mapping cookie names to
@@ -203,6 +203,17 @@ def get_user_from_cookie(cookies, app_id, app_secret):
     http://github.com/facebook/connect-js/. Read more about Facebook
     authentication at http://developers.facebook.com/docs/authentication/.
     """
+
+    import os
+    DEV = os.environ['SERVER_SOFTWARE'].startswith('Development')
+    if DEV:
+        app_id = "255979894444070"
+        app_secret = "9a2328e5fdee55ac6eb7e7720605c53f"
+    else:
+        app_id = "176117119113148"
+        app_secret = "2a1c4f248febec4655d9c765ee323a4c"
+        
+
     cookie = cookies.get("fbs_" + app_id, "")
     if not cookie: return None
     args = dict((k, v[-1]) for k, v in cgi.parse_qs(cookie.strip('"')).items())

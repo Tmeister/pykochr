@@ -310,10 +310,9 @@ class Following(webapp.RequestHandler):
 
 class Facebook(webapp.RequestHandler):
     """docstring for Facebook"""
-    FB_APP_ID = "255979894444070"
-    FB_SECRET = "9a2328e5fdee55ac6eb7e7720605c53f"
+    
     def get(self):
-        fbcookie = facebook.get_user_from_cookie(self.request.cookies, self.FB_APP_ID, self.FB_SECRET)
+        fbcookie = facebook.get_user_from_cookie(self.request.cookies)
         if not fbcookie:
             self.redirect('/')
             return
