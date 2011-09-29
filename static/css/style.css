@@ -2321,7 +2321,7 @@ textarea {
 	box-shadow: 0px 1px 3px rgba(000,000,000,0.2), inset 0px 0px 1px rgba(255,255,255,1);
 	
 	border: 1px solid #8EAD24;
-	text-shadow: 	0px 2px 0px rgba(0,0,0,0.3), 0px 2px 0px rgba(255,255,255,0.3);
+	text-shadow: 	0px 1px 0px rgba(0,0,0,0.3), 0px 1px 0px rgba(255,255,255,0.3);
 }
 
 .small-size {
@@ -2629,24 +2629,23 @@ h5.home{
 
 #register-form .loginbuttons{
 	float: right;
-	width:220px;
+	width:250px;
 }
 
 #login-form .loginbuttons{
 	float: right;
-	width:180px;
+	width:200px;
 }
 
 .fb_button {
-    background: url("//duv2rxyjq20ja.cloudfront.net/wlcom1/images/facebooklogin.png") no-repeat !important;
+    background: url(../images/fb-login.png) no-repeat !important;
     display: block;
     /*float: right;*/
-    height: 31px;
-    margin-left: 12px;
-    width: 84px;
+    height: 40px;
+    width: 120px;
 }
+/*
 .fb_button .fb_button_text, .fb_button_rtl .fb_button_text {
-    background: url("https://s-static.ak.facebook.com/rsrc.php/v1/yL/r/FGFbc80dUKj.png") #5F78AB;
     border-bottom: 1px solid #1A356E;
     border-top: 1px solid #879AC0;
     color: #FFFFFF;
@@ -2656,9 +2655,9 @@ h5.home{
     margin: 1px 1px 0 21px;
     padding: 2px 6px 3px;
     text-shadow: none;
-}
+}*/
 .fb_button:hover{
-	background-position: 0 -31px !important;
+	background-position: 0 -43px !important;
 }
 .fb_button_text {
     background: none!important;
