@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Make your kitchen social{% endblock %}
+{% block css %}
+	<link rel="stylesheet" href="/static/css/nivo-slider.css" />
+	<link rel="stylesheet" href="/static/js/nivo-slider/themes/orman/orman.css" />
+{% endblock css %}
+{% block js %}
+	<script src="/static/js/nivo-slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		jQuery(function($) {
+			$('.wrapper-slide').nivoSlider({
+				controlNav:false,
+				pauseTime:10000,
+				effect:'sliceDownRight',
+				animSpeed:500,
+				captionOpacity:.60
+			});
+		});
+	</script>
+{% endblock js %}
+{% block content %}
+<div  class="headline">
+	<div class="two-third notopmargin margin15 cleft">
+		<div class="action">
+			<h1 class="welcome-home">Manage Share &amp; Discover</h1>
+			<h4 class="notopmargin margin15 lower">&raquo; Kochter is a site where you can store and collect all your recipes.</h4>
+			<h4 class="notopmargin margin15 lower">&raquo; You won't need your recipe box anymore.</h4>
+			<h4 class="notopmargin margin15 lower">&raquo; Share and vote recipes, follow users and keep up with new recipes.</h4>
+			<h4 class="notopmargin margin15 lower">&raquo; Browse recipes from all users, you can find hidden treasures.</h4>
+			<div class="margin30 center">
+				<a href="#" title="" class="welcome-small follow-button big-size" id="create-account">Create your Account now</a> 
+				<!-- <a href="/explore" title="" class="welcome-small action-button big-size">Explore recipes</a> -->
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="one-third last notopmargin margin15 chef cright">
+		<div class="slide margin15">
+			<div class="slider-wrapper theme-orman">
+				<!--<div class="ribbon"></div>-->
+				<div class="wrapper-slide">
+					<img src="/static/images/slides/slide1.png" title="#wrapper-slide-caption-0">
+					<img src="http://www.washingtonian.com/block_dbimages/22678/Picture%201.png" alt="">
+				</div><!-- / -->
+				<div id="wrapper-slide-caption-0" class="nivo-html-caption">
+					<p>Esat ees el caption</p>
+				</div><!-- /wrapper-slide-caption-0 -->
+			</div>
+		</div><!-- / -->       
+	</div>
+	<div class="clear"></div>
+</div>
+{% endblock%}
