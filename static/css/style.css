@@ -6,10 +6,10 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-image:url('../images/pattern/body-bg-1.png');
 }
 body {
 	background-color:#f5f5f5;
-	background-image:url('../images/pattern/body-bg-1.png');
 	text-shadow: none;
 	font-family: Verdana;
 	color:#5a5a5a;
@@ -2664,3 +2664,22 @@ h5.home{
     border: medium none !important;
     text-indent: -23981px;
 }
+/******************************************************************************
+## LANDING PAGE
+******************************************************************************/
+
+body.home{background:url(../images/food.jpg) top center no-repeat;}
+.home .wrapper{background:none}
+.home .headline{
+	background-color:rgba(0,0,0,0.5);
+	border-radius:10px 10px 10px 10px;
+	padding-bottom:40px;
+}
+.home h1, .home h2, .home h3, .home h4, .home h5 {color: #fff;}
+.home .action{padding:0 0 0 20px;}
+.home .cleft{width:510px !important;}
+.home .cright{width:390px !important;}
+.home .wrapper-slide{margin-left:19px;height:265px;}
+
+
+.lower{text-transform: none;}

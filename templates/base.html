@@ -18,7 +18,7 @@
         <script type="text/javascript" src="/static/js/custom.js"></script>
         
     </head>
-    <body>
+    <body {% if is_home%} class="home" {% endif %}>
         <div class="full-top">
             <div class="wrapper-top">{% include 'top_menu.html'%}</div>    
         </div><!-- / full-top-->
@@ -62,7 +62,7 @@
         <script>
           window.fbAsyncInit = function() {
             FB.init({
-                appId  : '255979894444070',
+                appId  : '176117119113148',
                 status : true, // check login status
                 cookie : true, // enable cookies to allow the server to access the session
                 xfbml  : true,  // parse XFBML              

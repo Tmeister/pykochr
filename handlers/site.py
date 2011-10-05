@@ -8,6 +8,7 @@ from models import User
 class Home(webapp.RequestHandler):
 	def get(self):
 		user = User.is_logged(self)
+		is_home = True
 		if user:
 			self.redirect('/explore')
-		self.response.out.write(template.render('templates/home.html', locals()))
+		self.response.out.write(template.render('templates/landing.html', locals()))

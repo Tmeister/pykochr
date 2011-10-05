@@ -47,17 +47,20 @@
 /* Caption styles */
 .nivo-caption {
 	position:absolute;
-	left:0px;
-	bottom:0px;
-	background:#ffffff;
-	color:#999999;
-	opacity:0.8; /* Overridden by captionOpacity setting */
-	width:100%;
+	left:-1px;
+	bottom:-2px;
+	background:#000;
+	color:#fff;
+	opacity:0.5; /* Overridden by captionOpacity setting */
+	width:351px;
 	z-index:8;
 }
 .nivo-caption p {
 	padding:5px;
 	margin:0;
+	font-size:12px;
+	font-family: Oswald;
+	text-transform: uppercase;
 }
 .nivo-caption a {
 	display:inline !important;
