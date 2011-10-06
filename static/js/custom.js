@@ -13,13 +13,14 @@ $(function($) {
 	})
 			
 
-	$('#top-login, #top-register, #create-account').click(function(event) {
+	$('#top-login, #top-register, #create-account, #step1').click(function(event) {
 		event.preventDefault();
 		switch($(this).attr('id')){
 			case 'top-login':
 				$('#login-form').modal();
 			case 'top-register':
 			case 'create-account':
+			case 'step1':
 				$('#register-form').modal();
 
 		}

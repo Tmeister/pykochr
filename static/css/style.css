@@ -2644,18 +2644,6 @@ h5.home{
     height: 40px;
     width: 120px;
 }
-/*
-.fb_button .fb_button_text, .fb_button_rtl .fb_button_text {
-    border-bottom: 1px solid #1A356E;
-    border-top: 1px solid #879AC0;
-    color: #FFFFFF;
-    display: block;
-    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
-    font-weight: bold;
-    margin: 1px 1px 0 21px;
-    padding: 2px 6px 3px;
-    text-shadow: none;
-}*/
 .fb_button:hover{
 	background-position: 0 -43px !important;
 }
@@ -2670,16 +2658,79 @@ h5.home{
 
 body.home{background:url(../images/food.jpg) top center no-repeat;}
 .home .wrapper{background:none}
-.home .headline{
-	background-color:rgba(0,0,0,0.5);
-	border-radius:10px 10px 10px 10px;
-	padding-bottom:40px;
-}
+.home .headline{background-color:rgba(0,0,0,0.5);border-radius:10px 10px 10px 10px;padding-bottom:10px;}
 .home h1, .home h2, .home h3, .home h4, .home h5 {color: #fff;}
-.home .action{padding:0 0 0 20px;}
+.home .action{padding:0 0 0 20px; text-shadow:1px 1px 1px #000;}
 .home .cleft{width:510px !important;}
 .home .cright{width:390px !important;}
 .home .wrapper-slide{margin-left:19px;height:265px;}
-
-
 .lower{text-transform: none;}
+
+.home .action p{
+	color:#fff;
+	font-size:14px;
+	font-weight: bold;
+	font-family: Oswald;
+	text-transform: uppercase;
+	line-height:1.7em;
+	margin-bottom:10px;
+}
+
+.step {
+    background-image: url(../images/steps.png);
+    background-repeat: no-repeat;
+    float: left;
+    font-size: 16px;
+    height: 75px;
+    outline: medium none;
+    position: relative;
+    width: 300px;
+}
+.step1, .step2, .step-last{
+    width: 300px;
+    background-position: -625px;
+}
+.step-last{
+	background-position: -600px;
+}
+
+.steps-start{
+    background-image: url(../images/steps.png);
+    float: left;
+    height: 75px;
+    width: 20px;
+}
+.steps-end{
+    background-image: url(../images/steps.png);
+    height: 75px;
+    width: 20px;
+	background-position: -930px;   
+	float:right;
+}
+.step .number{
+	padding:15px 10px;
+	float:left;
+}
+.step .number .inner,
+.step .title .inner
+{
+	font-size:40px;
+	font-weight:bold;
+	font-family:Oswald;
+	color:#616161;
+	font-weight:bold;
+	text-shadow:1px 1px 0 #FFFFFF;
+	float:left;
+}
+.steps .title{
+	padding:5px 0px;
+}
+.step .title .inner{
+	color:#494949;
+	font-size:16px;
+	text-transform: uppercase;
+}
+.step .desc .inner{
+	color:#a6a6a6;
+	font-size:11px;
+}
