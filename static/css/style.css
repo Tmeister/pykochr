@@ -2663,9 +2663,13 @@ body.home{background:url(../images/food.jpg) top center no-repeat;}
 .home .action{padding:0 0 0 20px; text-shadow:1px 1px 1px #000;}
 .home .cleft{width:510px !important;}
 .home .cright{width:390px !important;}
-.home .wrapper-slide{margin-left:19px;height:265px;}
+.home .wrapper-slide{margin-left:19px;height:265px;width: 349px;}
 .lower{text-transform: none;}
 
+.home .wrapper-slide img{
+	width:349px;
+	height:265px;
+}
 .home .action p{
 	color:#fff;
 	font-size:14px;

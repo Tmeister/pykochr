@@ -41,11 +41,13 @@
 				<!--<div class="ribbon"></div>-->
 				<div class="wrapper-slide">
 					{% for koch in last_kochs%}
-						{% if koch.photo %}
-				       		<img src="/image/?img_id={{koch.key}}" title="#wrapper-{{koch.key}}"/>
-				        {% else %}
-				        	<img src="/static/images/default.png" title="#wrapper-{{koch.key}}" />
-				    	{% endif %}
+						<a href="/details/{{koch.slug}}">
+							{% if koch.photo %}
+					       		<img src="/image/?img_id={{koch.key}}" title="#wrapper-{{koch.key}}"/>
+					        {% else %}
+					        	<img src="/static/images/default.png" title="#wrapper-{{koch.key}}" />
+					    	{% endif %}
+					    </a>
 					{% endfor %}
 				</div><!-- / -->
 				{% for koch in last_kochs%}

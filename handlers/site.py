@@ -13,5 +13,4 @@ class Home(webapp.RequestHandler):
 			self.redirect('/explore')
 		
 		last_kochs = Koch.all().order('-created').fetch(5)
-			
 		self.response.out.write(template.render('templates/landing.html', locals()))

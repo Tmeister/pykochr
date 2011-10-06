@@ -61,11 +61,11 @@ Author URI: http://dev7studios.com
 }
 .theme-orman a.nivo-nextNav {
 	background-position:100% 50%;
-	right:-21px;
+	right:-24px;
     padding-right:20px;
 }
 .theme-orman a.nivo-prevNav {
-	left:-41px;
+	left:-24px;
     padding-left:20px;
 }
 

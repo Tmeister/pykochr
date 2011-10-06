@@ -77,14 +77,11 @@ class Create(webapp.RequestHandler):
 				pass
 
 		if key:
-			koch = Koch.get( key )
+			koch       = Koch.get( key )
+			koch.title = name 
 		else:
-			koch = Koch()
-			koch.slug = slug
+			koch = Koch(slug=slug, title=name, author=user)
 		
-
-		koch.author      = user 
-		koch.title       = name 
 		koch.notes       = notes
 		koch.prep_time   = prep
 		koch.cook_time   = cook
@@ -107,7 +104,7 @@ class Create(webapp.RequestHandler):
 			user.put() 
 		
 		koch.put()
-		self.redirect('/')
+		self.redirect('/cook/%s' % (user.nickname))
 
 class ListByAuthor(webapp.RequestHandler):
 	"""docstring for MyKochs"""

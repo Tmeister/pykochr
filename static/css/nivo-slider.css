@@ -47,12 +47,12 @@
 /* Caption styles */
 .nivo-caption {
 	position:absolute;
-	left:-1px;
-	bottom:-2px;
+	left:0px;
+	bottom:0px;
 	background:#000;
 	color:#fff;
 	opacity:0.5; /* Overridden by captionOpacity setting */
-	width:351px;
+	width:349px;
 	z-index:8;
 }
 .nivo-caption p {
