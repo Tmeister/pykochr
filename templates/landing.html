@@ -40,12 +40,17 @@
 			<div class="slider-wrapper theme-orman">
 				<!--<div class="ribbon"></div>-->
 				<div class="wrapper-slide">
-					<img src="/static/images/slides/slide1.png" title="#wrapper-slide-caption-0">
-					<img src="http://www.washingtonian.com/block_dbimages/22678/Picture%201.png" alt="">
+					{% for koch in last_kochs%}
+						{% if koch.photo %}
+				       		<img src="/image/?img_id={{koch.key}}" title="#wrapper-{{koch.key}}"/>
+				        {% else %}
+				        	<img src="/static/images/default.png" title="#wrapper-{{koch.key}}" />
+				    	{% endif %}
+					{% endfor %}
 				</div><!-- / -->
-				<div id="wrapper-slide-caption-0" class="nivo-html-caption">
-					<p>Esat ees el caption</p>
-				</div><!-- /wrapper-slide-caption-0 -->
+				{% for koch in last_kochs%}
+					<div id="wrapper-{{koch.key}}" class="nivo-html-caption"><p>{{koch.title|title}}</p></div>
+				{% endfor %}
 			</div>
 		</div><!-- / -->       
 	</div>

@@ -33,7 +33,7 @@ class Create(webapp.RequestHandler):
 
 		key 		= self.request.get('edit')
 		tags        = [a.lower() for a in self.request.get_all('tags[]')]
-		user        = session['user']
+		user        = user
 		ingredients = self.request.get_all('ingredients[]')
 		directions  = self.request.get_all('directions[]')
 		tags        = tags

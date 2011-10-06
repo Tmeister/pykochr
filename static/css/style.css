@@ -2308,7 +2308,7 @@ textarea {
 	color: #ffffff;
 	padding: 10px 20px;
 	text-align: center;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	font-size: 11px;
 
 	-webkit-border-radius: 5px;
@@ -2669,7 +2669,6 @@ body.home{background:url(../images/food.jpg) top center no-repeat;}
 .home .action p{
 	color:#fff;
 	font-size:14px;
-	font-weight: bold;
 	font-family: Oswald;
 	text-transform: uppercase;
 	line-height:1.7em;
@@ -2688,10 +2687,10 @@ body.home{background:url(../images/food.jpg) top center no-repeat;}
 }
 .step1, .step2, .step-last{
     width: 300px;
-    background-position: -625px;
+    background-position: -625px 0;
 }
 .step-last{
-	background-position: -600px;
+	background-position: -600px 0;
 }
 
 .steps-start{
@@ -2704,7 +2703,7 @@ body.home{background:url(../images/food.jpg) top center no-repeat;}
     background-image: url(../images/steps.png);
     height: 75px;
     width: 20px;
-	background-position: -930px;   
+	background-position: -930px 0;   
 	float:right;
 }
 .step .number{
@@ -2715,10 +2714,9 @@ body.home{background:url(../images/food.jpg) top center no-repeat;}
 .step .title .inner
 {
 	font-size:40px;
-	font-weight:bold;
+	/*font-weight:bold;*/
 	font-family:Oswald;
 	color:#616161;
-	font-weight:bold;
 	text-shadow:1px 1px 0 #FFFFFF;
 	float:left;
 }

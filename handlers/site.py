@@ -2,7 +2,7 @@ from google.appengine.ext import webapp
 from gaesessions import get_current_session
 from google.appengine.ext.webapp import util, template
 from libs import facebook
-from models import User
+from models import User, Koch
 
 
 class Home(webapp.RequestHandler):
@@ -11,4 +11,7 @@ class Home(webapp.RequestHandler):
 		is_home = True
 		if user:
 			self.redirect('/explore')
+		
+		last_kochs = Koch.all().order('-created').fetch(5)
+			
 		self.response.out.write(template.render('templates/landing.html', locals()))
