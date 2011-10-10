@@ -59,15 +59,15 @@ class Create(webapp.RequestHandler):
 
 				img = images.Image(img_data)
 				img.im_feeling_lucky()
-				png_data = img.execute_transforms(images.PNG)
+				png_data = img.execute_transforms(images.JPEG)
 				img.resize(450)
-				thumb = img.execute_transforms(images.PNG)
+				thumb = img.execute_transforms(images.JPEG)
 
 				thmb = images.Image(img_data)
 				thmb.im_feeling_lucky()
-				png_data = thmb.execute_transforms(images.PNG)
+				png_data = thmb.execute_transforms(images.JPEG)
 				thmb.resize(80, 80)
-				tinythumb = thmb.execute_transforms(images.PNG)				
+				tinythumb = thmb.execute_transforms(images.JPEG)				
 
 			except images.BadImageError:
 				pass

@@ -322,7 +322,7 @@ class Facebook(webapp.RequestHandler):
         profile = graph.get_object("me")
         if not user:
             password = helpers.random_string(8)
-            user = User(nickname = profile['username'], password = User.slow_hash(password));
+            user = User(nickname = profile['username'].lower(), password = User.slow_hash(password));
             user.fb_access_token = fbcookie["access_token"]
             try: user.about = profile['bio'] 
             except: pass
