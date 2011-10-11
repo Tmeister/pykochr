@@ -1,4 +1,5 @@
-from google.appengine.ext import webapp
+import base
+from base import BaseHandler
 from google.appengine.ext.webapp import util, template
 from google.appengine.api import mail
 from google.appengine.api import images
@@ -14,7 +15,7 @@ from libs import Mailing, facebook
 import helpers
 
 
-class Register(webapp.RequestHandler):
+class Register(BaseHandler):
     def post(self):
         session = get_current_session()
         username = self.request.get('username').lower()
@@ -59,7 +60,7 @@ class Register(webapp.RequestHandler):
         out = {'status':'error', 'message':message}
         self.response.out.write( simplejson.dumps(out) )
 
-class Login(webapp.RequestHandler):
+class Login(BaseHandler):
     """docstring for Login"""
     def post(self):
         session = get_current_session()
@@ -80,7 +81,7 @@ class Login(webapp.RequestHandler):
             self.response.out.write( simplejson.dumps({'status':'error', 'message':'Sorry, Login or password incorrect'}) )
 
 
-class Logout(webapp.RequestHandler):
+class Logout(BaseHandler):
     """docstring for Logout"""
     def get(self):
         session = get_current_session()
@@ -88,9 +89,10 @@ class Logout(webapp.RequestHandler):
             session.terminate()
         
         session.regenerate_id()
+        self.response.headers.add_header("Set-Cookie", "access_token=deleted; Expires=Thu, 01-Jan-1970 00:00:00 GMT")
         self.redirect('/')
 
-class SaveAvatar(webapp.RequestHandler):
+class SaveAvatar(BaseHandler):
     """docstring for Avatar"""
     def post(self):
         session = get_current_session()
@@ -125,7 +127,7 @@ class SaveAvatar(webapp.RequestHandler):
             self.redirect('/account')
 
 
-class Overview(webapp.RequestHandler):
+class Overview(BaseHandler):
     """docstring for Overview"""
     def get(self):
         session = get_current_session()
@@ -194,7 +196,7 @@ class Overview(webapp.RequestHandler):
         
         self.redirect('/account')
 
-class Avatar (webapp.RequestHandler):
+class Avatar (BaseHandler):
     def get(self):
         user = db.get(self.request.get("user_id"))
         if user:
@@ -202,7 +204,7 @@ class Avatar (webapp.RequestHandler):
             self.response.out.write(user.avatar)     
 
 
-class Edit(webapp.RequestHandler):
+class Edit(BaseHandler):
     """docstring for Edit"""
     def get(self):
         session = get_current_session()
@@ -212,7 +214,7 @@ class Edit(webapp.RequestHandler):
         else:
             self.response.out.write('Nonono')
         
-class Follow(webapp.RequestHandler):
+class Follow(BaseHandler):
     """docstring for Follow"""
     def post(self):
         fan = db.get( self.request.get('fan') )
@@ -245,7 +247,7 @@ class Follow(webapp.RequestHandler):
            
 
 
-class Unfollow(webapp.RequestHandler):
+class Unfollow(BaseHandler):
     """docstring for Unfollow"""
     def post(self):
         fan = db.get( self.request.get('fan') )
@@ -278,7 +280,7 @@ class Unfollow(webapp.RequestHandler):
                         ) 
                     ) 
 
-class Followers(webapp.RequestHandler):
+class Followers(BaseHandler):
     """docstring for Followers"""
     def get(self, star):
         user = User.is_logged(self)
@@ -292,8 +294,10 @@ class Followers(webapp.RequestHandler):
             followers = helpers.get_followers_data( foll_tmp )
             last_from_all = Koch.get_random()
             self.response.out.write(template.render('templates/followers.html', locals()))
+        else:
+            self.error(404)
 
-class Following(webapp.RequestHandler):
+class Following(BaseHandler):
     """docstring for Followers"""
     def get(self, star):
         user = User.is_logged(self)
@@ -307,8 +311,10 @@ class Following(webapp.RequestHandler):
             followers = helpers.get_following_data( foll_tmp )
             last_from_all = Koch.get_random()
             self.response.out.write(template.render('templates/followers.html', locals()))
+        else:
+            self.error(404)
 
-class Facebook(webapp.RequestHandler):
+class Facebook(BaseHandler):
     """docstring for Facebook"""
     
     def get(self):

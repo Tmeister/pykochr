@@ -1,7 +1,5 @@
-import helpers
-import time
-
-from google.appengine.ext import webapp
+import base, helpers, time
+from base import BaseHandler
 from google.appengine.ext.webapp import util, template
 from google.appengine.ext import db
 
@@ -17,7 +15,7 @@ from gaesessions import get_current_session
 from models import (User, Koch, Like, Tag, Friendship)
 
 
-class Create(webapp.RequestHandler):
+class Create(BaseHandler):
 	"""docstring for Create"""
 	def get(self):
 		user = User.is_logged(self)
@@ -106,7 +104,7 @@ class Create(webapp.RequestHandler):
 		koch.put()
 		self.redirect('/cook/%s' % (user.nickname))
 
-class ListByAuthor(webapp.RequestHandler):
+class ListByAuthor(BaseHandler):
 	"""docstring for MyKochs"""
 	def get(self, cook):
 		user = User.is_logged(self)
@@ -141,7 +139,7 @@ class ListByAuthor(webapp.RequestHandler):
 		self.response.out.write(template.render('templates/list_kochs.html', locals()))
 		
 
-class ListByTag(webapp.RequestHandler):
+class ListByTag(BaseHandler):
 	"""docstring for ListByTag"""
 	def get(self, tag):
 		user = User.is_logged(self)
@@ -155,7 +153,7 @@ class ListByTag(webapp.RequestHandler):
 		last_from_all = Koch.get_random()
 		self.response.out.write(template.render('templates/list_kochs.html', locals()))
 
-class ListByDate(webapp.RequestHandler):
+class ListByDate(BaseHandler):
 	"""docstring for ListByDate"""
 	def get(self):
 		user = User.is_logged(self)
@@ -169,7 +167,7 @@ class ListByDate(webapp.RequestHandler):
 		self.response.out.write(template.render('templates/list_kochs.html', locals()))		
 		
 
-class Detail(webapp.RequestHandler):
+class Detail(BaseHandler):
 	"""docstring for Detail"""
 	def get(self, slug):
 		user = User.is_logged(self)
@@ -219,15 +217,17 @@ class Detail(webapp.RequestHandler):
 		else:
 			self.error(404)
 		
-class Edit(webapp.RequestHandler):
+class Edit(BaseHandler):
 	"""docstring for Edit"""
 	def get(self, key):
 		user = User.is_logged(self)
 		if not user:
 			self.error(404)
 			return
-		koch = Koch.get( key )
-		if not koch:
+
+		try:
+			koch = Koch.get( key )
+		except db.BadKeyError:
 			self.error(404)
 			return	
 	
@@ -237,7 +237,7 @@ class Edit(webapp.RequestHandler):
 
 
 
-class UpVote(webapp.RequestHandler):
+class UpVote(BaseHandler):
 	"""docstring for vote"""
 	def post(self):
 		user = User.is_logged(self)
@@ -263,7 +263,7 @@ class UpVote(webapp.RequestHandler):
 			) 
 		)
 
-class DownVote(webapp.RequestHandler):
+class DownVote(BaseHandler):
 	"""docstring for DownVote"""
 	def post(self):
 		user = User.is_logged(self)
@@ -288,7 +288,7 @@ class DownVote(webapp.RequestHandler):
 		
 		self.response.out.write( simplejson.dumps({'status':'success', 'message':'An error occurred please contact the developer'}) )
 
-class Image (webapp.RequestHandler):
+class Image (BaseHandler):
 	def get(self):
 		koch = db.get(self.request.get("img_id"))
 		if koch:
