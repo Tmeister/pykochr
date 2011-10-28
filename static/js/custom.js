@@ -27,13 +27,16 @@ $(function($) {
 	});
 
 	$('#nav #logout').click(function(event) {
+		/*
+		TODO
 		FB.getLoginStatus(function(response) {
 			if (response.status == "connected") {
 				FB.logout();
 			} else {
 				location.href = "/logout"
 			}
-		});
+		});*/
+		location.href = "/logout"
 		event.preventDefault();
 	});
 			
