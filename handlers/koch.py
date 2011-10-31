@@ -20,6 +20,7 @@ class Create(BaseHandler):
 	def get(self):
 		user = User.is_logged(self)
 		if user:
+			current = "add"
 			self.response.out.write(template.render('templates/new_koch.html', locals()))
 		else:
 			self.redirect('/')
@@ -136,6 +137,7 @@ class ListByAuthor(BaseHandler):
 		kochs = helpers.get_kochs_data(tmp_kochs)
 		last_kochs = Koch.all().filter('author =', author).order('-created').fetch(5);
 		last_from_all = Koch.get_random()
+		current = "explore"
 		self.response.out.write(template.render('templates/list_kochs.html', locals()))
 		
 
@@ -148,6 +150,7 @@ class ListByTag(BaseHandler):
 		page = self.request.get_range('page', min_value=0, max_value=1000, default=0)
 		title = "Explore %s" %(tag)
 		subhead = "You can find hidden treasures."
+		current = "explore"
   		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().filter('tags =', tag).order('-created'), page ) 
 		kochs = helpers.get_kochs_data(tmp_kochs)
 		last_from_all = Koch.get_random()
@@ -161,6 +164,7 @@ class ListByDate(BaseHandler):
 		title = "Explore Recipes"
 		subtitle = ""
 		subhead = "You can find hidden treasures."
+		current = "explore"
   		tmp_kochs, next_page, prev_page = helpers.paginate( Koch.all().order('-created'), page )
 		kochs = helpers.get_kochs_data(tmp_kochs)
 		last_from_all = Koch.get_random()
@@ -211,6 +215,7 @@ class Detail(BaseHandler):
 
 			last_kochs = Koch.all().filter('author =', author).order('-created').fetch(5);
 			last_from_all = Koch.get_random()
+			current = "explore"
 
 			humanlikes = intcomma( int( koch.likes) )
 			self.response.out.write(template.render('templates/details_koch.html', locals()))

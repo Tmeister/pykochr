@@ -1,4 +1,4 @@
-<div class="one-fourth notopmargin">
+<div class="one-fourth logo">
 	<h2 class="margin5 whitie">
 		<a href="/" title="Home">Kochster</a>
 		
@@ -7,11 +7,11 @@
 
 {% if not user %}
 	
-	<div class="three-fourth-last notopmargin right">
-		<ul id="nav"> 
+	<div class="three-fourth last notopmargin right">
+		<ul id="nav" class="right"> 
 			<li><a href="#" id="top-login">Login</a></li>
 			<li><a href="#" id="top-register">Register</a></li>
-			<li><a href="/explore">Explore</a></li>
+			<li {% if current == 'explore' %} class="current" {% endif %}><a href="/explore">Explore</a></li>
 		</ul>
 		<div id="register-form" class="hide">
 			<form id="register-send" method="post" action="">
@@ -67,17 +67,19 @@
 		</div>  
 	</div>
 {% else %}
-	<div class="three-fourth-last notopmargin right">
-		<ul id="nav"> 
-			<li>
+	<div class="three-fourth last notopmargin right">
+		<ul id="nav" class="right"> 
+			<li {% if user.nickname == author.nickname %} class="current" {% endif %}>
 				<a href="/cook/{{user.nickname}}">{{user.nickname.title}}</a> 
 				<ul> 
 					<li><a href="/cook/{{user.nickname}}">Your Cookbook</a></li> 
 					<li><a href="/account">Your Account</a></li> 
+					<li><a href="" title="Otro">Otro</a></li>
+					
 				</ul> 
 			</li>
-			<li><a href="/explore">Explore</a></li>
-			<li><a href="/create">Add Recipe</a> 
+			<li {% if current == 'explore' and user.nickname != author.nickname %} class="current" {% endif %}><a href="/explore">Explore</a></li>
+			<li {% if current == 'add' %}class="current" {% endif %}><a href="/create">Add Recipe</a> 
 			<li><a href="#" id="logout">Logout</a></li> 
 		</ul>
 	</div>

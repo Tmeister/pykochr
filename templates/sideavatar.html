@@ -1,4 +1,4 @@
-<div class=" notopmargin margin15">
+<div class=" notopmargin">
 	<div class="author-widget">
 		<div class="right star-details notopmargin">
 			<h4 class="notopmargin link">
@@ -30,10 +30,10 @@
 		<div class="clear"></div>
 	</div>
 	<div class="followers left">
-		<a href="/followers/{{author.nickname}}" class="link"><span class="strong small">{{author.followers}} Followers</span></a>
+		<a href="/followers/{{author.nickname}}" class="link"><span class="small">{{author.followers}} Followers</span></a>
 	</div>
 	<div class="following right">
-		<a href="/following/{{author.nickname}}" class="link"><span class="strong small">{{author.following}} Following</span></a>
+		<a href="/following/{{author.nickname}}" class="link"><span class="small">{{author.following}} Following</span></a>
 	</div>
 	<div class="clear"></div>
 
@@ -45,9 +45,11 @@
 	{% endif %}
 
 	{% if author.about %}
-		<div class="dot-separator margin15"></div>
-		<p>{{author.about}}</p>
+		<div class="side-container margin15">
+			<h4 class="notopmargin">About the author</h4>
+			<p class="notopmargin">{{author.about}}</p>
+		</div>
 	{% endif %}
-	<div class="dot-separator margin15"></div>
+	<div class="margin15"></div>
 </div>
 <div class="clear"></div>

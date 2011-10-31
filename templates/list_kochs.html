@@ -35,13 +35,13 @@
                     	</p>
     	                {% if koch.koch.level %}
                             <p class="notopmargin nobottommargin marginb5">
-                                <span class="strong">Level: </span>
+                                <span class="">Level: </span>
                                 {{koch.koch.level|title}}
                             </p>
                         {% endif %}
                         {% if koch.koch.tags %}
                             <p class="small-italic notopmargin nobottommargin marginb5">
-                                <span class="strong">Tags: </span>
+                                <span class="">Tags: </span>
                                 {% for tag in koch.koch.tags %}
                                     <a href="/tag/{{tag|slugify}}" class="link">{{tag}}</a> 
                                 {% endfor %}
@@ -51,12 +51,13 @@
                     <div class="clear"></div>
                 </div>
                 <div class="one-half blog-content last margin15">
-                    <h3 class="notopmargin"><a class="link" href="/details/{{koch.koch.slug}}">{{koch.koch.title}}</a></h3>
-                    <p class="notopmargin small-italic">by: <a class="link strong" href="/cook/{{koch.koch.author.nickname}}">{{koch.koch.author.nickname|title}}</a> | {{koch.koch.created}}</p>
+                    <h3 class="notopmargin"><a class="pink normal" href="/details/{{koch.koch.slug}}">{{koch.koch.title}}</a></h3>
+                    <p class="notopmargin small-italic">by: <a class="link " href="/cook/{{koch.koch.author.nickname}}">{{koch.koch.author.nickname|title}}</a> | {{koch.koch.created}}</p>
                     <div class="clear"></div>
                     {% if koch.koch.notes|length %}
                         <p class="notopmargin">{{koch.koch.notes}}</p>
                     {% endif %}
+                    <p class="notopmargin nobottommargin"><a href="/details/{{koch.koch.slug}}" class="link normal">Continue Reading</a></p>
                     <div class="clear"></div>
                 </div>
                 <div class="three-fourth last dot-separator margin30"></div>

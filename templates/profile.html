@@ -39,7 +39,7 @@
 {% block left_content %}
 	<h1 class="welcome nobottommargin">Account Settings</h1>
 	<h4 class="notopmargin colored">You may change your account settings here.</h4>
-	<div class="separator margin15"></div>
+	<div class="dot-separator margin15"></div>
 	{% if profile_updated %}
 		<div class="info-box-green">
 			Your account has been updated.
@@ -104,27 +104,28 @@
 {% endblock %}
 
 {% block side_content %}
-	<div class="one-fourth sidebar-right last">
-		<h2 class="notopmargin margin5">Your Avatar</h2>
-		<div class="separator margin15"></div>
-		<div class="margin15">
-			<img class="bordered-img left" src="{{avatar}}"/>
-			<div class="notopmargin" id="actionavatar">
-				<a href="#" class="notopmargin blue-button right small-size" id="changeavatar">Change</a><br />
-			</div><!-- / -->
-			<form id="uploadavatar"action="/account/change-avatar" method="post" enctype="multipart/form-data">
-				<div class="uploader white margin15">
-					<input type="text" class="filename" readonly="readonly" style="width:85px !important	;"/>
-					<input type="button" class="button" value="Change Avatar"/>
-					<input type="file" name="photo" size="30" id="image_file"/>
-				</div>
-				<div class="margin20 rigth">
-					<a href="#" class="unfollow-button rigth margin15 small-size" id="cancelavatar">Cancel</a>
-					<a href="#" class="blue-button rigth margin15 small-size" id="sendavatar">Upload</a>
-				</div>
-			</form>	
+	<div class="side-container">
+		<div class="one-fourth sidebar-right last notopmargin">
+			<h2 class="notopmargin margin5">Your Avatar</h2>
+			<div class="margin15">
+				<img class="bordered-img left" src="{{avatar}}"/>
+				<div class="notopmargin" id="actionavatar">
+					<a href="#" class="notopmargin blue-button right small-size" id="changeavatar">Change</a><br />
+				</div><!-- / -->
+				<form id="uploadavatar"action="/account/change-avatar" method="post" enctype="multipart/form-data">
+					<div class="uploader white margin15">
+						<input type="text" class="filename" readonly="readonly" style="width:85px !important	;"/>
+						<input type="button" class="button" value="Change Avatar"/>
+						<input type="file" name="photo" size="30" id="image_file"/>
+					</div>
+					<div class="margin20 rigth">
+						<a href="#" class="unfollow-button rigth margin15 small-size" id="cancelavatar">Cancel</a>
+						<a href="#" class="blue-button rigth margin15 small-size" id="sendavatar">Upload</a>
+					</div>
+				</form>	
+			</div>
+			<div class="clear"></div>
+			<div class="margin15"></div>		
 		</div>
-		<div class="clear"></div>
-		<div class="separator margin15"></div>		
 	</div>
 {% endblock %}

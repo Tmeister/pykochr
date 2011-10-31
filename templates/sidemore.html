@@ -1,57 +1,59 @@
 {% if author and last_kochs%}
-	<h4 class="notopmargin margin15">More from {{author.nickname}}</h4>
-	<div class="dot-separator"></div>
-	{% for koch in last_kochs %}
-		<div class="margin15 koch_mini_list">
-			<div class="left block">
-				<a href="/details/{{koch.slug}}">
-                    {% if koch.thumb %}
-						<img class="bordered-img preview-img" src="/image/?img_id={{koch.key}}&size=thumb" />	
-					{% else %}
-						<img class="bordered-img preview-img" src="/static/images/default-thumb.png" />	
-					{% endif %}
-				</a>
-			</div>
-			<div class="rigth">
-				<a href="/details/{{koch.slug}}" class="pink small marginb5">
-					{{koch.title}}
-				</a>
-				<div class="right small-italic margin10">
-					{{koch.created}}
-				</div>	
+	<div class="side-container">
+		<h4 class="notopmargin">More from {{author.nickname}}</h4>
+		{% for koch in last_kochs %}
+			<div class="margin15 koch_mini_list">
+				<div class="left block">
+					<a href="/details/{{koch.slug}}">
+	                    {% if koch.thumb %}
+							<img class="bordered-img preview-img" src="/image/?img_id={{koch.key}}&size=thumb" />	
+						{% else %}
+							<img class="bordered-img preview-img" src="/static/images/default-thumb.png" />	
+						{% endif %}
+					</a>
+				</div>
+				<div class="rigth">
+					<a href="/details/{{koch.slug}}" class="pink small marginb5">
+						{{koch.title}}
+					</a>
+					<div class="right small-italic margin10">
+						{{koch.created}}
+					</div>	
+				</div>
+				<div class="clear"></div>
 			</div>
 			<div class="clear"></div>
-		</div>
-		<div class="clear"></div>
-		<div class="dot-separator margin15"></div>		
-		<div class="clear"></div>
-	{% endfor %}	
+			<div class="margin15"></div>		
+			<div class="clear"></div>
+		{% endfor %}
+	</div>
 {% endif %}
 
-<h4 class="notopmargin margin15">More from all</h4>
-<div class="dot-separator"></div>
-{% for koch in last_from_all %}
-	<div class="margin15 koch_mini_list">
-			<div class="left block">
-				<a href="/details/{{koch.slug}}">
-					{% if koch.thumb %}
-						<img class="bordered-img preview-img" src="/image/?img_id={{koch.key}}&size=thumb" />	
-					{% else %}
-						<img class="bordered-img preview-img" src="/static/images/default-thumb.png" />	
-					{% endif %}
-				</a>
-			</div>
-			<div class="rigth">
-				<a href="/details/{{koch.slug}}" class="pink small marginb5">
-					{{koch.title}}
-				</a>
-				<div class="right small-italic margin10">
-					{{koch.created}}
-				</div>	
+<div class="side-container">
+	<h4 class="notopmargin">More from all</h4>
+	{% for koch in last_from_all %}
+		<div class="margin15 koch_mini_list">
+				<div class="left block">
+					<a href="/details/{{koch.slug}}">
+						{% if koch.thumb %}
+							<img class="bordered-img preview-img" src="/image/?img_id={{koch.key}}&size=thumb" />	
+						{% else %}
+							<img class="bordered-img preview-img" src="/static/images/default-thumb.png" />	
+						{% endif %}
+					</a>
+				</div>
+				<div class="rigth">
+					<a href="/details/{{koch.slug}}" class="pink small marginb5">
+						{{koch.title}}
+					</a>
+					<div class="right small-italic margin10">
+						{{koch.created}}
+					</div>	
+				</div>
+				<div class="clear"></div>
 			</div>
 			<div class="clear"></div>
-		</div>
-		<div class="clear"></div>
-		<div class="dot-separator margin15"></div>		
-		<div class="clear"></div>
-{% endfor %}
+			<div class="margin15"></div>		
+			<div class="clear"></div>
+	{% endfor %}
+</div><!-- / -->
