@@ -32,7 +32,7 @@ application = webapp.WSGIApplication(
                     ('/tag/(.+)'                , koch.ListByTag),
                     ('/explore'                 , koch.ListByDate),
                     ('/details/(.+)'            , koch.Detail),
-                    ('/image/'                  , koch.Image),
+                    ('/image/'                  , koch.Images),
                     ('/edit/(.+)'               , koch.Edit),
                 ],
                 debug=True)

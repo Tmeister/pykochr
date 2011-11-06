@@ -9,10 +9,10 @@
     	{% for koch in kochs %}
     		<div class="three-fourth left margin10">
                 <div class="one-fourth margin15">
-                    <div class="left">
+                    <div class="left img-preview">
                     	{% if koch.koch.thumb %}
                     		<a href="/details/{{koch.koch.slug}}">
-                    			<img class="bordered-img preview-img img-preview" src="/image/?img_id={{koch.koch.key}}&size=thumb" />
+                    			<img class="" src="/image/?img_id={{koch.koch.key}}&size=thumb" />
                     		</a>
                     	{% else %}
                     		<a href="/details/{{koch.koch.slug}}">

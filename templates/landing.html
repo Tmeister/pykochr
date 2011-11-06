@@ -1,86 +1,45 @@
-{% extends 'base.html' %}
+{% extends 'right_bar.html' %}
 {% block title %}Make your kitchen social{% endblock %}
+
 {% block css %}
-	<link rel="stylesheet" href="/static/css/nivo-slider.css" />
-	<link rel="stylesheet" href="/static/js/nivo-slider/themes/orman/orman.css" />
 {% endblock css %}
+
 {% block js %}
-	<script src="/static/js/nivo-slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
-	<script type="text/javascript">
-		jQuery(function($) {
-			$('.wrapper-slide').nivoSlider({
-				controlNav:false,
-				pauseTime:10000,
-				effect:'sliceDownRight',
-				animSpeed:500,
-				captionOpacity:.60
-			});
-		});
-	</script>
 {% endblock js %}
-{% block content %}
-<div  class="headline">
-	<div class="two-third notopmargin margin15 cleft">
+
+{% block left_content %}
+	<div class="mini-left">
+		<ul>
+			{% for koch in last_kochs %}
+				<li class="toptooltip" style="background:url(/image/?img_id={{koch.key}}&size=thumb-home) 50% 50%" title="{{koch.title}}"></li>	
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="mini-slider" style="background:url(/image/?img_id={{fkoch.key}}&size=slider-home) 100% 50% no-repeat">
+		
+	</div><!-- / -->
+	<div class="clear"></div>
+	<div class="call2action margin10 shadow">
 		<div class="action">
-			<h1 class="welcome-home">Make your kitchen social</h1>
-			<div class="uppercase">
+			<h1 class="welcome-home backie">Make your kitchen social</h1>
+			<div class="uppercase center">
 				<p>If you love cooking and experimenting with new recipes Kochster is the site for you, manage all your recipes from a single site in a simple and easy way.</p>
-				<p>Your recipes can be discussed and voted on by others, plus you can follow other cooks and keep up with new recipes.</p>
-				<p>Start writing your recipes now.</p>
 			</div>
 			<div class="margin30 center">
-				<a href="#" title="" class="welcome-small follow-button big-size" id="create-account">Create your Account now</a> 
-				<!-- <a href="/explore" title="" class="welcome-small action-button big-size">Explore recipes</a> -->
+				<a href="#" title="" class="welcome-small action-button big-size" id="create-account">Create your Account</a> 
 			</div>
-			<div class="clear"></div>
+			<div class="clear margin30"></div>
 		</div>
+	</div>	
+{% endblock%}
+
+{% block side_content %}
+	<div class="one-fourth sidebar-right last notopmargin">
+		<ul>
+			{% for user in users %}
+				<li title="{{user.nickname}}" class="toptooltip"><a href="/cook/{{user.nickname}}"><img src="{{user.avatar}}"></a></li>
+			{% endfor %}
+		</ul>
+		<div class="clear"></div>
 	</div>
-	<div class="one-third last notopmargin margin15 chef cright">
-		<div class="slide margin15">
-			<div class="slider-wrapper theme-orman">
-				<!--<div class="ribbon"></div>-->
-				<div class="wrapper-slide">
-					{% for koch in last_kochs%}
-						<a href="/details/{{koch.slug}}">
-							{% if koch.photo %}
-					       		<img src="/image/?img_id={{koch.key}}" title="#wrapper-{{koch.key}}"/>
-					        {% else %}
-					        	<img src="/static/images/default.png" title="#wrapper-{{koch.key}}" />
-					    	{% endif %}
-					    </a>
-					{% endfor %}
-				</div><!-- / -->
-				{% for koch in last_kochs%}
-					<div id="wrapper-{{koch.key}}" class="nivo-html-caption"><p>{{koch.title|title}}</p></div>
-				{% endfor %}
-			</div>
-		</div><!-- / -->       
-	</div>
-	<div class="clear"></div>
-</div>
-<div class="steps margin30">
-	<div class="steps-start"></div>
-	<a href="#" id="step1">
-		<div class="step step1">
-			<p class="number"><span class="inner">1</span></p>
-			<p class="title"><span class="inner">Create your account</span></p>
-			<p class="desc"><span class="inner">Only takes a few seconds.</span></p>
-		</div>
-	</a>
-	<a href="#">
-		<div class="step step2">
-			<p class="number"><span class="inner">2</span></p>
-			<p class="title"><span class="inner">Write your recipes</span></p>
-			<p class="desc"><span class="inner">Store your recipes in one place.</span></p>
-		</div>
-	</a>
-	<a href="/explore">
-		<div class="step step-last">
-			<p class="number"><span class="inner">3</span></p>
-			<p class="title"><span class="inner">Share &amp; discover</span></p>
-			<p class="desc"><span class="inner">Share the link with all your friends.</span></p>
-		</div>
-	</a>
-	<div class="steps-end"></div>
-</div>
 {% endblock%}

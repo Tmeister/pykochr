@@ -1,6 +1,6 @@
 {% if author and last_kochs%}
 	<div class="side-container">
-		<h4 class="notopmargin">More from {{author.nickname}}</h4>
+		<h4 class="notopmargin center">More from {{author.nickname}}</h4>
 		{% for koch in last_kochs %}
 			<div class="margin15 koch_mini_list">
 				<div class="left block">
@@ -30,7 +30,7 @@
 {% endif %}
 
 <div class="side-container">
-	<h4 class="notopmargin">More from all</h4>
+	<h4 class="notopmargin center">More from all</h4>
 	{% for koch in last_from_all %}
 		<div class="margin15 koch_mini_list">
 				<div class="left block">

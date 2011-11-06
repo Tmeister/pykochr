@@ -5,6 +5,7 @@
         <meta name="google-site-verification" content="KudV6O0y6IEjiNRTF6SwOyLSFVxmpm-eLyf0CIYi58M" />
         <title>Kochster | {%block title%}{%endblock%}</title>
         <link href="/static/css/reset.css" rel="stylesheet" type="text/css" />
+        <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
         <link href="/static/css/style.css" rel="stylesheet" type="text/css" />
         <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="/static/js/jgrowl/jquery.jgrowl.css" />
@@ -34,20 +35,23 @@
         <div class="header-bottom"></div>
         <div class="full-footer-bottom">
             <div class="wrapper-footer">
-                <div class="one notopmargin">
-                    <p class="margin15 left whitie">© Copyright 2011 Kochster. Developed by <a href="http://tmeister.net" target="_blank">Tmeister</a></p>
-                    <!--<p class="right margin15">
-                        <a class="link" href="/">Home</a> /
-                        <a class="link" href="/">About</a> /
-                        <a class="link" href="/">Contact &amp; Support</a>
-                    </p>-->
+                <div class="one notopmargin center margin15">
+                    <div id="mc_embed_signup">
+                        <form action="http://kochster.us2.list-manage2.com/subscribe/post?u=05a0d341fe5c07246a122552c&amp;id=686e0c4af9" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                            <span class="whitie">Get the latest development news </span>
+                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+                            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button action-button big-size">
+                        </form>
+                    </div>
+                    <div class="whitie center marginb5">
+                        © Copyright  2011 - Kochster
+                    </div>
                 </div>
-                <div class="clear"></div>
             </div>
+            <div class="clear"></div>
         </div>
         <script type="text/javascript">
-            
-            var _gaq = _gaq || [];
+            /*var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-25793857-1']);
             _gaq.push(['_trackPageview']);
             (function() {
@@ -61,11 +65,8 @@
                 var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
                 uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/zEpBVsdTP6bNorxS322W2g.js';
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-            })();
-            
-
+            })();*/
         </script>
-        <div id="fb-root"></div>
         <script type="text/javascript" src="/static/js/jquery-1.6.1.min.js"></script>
         <script type="text/javascript" src="/static/js/scrolltop/scrolltopcontrol.js"></script>
         <script type="text/javascript" src="/static/js/jquery.simplemodal.1.4.1.min.js"></script>
@@ -73,23 +74,6 @@
         <script src="/static/js/jgrowl/jquery.jgrowl_minimized.js" type="text/javascript"></script>
         <script src="/static/js/tiptip/jquery.tipTip.minified.js" type="text/javascript"></script>
         <script type="text/javascript" src="/static/js/custom.js"></script>
-        <script type="text/javascript">
-            window.fbAsyncInit = function() {
-                FB.init({
-                    appId  : '176117119113148',
-                    status : true, // check login status
-                    cookie : true, // enable cookies to allow the server to access the session
-                    xfbml  : true,  // parse XFBML
-                });
-                FB.Event.subscribe('auth.login', function(response) {
-                    location.href = "/login/facebook"
-                });
-
-                FB.Event.subscribe('auth.logout', function(response) {
-                    location.href = "/logout"
-                });
-             };
-        </script>
         <!--[if lte IE 7]>
     	<script src="/static/js/en_US.js"></script>
     	<script src="/static/js/warning.js"></script>

@@ -59,13 +59,13 @@ class Create(BaseHandler):
 				img = images.Image(img_data)
 				img.im_feeling_lucky()
 				png_data = img.execute_transforms(images.JPEG)
-				img.resize(450)
+				img.resize(620,420)
 				thumb = img.execute_transforms(images.JPEG)
 
 				thmb = images.Image(img_data)
 				thmb.im_feeling_lucky()
 				png_data = thmb.execute_transforms(images.JPEG)
-				thmb.resize(80, 80)
+				thmb.resize(0, 80)
 				tinythumb = thmb.execute_transforms(images.JPEG)				
 
 			except images.BadImageError:
@@ -293,12 +293,29 @@ class DownVote(BaseHandler):
 		
 		self.response.out.write( simplejson.dumps({'status':'success', 'message':'An error occurred please contact the developer'}) )
 
-class Image (BaseHandler):
+class Images (BaseHandler):
 	def get(self):
 		koch = db.get(self.request.get("img_id"))
 		if koch:
-			self.response.headers['Content-Type'] = "image/png"
-			if self.request.get("size") == 'thumb':
-				self.response.out.write(koch.thumb)
-			else:
-				self.response.out.write(koch.photo)
+			#self.response.headers['Content-Type'] = "image/jpeg"
+			size = self.request.get("size")
+			if size == 'thumb':
+				img = koch.photo
+				thumb = images.Image(img)
+				thumb.resize(0, 80)
+				print thumb.execute_transforms(images.JPEG)
+			elif size == 'thumb-home':
+				img = koch.photo
+				thumb = images.Image(img)
+				thumb.resize(0, 70)
+				print thumb.execute_transforms(images.JPEG)
+			elif size == "slider-home":
+				img = koch.photo
+				thumb = images.Image(img)
+				thumb.resize(610)
+				print thumb.execute_transforms(images.JPEG)
+			else :
+				img = koch.photo
+				thumb = images.Image(img)
+				thumb.resize(450)
+				print thumb.execute_transforms(images.JPEG)
