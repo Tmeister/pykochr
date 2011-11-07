@@ -46,24 +46,28 @@
 			</a>
 		{% endif %}
 	</div>
-	<div class="one-fourth last rigth notopmargin margin15">
-		<div style="margin-top:8px;" class="ajax-like-trigger right">
-			{% if not alreadylike %}
-				<a href="" title="Do you like?" class="like" data-key="{{koch.key}}">
-				{{humanlikes}} Likes
-				</a>
-			{% else %}	
-				<a href="" title="You like this, Click to unlike" class="liked" data-key="{{koch.key}}">
-				{{humanlikes}} Likes
-				</a>
-			{% endif %}
-		</div>
+	<div class="one-fourth last notopmargin margin15">
+		<div class="right details-stats">
+			<div class="views left"><span>{{koch.views}}</span></div>
+			<div class="ajax-like-trigger right">
+				{% if not alreadylike %}
+					<a href="#" title="Do you like?" class="like" data-key="{{koch.key}}">
+					{{humanlikes}}
+					</a>
+				{% else %}	
+					<a href="" title="You like this, Click to unlike" class="liked" data-key="{{koch.key}}">
+					{{humanlikes}}
+					</a>
+				{% endif %}
+			</div>	
+		</div><!-- / -->
+		
 	</div>
 	<div class="clear"></div>
 	<div class="dot-separator margin15"></div>
 	<div class="one-fourth left sidebar notopmargin">
-		<h3 class="">Ingredients</h3>
-		<div class="dot-separator margin15"></div>
+		<h3 class="title-back"><span class="inner-back">Ingredients</span></h3>
+		<div class="margin15"></div>
 		<ul class="list check-list">
 			{% for ingredient in koch.ingredients %}
 				<li>{{ingredient}}</li>
@@ -72,8 +76,8 @@
 		<ul>
 	</div>
 	<div class="one-half last notopmargin">
-		<h3 class="">&nbsp</h3>
-		<div class="dot-separator margin15"></div>
+		<h3 class="title-back"><span class="inner-back">Preview</span></h3>
+		<div class="margin15"></div>
 		{% if koch.photo %}
        		<img class="bordered-img margin10"  src="/image/?img_id={{koch.key}}" alt=" "/>
         {% else %}
@@ -81,7 +85,7 @@
     	{% endif %}
     	<div class="clear"></div>
     	{% if koch.tags %}
-	    	<div class="dot-separator margin15">
+	    	<div class="margin15">
 	    		<ul>
 		    		{% for tag in koch.tags %}
 			    		<li>
@@ -96,8 +100,7 @@
         {% endif %}
 	</div>
 	<div class="clear"></div>
-	<h3 class="">Directions</h3>
-	<div class="dot-separator margin15"></div>
+	<h3 class="title-back"><span class="inner-back">Directions</span></h3>
 	<div id="" class="">
 		{% for direction in koch.directions %}
 			<div class="small-round-icon-gray left">
@@ -107,11 +110,9 @@
 		{% endfor %}	
 	</div>
 	{% if likesusers %}
-		<div class="dot-separator margin15"></div>
 		<div class="three-fourth notopmargin">
-			<h3>Users who liked this recipe</h3>
-			<div class="dot-separator margin15"></div>
-			<div class="likes margin15">
+			<h3 class="title-back"><span class="inner-back">Users who liked this recipe</span></h3>
+			<div class="likes">
 				{% for user in likesusers %}
 					<div class="left likeuser">
 						<a href="/cook/{{user.nickname}}" title="">

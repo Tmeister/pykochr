@@ -259,7 +259,7 @@ $(function($) {
 			},
 			success: function(data, textStatus, xhr) {
 				if( data.status == 'success' ){
-					target.parent().html( '<a href="#" title="You like this, Click to unlike" class="liked" data-key="'+key+'">'+data.votes+' Likes</a>' );
+					target.parent().html( '<a href="#" title="You like this, Click to unlike" class="liked" data-key="'+key+'">'+data.votes+'</a>' );
 				}else{
 					user_message(data.message, 'error');
 				}
@@ -278,7 +278,7 @@ $(function($) {
 			},
 			success: function(data, textStatus, xhr) {
 				if( data.status == 'success' ){
-					target.parent().html( '<a href="#" title="You like this, Click to unlike" class="like" data-key="'+key+'">'+data.votes+' Likes</a>' );
+					target.parent().html( '<a href="#" title="You like this, Click to unlike" class="like" data-key="'+key+'">'+data.votes+'</a>' );
 				}else{
 					user_message(data.message, 'error');
 				}

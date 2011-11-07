@@ -21,14 +21,15 @@
                     	{% endif %}
                     </div>
                     <div class="left author left5">
+                        <div class="views left"><span>{{koch.koch.views}}</span></div>
                     	<p class="notopmargin nobottommargin marginb5 ajax-like-trigger">
                     		{% if not koch.alreadylike %}
                     			<a href="" title="Do you like?" class="like" data-key="{{koch.koch.key}}">
-                    			{{koch.humanlikes}} Likes
+                    			{{koch.humanlikes}}
                     			</a>
                     		{% else %}	
                     			<a href="" title="You like this, Click to unlike" class="liked" data-key="{{koch.koch.key}}">
-                    			{{koch.humanlikes}} Likes
+                    			{{koch.humanlikes}}
                     			</a>
                     		{% endif %}
                     		

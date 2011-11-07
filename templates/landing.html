@@ -8,15 +8,18 @@
 {% endblock js %}
 
 {% block left_content %}
+	<h3 class="notopmargin title-back"><span>Latest recipes</span></h3>
 	<div class="mini-left">
 		<ul>
 			{% for koch in last_kochs %}
-				<li class="toptooltip" style="background:url(/image/?img_id={{koch.key}}&size=thumb-home) 50% 50%" title="{{koch.title}}"></li>	
+				<li class="toptooltip" style="background:url(/image/?img_id={{koch.key}}&size=thumb-home) 50% 50%" title="{{koch.title|title}}">
+					<a href="/details/{{koch.slug}}">&nbsp;</a>
+				</li>	
 			{% endfor %}
 		</ul>
 	</div>
 	<div class="mini-slider" style="background:url(/image/?img_id={{fkoch.key}}&size=slider-home) 100% 50% no-repeat">
-		
+		<a href="/details/{{fkoch.slug}}" title="{{fkoch.title|title}}" class="toptooltip">&nbsp;</a>
 	</div><!-- / -->
 	<div class="clear"></div>
 	<div class="call2action margin10 shadow">
@@ -34,9 +37,10 @@
 {% endblock%}
 
 {% block side_content %}
+	<h3 class="notopmargin title-back"><span>Latest Cooks</span></h3>
 	<div class="one-fourth sidebar-right last notopmargin">
 		<ul>
-			{% for user in users %}
+			{% for user in users_grid %}
 				<li title="{{user.nickname}}" class="toptooltip"><a href="/cook/{{user.nickname}}"><img src="{{user.avatar}}"></a></li>
 			{% endfor %}
 		</ul>

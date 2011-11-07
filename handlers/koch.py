@@ -181,7 +181,8 @@ class Detail(BaseHandler):
 			alreadylike = False
 			alreadyfollow = False
 			likesusers = []
-			
+			koch.views += 1
+			koch.put()
 			
 			author = koch.author
 			
@@ -218,6 +219,7 @@ class Detail(BaseHandler):
 			current = "explore"
 
 			humanlikes = intcomma( int( koch.likes) )
+
 			self.response.out.write(template.render('templates/details_koch.html', locals()))
 		else:
 			self.error(404)
@@ -297,25 +299,25 @@ class Images (BaseHandler):
 	def get(self):
 		koch = db.get(self.request.get("img_id"))
 		if koch:
-			#self.response.headers['Content-Type'] = "image/jpeg"
+			self.response.headers['Content-Type'] = "image/jpeg"
 			size = self.request.get("size")
 			if size == 'thumb':
 				img = koch.photo
 				thumb = images.Image(img)
 				thumb.resize(0, 80)
-				print thumb.execute_transforms(images.JPEG)
+				self.response.out.write( thumb.execute_transforms(images.JPEG) )
 			elif size == 'thumb-home':
 				img = koch.photo
 				thumb = images.Image(img)
 				thumb.resize(0, 70)
-				print thumb.execute_transforms(images.JPEG)
+				self.response.out.write( thumb.execute_transforms(images.JPEG) )
 			elif size == "slider-home":
 				img = koch.photo
 				thumb = images.Image(img)
 				thumb.resize(610)
-				print thumb.execute_transforms(images.JPEG)
+				self.response.out.write( thumb.execute_transforms(images.JPEG) )
 			else :
 				img = koch.photo
 				thumb = images.Image(img)
 				thumb.resize(450)
-				print thumb.execute_transforms(images.JPEG)
+				self.response.out.write( thumb.execute_transforms(images.JPEG) )

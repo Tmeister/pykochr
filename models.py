@@ -98,6 +98,7 @@ class Koch(db.Model):
 	directions  = db.StringListProperty()
 	photo 		= db.BlobProperty()
 	thumb		= db.BlobProperty()
+	views		= db.IntegerProperty(default=1)
 
 	@staticmethod
 	def get_random(limit=5):

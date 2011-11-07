@@ -248,11 +248,11 @@ form.inline p {
 		width:200px !important;
 	}
 	.sidebar-right {
-		width:200px !important;
+		width:230px !important;
 	}
 	.sidebar-right-inner {
 		padding-left:0px !important;
-		width:200px !important;
+		width:230px !important;
 	}
 	.content-navigation {
 		font-size:12px;
@@ -462,14 +462,14 @@ p {
 h1, h2, h3, h4{
 	font-family: Oswald;
 	margin-top:30px;
-	color:#666666;
+	color:#b2b7a1;
 	text-transform:uppercase;
 	line-height:30px;
 }
 h5, h6 {
 	text-transform:uppercase;
 	margin-top:30px;
-	color:#666666;
+	color:#b2b7a1;
 	font-weight:bold;
 }
 /*Colors*/
@@ -2678,6 +2678,20 @@ h5.home{
 	height:80px;
 	overflow:hidden;
 }
+.views{
+	margin-right:10px;
+	background:url(../images/icon-views.png) no-repeat 0 50%;
+}
+.views span{
+	padding-left:20px;
+	font-weight:bold;
+}
+.details-stats{
+	margin-top:8px;
+}
+.inner-back{
+	background:#fff !important;
+}
 /******************************************************************************
 ** LANDING PAGE
 ******************************************************************************/
@@ -2697,6 +2711,15 @@ h5.home{
 	padding: 0 6px 3px 0;
 
 }
+.title-back{
+	text-align:center;
+	margin-bottom:10px;
+	background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAKUlEQVQYV2PcvH1hva9nfCMDEOBiM4Ik8SkAaQQrImQaIyEFIEOGrHUAKulnqJh9Q2MAAAAASUVORK5CYII=) repeat-x 0 50%;|
+}
+.title-back span{
+	background-image:url('../images/pattern/body-bg-1.png');
+	padding:0 15px;
+}
 .mini-left{
 	width:80px;
 	float: left;
@@ -2707,7 +2730,8 @@ h5.home{
 .mini-left li{width:70px; height:70px; overflow: hidden;}
 .mini-slider{width:610px;height:249px;}
 .home .sidebar-right ul li img{width:50px;height:50px;}
-
+.mini-left li a{ width:70px; height:70px; display:block; }
+.mini-slider a{width:610px;height:249px; display:block;}
 .mini-left li,
 .mini-slider,
 .home .sidebar-right ul li img,
@@ -2717,6 +2741,7 @@ h5.home{
 	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 25px rgba(0, 0, 0, 0.05);
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 25px rgba(0, 0, 0, 0.05);
 }
+
 .mini-slider{
 	float:right;
 }

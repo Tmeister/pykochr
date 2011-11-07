@@ -14,20 +14,21 @@ class Home(BaseHandler):
 		if user:
 			self.redirect('/explore')
 		
-		last_kochs = Koch.all().order('-created').fetch(3)
-		fkoch = last_kochs[0]
+		last_kochs = Koch.all().order('-created').fetch(3,2)
+		fkoch = Koch.all().order('-created').fetch(1)
+		fkoch = fkoch[0]
 		last_users = User.all().order('-created').fetch(12)
-		users = []
-		for user in last_users:
-			if user.fb_profile_url:
-				avatar = "https://graph.facebook.com/%s/picture" % (user.nickname)
-			elif not user.usegravatar and user.avatar:
-				avatar = "/avatar/?user_id=%s" %(user.key())
+		users_grid = []
+		for user_home in last_users:
+			if user_home.fb_profile_url:
+				avatar = "https://graph.facebook.com/%s/picture" % (user_home.nickname)
+			elif not user_home.usegravatar and user_home.avatar:
+				avatar = "/avatar/?user_id=%s" %(user_home.key())
 			else:
-				avatar = helpers.get_gravatar( user.email, 90 )
+				avatar = helpers.get_gravatar( user_home.email, 90 )
 			
-			users.append({
-				'nickname'	: user.nickname,
+			users_grid.append({
+				'nickname'	: user_home.nickname,
 				'avatar'	: avatar 
 			})
 
