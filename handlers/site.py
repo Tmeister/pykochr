@@ -14,7 +14,7 @@ class Home(BaseHandler):
 		if user:
 			self.redirect('/explore')
 		
-		last_kochs = Koch.all().order('-created').fetch(3,2)
+		last_kochs = Koch.all().order('-created').fetch(3,1)
 		fkoch = Koch.all().order('-created').fetch(1)
 		fkoch = fkoch[0]
 		last_users = User.all().order('-created').fetch(12)
