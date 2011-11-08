@@ -66,6 +66,14 @@
                 uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/zEpBVsdTP6bNorxS322W2g.js';
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
             })();
+
+            (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) {return;}
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=176117119113148";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));   
         </script>
         <script type="text/javascript" src="/static/js/jquery-1.6.1.min.js"></script>
         <script type="text/javascript" src="/static/js/scrolltop/scrolltopcontrol.js"></script>
@@ -94,6 +102,7 @@
     		};
     	</script>
     	<![endif]-->
+        <div id="fb-root"></div>
     </body>
 </html>
 

@@ -12,15 +12,29 @@
 	<div class="mini-left">
 		<ul>
 			{% for koch in last_kochs %}
-				<li class="toptooltip" style="background:url(/image/?img_id={{koch.key}}&size=thumb-home) 50% 50%" title="{{koch.title|title}}">
-					<a href="/details/{{koch.slug}}">&nbsp;</a>
-				</li>	
+				{% if koch.photo %}
+					<li class="toptooltip" style="background:url(/image/?img_id={{koch.key}}&size=thumb-home) 50% 50%" title="{{koch.title|title}}">
+						<a href="/details/{{koch.slug}}">&nbsp;</a>
+					</li>	
+				{% else %}
+					<li class="toptooltip" style="background:url(/static/images/default-thumb.png) 50% 50%" title="{{koch.title|title}}">
+						<a href="/details/{{koch.slug}}">&nbsp;</a>
+					</li>
+				{% endif %}
+					
 			{% endfor %}
 		</ul>
 	</div>
-	<div class="mini-slider" style="background:url(/image/?img_id={{fkoch.key}}&size=slider-home) 100% 50% no-repeat">
-		<a href="/details/{{fkoch.slug}}" title="{{fkoch.title|title}}" class="toptooltip">&nbsp;</a>
-	</div><!-- / -->
+	{% if fkoch.photo %}
+		<div class="mini-slider" style="background:url(/image/?img_id={{fkoch.key}}&size=slider-home) 100% 50% no-repeat">
+			<a href="/details/{{fkoch.slug}}" title="{{fkoch.title|title}}" class="toptooltip">&nbsp;</a>
+		</div>
+	{% else %}
+		<div class="mini-slider" style="background:url(/static/images/default-thumb.png) 50% 50% no-repeat #f0f0f0">
+			<a href="/details/{{fkoch.slug}}" title="{{fkoch.title|title}}" class="toptooltip">&nbsp;</a>
+		</div>	
+	{% endif %}
+	
 	<div class="clear"></div>
 	<div class="call2action margin10 shadow">
 		<div class="action">
@@ -45,5 +59,15 @@
 			{% endfor %}
 		</ul>
 		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+	<h3 class="title-back"><span>Spread the word</span></h3>
+	<div class="one-fourth sidebar-right last notopmargin">
+		<div class="twitter" style="float:left; margin-left:40px;">
+			<a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="k0chster">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>	
+		</div>
+		<div class="facebook" style="float:right;">
+			<div class="fb-like" data-send="false" data-layout="box_count" data-width="95" data-show-faces="true"></div>
+		</div>
 	</div>
 {% endblock%}

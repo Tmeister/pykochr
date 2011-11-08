@@ -55,4 +55,17 @@
 			<div class="margin15"></div>		
 			<div class="clear"></div>
 	{% endfor %}
-</div><!-- / -->
+</div>
+{% if not author %}
+	<div class="clear"></div>
+	<h3 class="title-back"><span>Spread the word</span></h3>
+	<div class="one-fourth sidebar-right last notopmargin">
+		<div class="twitter" style="float:left; margin-left:40px;">
+			<a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="k0chster">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>	
+		</div>
+		<div class="facebook" style="float:right;">
+			<div class="fb-like" data-send="false" data-layout="box_count" data-width="95" data-show-faces="true"></div>
+		</div>
+	</div>
+<div class="clear"></div>
+{% endif %}

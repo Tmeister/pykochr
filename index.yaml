@@ -30,6 +30,12 @@ indexes:
 
 - kind: Koch
   properties:
+  - name: photo
+  - name: created
+    direction: desc
+
+- kind: Koch
+  properties:
   - name: tags
   - name: created
     direction: desc

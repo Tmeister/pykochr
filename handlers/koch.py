@@ -321,3 +321,4 @@ class Images (BaseHandler):
 				thumb = images.Image(img)
 				thumb.resize(450)
 				self.response.out.write( thumb.execute_transforms(images.JPEG) )
+			
