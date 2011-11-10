@@ -72,7 +72,7 @@ $(function($) {
 	});
 
 	$('#login-send').submit(function(event) {
-		console.log("Fuck")
+		//console.log("Fuck")
 		event.preventDefault();
 		targetBtn = $(this);
 		targetBtn.attr('disabled', 'disabled');
