@@ -100,7 +100,7 @@ def get_following_data(entities):
 def get_gravatar(email, size=90):
   if not email:
     email =""
-  default = "http://www.kochster.com/static/images/default-thumb.png"
+  default = "http://localhost:8080/static/images/chef-thumb.png"
   gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
   gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
   return gravatar_url

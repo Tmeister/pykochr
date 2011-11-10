@@ -1,5 +1,6 @@
 import base
 import helpers
+import random
 from base import BaseHandler
 from gaesessions import get_current_session
 from google.appengine.ext.webapp import util, template
@@ -19,6 +20,7 @@ class Home(BaseHandler):
 		fkoch = fkoch[0]
 		last_users = User.all().order('-created').fetch(12)
 		users_grid = []
+		random_id = random.randrange(1,4)
 		for user_home in last_users:
 			if user_home.fb_profile_url:
 				avatar = "https://graph.facebook.com/%s/picture" % (user_home.nickname)
